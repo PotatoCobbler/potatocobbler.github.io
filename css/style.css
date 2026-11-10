@@ -30,14 +30,6 @@ a:hover{text-decoration:underline}
   color:#fff;
 }
 
-/* Dark overlay so the white text remains readable */
-.site-header::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.40);
-}
-
 .header-inner{
   width:min(1100px,94%);
   margin:0 auto;
