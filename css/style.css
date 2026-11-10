@@ -140,8 +140,8 @@ main{padding:36px 0 60px}
 .timeline .item{display:grid;grid-template-columns:190px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid #ddd}
 .timeline .date{font-weight:600;color:#444}
 
-.pub{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid #ddd;}
-.pub > img{width:80px;height:80px;object-fit:cover;display:block;}
+.pub{display:grid;grid-template-columns:100px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid #ddd;}
+.pub > img{width:100px;height:100px;object-fit:cover;display:block;}
 .pub-content{min-width:0;}
 .pub .year{font-weight:700;color:#14739a;margin-bottom:2px;}
 .pub .title{font-weight:600;}
