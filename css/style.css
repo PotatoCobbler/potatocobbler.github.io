@@ -123,12 +123,12 @@ main{padding:36px 0 60px}
 .card img{width:100%;height:150px;object-fit:cover;display:block}
 .card .icon{height:150px;object-fit:contain;background:#fff}
 .card a{display:block;padding:10px 5px 0;font-size:13px}
-.section{
-  background:#fff;border:1px solid #ddd;padding:28px 34px;margin:20px auto;max-width:1000px
-}
+
+.section{background:#fff;border:1px solid #ddd;padding:28px 34px;margin:20px auto;max-width:1000px}
 .section h2{font-size:20px;font-weight:400;color:#14739a;margin:0 0 18px}
 .section h3{font-size:16px;font-weight:600;color:#14739a;margin:25px 0 8px}
 .section p{margin:8px 0;text-align:justify}
+
 .banner{
   position:relative;overflow:hidden;min-height:260px;margin:-36px 0 30px;
   background:#ddd
@@ -149,6 +149,7 @@ main{padding:36px 0 60px}
 .pub .journal{font-size:13px;color:#666;}
 
 .badge{display:inline-block;padding:2px 8px;background:#eee;border-radius:10px;font-size:12px}
+
 .cv-header{
   display:grid;grid-template-columns:160px 1fr 220px;gap:24px;align-items:center
 }
@@ -164,12 +165,68 @@ main{padding:36px 0 60px}
 footer{border-top:1px solid #ddd;background:#fff;color:#777;text-align:center;padding:25px 10px;font-size:12px}
 .small{font-size:13px;color:#666}
 .center{text-align:center}
+
+/* =========================
+   Citation metrics
+   ========================= */
+.citation-section{max-width:1000px;}
+.citation-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.citation-header h2{margin:0;}
+
+.scholar-link{font-size:13px;color:var(--blue);text-decoration:underline;}
+.scholar-link:hover{color:var(--blue-dark);}
+.citation-content{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center;}
+.citation-table{width:100%;border-collapse:collapse;font-size:14px;}
+.citation-table th{font-weight:600;color:#444;text-align:right;padding:6px 8px;border-bottom:1px solid #ddd;}
+.citation-table th:first-child{text-align:left;}
+.citation-table td{padding:8px;border-bottom:1px solid #eee;}
+.citation-table td:first-child{color:#444;}
+.citation-table td:not(:first-child){text-align:right;font-weight:600;}
+
+/* Histogram */
+.citation-chart{width:100%;}
+.chart-area{height:220px;position:relative;padding-left:32px;padding-bottom:30px;}
+.chart-gridline{position:absolute;left:32px;right:0;border-top:1px solid #eee;}
+.chart-0{bottom:30px;}
+.chart-25{bottom:110px;}
+.chart-50{top:0;}
+.chart-ylabel{position:absolute;left:0;width:25px;text-align:right;font-size:11px;color:#777;}
+
+.y0{bottom:25px;}
+.y25{bottom:105px;}
+.y50{top:-5px;}
+
+.citation-bars{position:absolute;left:42px;right:5px;bottom:30px;height:160px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;}
+.citation-bar{position:relative;height:160px;flex:1;display:flex;align-items:flex-end;justify-content:center;}
+.citation-bar .bar{width:70%;min-width:10px;max-width:22px;background:#777;position:relative;}
+.citation-bar .bar:hover{background:#555;}
+
+.bar-value{position:absolute;bottom:100%;margin-bottom:4px;font-size:11px;color:#555;}
+.bar-year{position:absolute;top:100%;margin-top:8px;font-size:11px;color:#777;white-space:nowrap;}
+
+/* Mobile */
+@media(max-width:800px){
+  .citation-content{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+
+@media(max-width:560px){
+  .citation-header{align-items:flex-start;gap:10px;}
+  .citation-table{font-size:13px;}
+  .citation-bars{gap:3px;}
+  .citation-bar .bar{width:80%;}
+  .bar-year{font-size:10px;}
+}
+
 @media(max-width:800px){
   .card-grid,.project-grid{grid-template-columns:repeat(2,1fr)}
   .columns{grid-template-columns:1fr}
   .cv-header{grid-template-columns:120px 1fr}
   .cv-header .map{display:none}
 }
+
 @media(max-width:560px){
   .site-header{min-height:0}
   .brand{font-size:22px}
