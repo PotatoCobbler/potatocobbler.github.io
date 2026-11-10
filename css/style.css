@@ -20,6 +20,11 @@ a:hover{text-decoration:underline}
   color:#fff;background:#050505;
   min-height:128px;position:relative;
   display:flex;align-items:flex-end
+
+  background-image:url("/images/Ethanol_banner.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 }
 .site-header::before{
   content:"";position:absolute;inset:0;opacity:.55;
@@ -53,6 +58,7 @@ main{padding:36px 0 60px}
 }
 .hero h1{font-size:26px;font-weight:400;color:#14739a;margin:0 0 12px}
 .hero .lead{font-size:16px;margin:0 auto 16px;max-width:700px}
+.hero p:not(.lead){text-align:justify;}
 .card-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:28px auto;max-width:900px
 }
@@ -68,7 +74,7 @@ main{padding:36px 0 60px}
 }
 .section h2{font-size:20px;font-weight:400;color:#14739a;margin:0 0 18px}
 .section h3{font-size:16px;font-weight:600;color:#14739a;margin:25px 0 8px}
-.section p{margin:8px 0}
+.section p{margin:8px 0;text-align:justify}
 .banner{
   position:relative;overflow:hidden;min-height:260px;margin:-36px 0 30px;
   background:#ddd
