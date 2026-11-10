@@ -175,8 +175,9 @@ main{padding:36px 0 60px}
   padding:14px 0;
 }
 
-.project-language{font-size:20px;font-weight:700;color:#800000;margin:30px 0 8px;}
-.project-language:first-child{margin-top:0;}
+.section .project-language{font-size:20px;font-weight:700;color:#800000;margin:30px 0 8px;}
+.section .project-language:first-child{margin-top:0;}
+
 .project-item .project-title{font-size:16px;}
 .project-item .project-title a{color:var(--blue);text-decoration:underline;}
 .project-item .project-title a:hover{color:var(--blue-dark);}
@@ -269,5 +270,5 @@ footer{border-top:1px solid #ddd;background:#fff;color:#777;text-align:center;pa
   .project-item{grid-template-columns:1fr;row-gap:3px;padding:12px 0;}
   .project-item .project-bullet{display:none;}
   .project-item .project-description{font-size:15px;}
-  .project-language{font-size:18px;}
+  .section .project-language{font-size:18px;}
 }
