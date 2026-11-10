@@ -17,11 +17,11 @@ body{
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 .site-header{
-  color:#fff;background:#050505;
+  color:#fff;
   min-height:128px;position:relative;
   display:flex;align-items:flex-end
 
-  background-image:url("/images/Ethanol_banner.png");
+  background-image:url("/images/Ethanol_banner.jpg");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
