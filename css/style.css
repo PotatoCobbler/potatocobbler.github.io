@@ -175,13 +175,13 @@ main{padding:36px 0 60px}
   padding:14px 0;
 }
 
+.project-language{font-size:20px;font-weight:700;color:#800000;margin:30px 0 8px;}
+.project-language:first-child{margin-top:0;}
 .project-item .project-title{font-size:16px;}
 .project-item .project-title a{color:var(--blue);text-decoration:underline;}
 .project-item .project-title a:hover{color:var(--blue-dark);}
 .project-item .project-bullet{font-size:18px;line-height:1.45;color:#222;text-align:center;}
 .project-item .project-description{font-size:16px;color:#222;}
-.project-language{font-size:20px;font-weight:700;color:#800000;margin:30px 0 8px;}
-.project-language:first-child{margin-top:0;}
 
 footer{border-top:1px solid #ddd;background:#fff;color:#777;text-align:center;padding:25px 10px;font-size:12px}
 .small{font-size:13px;color:#666}
