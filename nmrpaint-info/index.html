@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NMRpaint – Interactive NMR Pulse Programming Tool | van der Ham NMR</title>
+
+  <meta name="description"
+    content="Discover NMRpaint, an interactive tool for the development of nuclear magnetic resonance (NMR) pulse program development.">
+
+  <meta name="keywords"
+    content="NMRpaint, NMR software, NMR pulse programming, nuclear magnetic resonance, NMR spectroscopy, magnetic resonance software">
+
+  <meta name="author" content="Alex van der Ham">
+
+  <link rel="canonical"
+    href="https://vanderhamnmr.com/nmrpaint-info/">
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title"
+    content="NMRpaint – Interactive NMR Pulse Programming Tool">
+  <meta property="og:description"
+    content="Explore NMRpaint, its functionality, documentation and tutorials.">
+  <meta property="og:url"
+    content="https://vanderhamnmr.com/nmrpaint-info/">
+  <meta property="og:image"
+    content="https://vanderhamnmr.com/images/NMRpaint_link_ico.png">
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* NMRpaint-specific styling */
+
+    .nmrpaint-intro {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .nmrpaint-intro .lead {
+      font-size: 17px;
+      max-width: 750px;
+      margin: 0 auto 20px;
+    }
+
+    .launch-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #147da5, #075474);
+      color: #fff !important;
+      padding: 18px 42px;
+      margin: 22px 5px;
+      border-radius: 6px;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-decoration: none !important;
+      box-shadow: 0 5px 15px rgba(13, 111, 152, .25);
+      transition: all .2s ease;
+    }
+    
+    .launch-button:hover {
+      background: linear-gradient(135deg, #075474, #043e58);
+      color: #fff !important;
+      text-decoration: none !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(13, 111, 152, .35);
+    }
+
+    .launch-button:focus-visible {
+      outline: 3px solid #f0a500;
+      outline-offset: 4px;
+    }
+
+    .launch-button svg {
+      width: 22px;
+      height: 22px;
+    }
+    
+    .launch-container {
+      margin: 30px auto 10px;
+      padding: 25px 20px;
+      background: #f0f7fa;
+      border: 1px solid #d5e8ef;
+      border-radius: 8px;
+    }
+    
+    .launch-container p {
+      margin-bottom: 5px;
+      font-size: 15px;
+      color: #405563;
+    }    
+
+    .secondary-button {
+      display: inline-block;
+      border: 1px solid #0d6f98;
+      color: #0d6f98;
+      padding: 11px 24px;
+      margin: 15px 5px;
+      border-radius: 3px;
+    }
+
+    .secondary-button:hover {
+      background: #eaf4f8;
+      text-decoration: none;
+    }
+
+    .nmrpaint-image {
+      max-width: 850px;
+      margin: 25px auto;
+      text-align: center;
+    }
+
+    .nmrpaint-image img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
+
+    .nmrpaint-image figcaption {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .feature {
+      background: #f8fafb;
+      border: 1px solid #e1e5e8;
+      padding: 18px;
+    }
+
+    .feature h3 {
+      margin-top: 0 !important;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .resource {
+      background: #f8fafb;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .resource h3 {
+      margin-top: 0 !important;
+    }
+
+    .resource p {
+      text-align: center !important;
+      font-size: 14px;
+    }
+
+    .resource a {
+      font-weight: 600;
+    }
+
+    .nmrpaint-note {
+      background: #f0f6f9;
+      border-left: 4px solid #0d6f98;
+      padding: 15px 20px;
+      margin: 20px 0;
+    }
+
+    .nmrpaint-note p {
+      margin: 0;
+    }
+    
+    @media(max-width:600px) {
+      .launch-button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 17px 20px;
+        font-size: 17px;
+      }
+    }
+
+    @media(max-width:700px) {
+      .feature-grid,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+
+    <div class="brand">
+      <a href="/">van der Ham NMR</a>
+    </div>
+
+    <div class="tagline">
+      Magnetic resonance • NMR • DNP
+    </div>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/research/">Research</a>
+      <a href="/cv/">CV</a>
+      <a href="/publications/">Publications</a>
+
+      <details>
+        <summary>Projects ▾</summary>
+        <div class="dropdown">
+          <a href="/projects/">Projects</a>
+          <a href="/projects/writings/">Writings</a>
+          <a href="/projects/science/">Science</a>
+        </div>
+      </details>
+
+      <a href="/periodic-table/">Periodic table</a>
+      <a href="/nmrpaint/">NMRpaint</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+<div class="container">
+
+<!-- INTRODUCTION -->
+
+<section class="section nmrpaint-intro">
+
+  <h1 style="font-size:30px;font-weight:400;color:#14739a;">
+    NMRpaint
+  </h1>
+
+  <p class="lead">
+    An interactive tool for nuclear magnetic resonance (NMR) pulse program development.
+  </p>
+
+  <p>
+    Welcome to NMRpaint! This project aims to provide an
+    interactive environment for working with and exploring
+    nuclear magnetic resonance. The application is designed
+    to make its functionality accessible through an
+    intuitive graphical interface.
+  </p>
+
+  <p>
+    NMRpaint is developed by Alex van der Ham and is
+    available as an interactive web application.
+    You can explore the application directly in your browser
+    or consult the documentation and source code below.
+  </p>
+
+  <a class="launch-button"
+     href="/nmrpaint/"
+     target="_blank">
+    Launch NMRpaint →
+  </a>
+
+
+</section>
+
+
+<!-- SCREENSHOT -->
+
+<section class="section">
+
+  <h2>Explore NMRpaint</h2>
+
+  <p>
+    NMRpaint provides an interactive interface for both graphic-to-text
+    as well as text-to-graphic conversion between visual pulse sequences 
+    and functional pulse programs. The application runs directly in
+    your browser, without requiring downloading or local installation.
+  </p>
+
+  <figure class="nmrpaint-image">
+
+    <!-- Replace with an actual application screenshot -->
+    <img
+      src="/images/NMRpaint_link_ico.png"
+      alt="Screenshot of the NMRpaint interface"
+      loading="lazy">
+
+    <figcaption>
+      The NMRpaint application interface.
+    </figcaption>
+
+  </figure>
+
+</section>
+
+<!-- DOCUMENTATION -->
+
+<section class="section">
+
+  <h2>Documentation and tutorials</h2>
+
+  <p>
+    Whether you are new to NMRpaint or already familiar
+    with the application, this documentation will help
+    you understand its functionality and get started.
+  </p>
+
+  <div class="resource-grid">
+
+    <div class="resource">
+      <h3>User manual</h3>
+      <p>
+        Detailed documentation covering the application,
+        its interface and available functionality.
+      </p>
+      <a href="manual/">
+        Read the manual →
+      </a>
+    </div>
+
+    <div class="resource">
+      <h3>Video tutorials</h3>
+      <p>
+        Visual demonstrations of NMRpaint features
+        and practical workflows.
+      </p>
+      <a href="videos/">
+        Watch tutorials →
+      </a>
+    </div>
+
+  </div>
+
+  <p class="small center" style="margin-top:20px;">
+    Documentation and tutorials will be expanded as
+    the project develops.
+  </p>
+
+</section>
+
+
+<!-- SOURCE CODE -->
+
+<section class="section">
+
+  <h2>Source code and development</h2>
+
+  <p>
+    NMRpaint is developed in Python and uses the
+    Jupyter ecosystem to provide an interactive
+    application through the browser.
+  </p>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="section">
+
+  <h2>About the developer</h2>
+
+  <p>
+    NMRpaint is developed by
+    <a href="/">Alex van der Ham</a>,
+    a physicist specializing in magnetic resonance,
+    NMR spectroscopy and dynamic nuclear polarization.
+  </p>
+
+  <p>
+    For more information about my research and other
+    scientific projects, please visit the
+    <a href="/research/">research section</a>
+    of this website.
+  </p>
+
+</section>
+
+
+<!-- LAUNCH -->
+
+<section class="section center">
+
+  <h2>Ready to explore NMRpaint?</h2>
+
+  <p>
+    Start working with the interactive NMRpaint Tool
+  </p>
+
+  <a class="launch-button"
+     href="/nmrpaint/"
+     target="_blank"
+     rel="noopener noreferrer">
+
+    Launch NMRpaint
+    <span aria-hidden="true">→</span>
+
+  </a>
+
+  <p style="font-size:13px;">
+    Web-based application · No local installation required
+  </p>
+
+</div>
+
+</section>
+
+</div>
+</main>
+
+<footer>
+  © Alex van der Ham · 2026
+</footer>
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>
