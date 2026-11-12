@@ -151,7 +151,7 @@
 
     .resource-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(2,1fr);
       gap: 16px;
       margin-top: 20px;
     }
@@ -235,7 +235,7 @@
       </details>
 
       <a href="/periodic-table/">Periodic table</a>
-      <a href="/nmrpaint/">NMRpaint</a>
+      <a href="/nmrpaint-info/">NMRpaint</a>
     </nav>
 
   </div>
@@ -244,61 +244,58 @@
 <main>
 <div class="container">
 
-<!-- INTRODUCTION -->
+  <!-- LANDING / LAUNCH -->
 
-<section class="section nmrpaint-intro">
 
-  <h1 style="font-size:30px;font-weight:400;color:#14739a;">
-    NMRpaint
-  </h1>
+<section class="nmr-section">
 
-  <p class="lead">
-    An interactive tool for nuclear magnetic resonance (NMR) pulse program development.
-  </p>
+  <h1 class="nmr-title">NMRpaint</h1>
 
-  <p>
-    Welcome to NMRpaint! This project aims to provide an
-    interactive environment for working with and exploring
-    nuclear magnetic resonance. The application is designed
-    to make its functionality accessible through an
-    intuitive graphical interface.
-  </p>
+  <div class="nmr-heading">
+    <h2>Interactive NMR Pulse Programming Tool</h2>
+  </div>
 
-  <p>
-    NMRpaint is developed by Alex van der Ham and is
-    available as an interactive web application.
-    You can explore the application directly in your browser
-    or consult the documentation and source code below.
-  </p>
+  <div class="nmr-panel">
 
-  <a class="launch-button"
-     href="/nmrpaint/"
-     target="_blank">
-    Launch NMRpaint →
-  </a>
+    <p class="nmr-description">
+      Open the interactive application directly in<br>
+      your browser.
+    </p>
 
+    <a class="launch-button"
+       href="/nmrpaint/"
+       target="_blank"
+       rel="noopener noreferrer">
+      Launch NMRpaint <span aria-hidden="true">→</span>
+    </a>
+
+    <p class="nmr-footer">
+      Web-based application · No local installation required
+    </p>
+
+  </div>
 
 </section>
 
-
-<!-- SCREENSHOT -->
+  
+<!-- INTRO / SCREENSHOT -->
 
 <section class="section">
 
   <h2>Explore NMRpaint</h2>
 
   <p>
-    NMRpaint provides an interactive interface for both graphic-to-text
-    as well as text-to-graphic conversion between visual pulse sequences 
-    and functional pulse programs. The application runs directly in
-    your browser, without requiring downloading or local installation.
+    Welcome to NMRpaint! This tool aims provides an
+    interactive environment for the development of NMR pulse programs.
+    It has been designed for both graphic-to-text and text-to-graphic conversion.
+    This tool is especially useful for novice NMR spectroscopists, students or those
+    who need to develop custom pulse programs on only an occasional basis.
   </p>
 
   <figure class="nmrpaint-image">
 
-    <!-- Replace with an actual application screenshot -->
     <img
-      src="/images/NMRpaint_link_ico.png"
+      src="/images/NMRpaint_screenshot.png"
       alt="Screenshot of the NMRpaint interface"
       loading="lazy">
 
@@ -328,7 +325,7 @@
       <h3>User manual</h3>
       <p>
         Detailed documentation covering the application,
-        its interface and available functionality.
+        its interface and available functionality
       </p>
       <a href="manual/">
         Read the manual →
@@ -338,18 +335,18 @@
     <div class="resource">
       <h3>Video tutorials</h3>
       <p>
-        Visual demonstrations of NMRpaint features
-        and practical workflows.
+        Video exploring the features of NMRpaint
+        and demonstration how to use it
       </p>
       <a href="videos/">
-        Watch tutorials →
+        Watch tutorial →
       </a>
     </div>
 
   </div>
 
   <p class="small center" style="margin-top:20px;">
-    Documentation and tutorials will be expanded as
+    Documentation and tutorial will be expanded as
     the project develops.
   </p>
 
@@ -364,8 +361,8 @@
 
   <p>
     NMRpaint is developed in Python and uses the
-    Jupyter ecosystem to provide an interactive
-    application through the browser.
+    Jupyter environment to provide an interactive
+    application directly through the browser.
   </p>
 
 </section>
@@ -390,35 +387,6 @@
     <a href="/research/">research section</a>
     of this website.
   </p>
-
-</section>
-
-
-<!-- LAUNCH -->
-
-<section class="section center">
-
-  <h2>Ready to explore NMRpaint?</h2>
-
-  <p>
-    Start working with the interactive NMRpaint Tool
-  </p>
-
-  <a class="launch-button"
-     href="/nmrpaint/"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    Launch NMRpaint
-    <span aria-hidden="true">→</span>
-
-  </a>
-
-  <p style="font-size:13px;">
-    Web-based application · No local installation required
-  </p>
-
-</div>
 
 </section>
 
