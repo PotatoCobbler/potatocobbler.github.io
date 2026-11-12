@@ -191,13 +191,12 @@ main{padding:36px 0 60px}
   margin: 0 0 12px;
 }
 
-.nmr-heading {text-align: left;}
-
-.nmr-heading h2 {
+.nmr-heading {
   color: #fff;
   font-size: 32px;
   font-weight: 600;
   line-height: 1.3;
+  text-align: center;
   white-space: nowrap;
   margin: 0 0 15px;
 }
