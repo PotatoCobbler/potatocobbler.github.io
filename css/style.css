@@ -287,16 +287,14 @@ body.nmrpaint-page .section {
 .resource {
   background: linear-gradient(
     135deg,
-    #F1F3F4 0%,
-    #E5ECEF 55%,
-    #DCEBF0 100%
+    #DCEBF0 0%,
+    #E5ECEF 50%,
+    #F1F3F4 100%
   );
   border: 1px solid #D8DDE0;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
-  transition: transform 0.2s ease,
-              box-shadow 0.2s ease;
 }
 
 .resource h3 {margin-top: 0 !important;}
