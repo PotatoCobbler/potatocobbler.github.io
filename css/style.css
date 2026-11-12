@@ -226,7 +226,11 @@ main{padding:36px 0 60px}
   transition: background 0.2s ease;
 }
 
-:hover {background: #0c6382;}
+/* Only change the NMRpaint launch button on hover */
+.launch-button:hover {
+  background: #0c6382;
+  text-decoration: none;
+}
 
 /* Footer */
 .nmr-footer {
