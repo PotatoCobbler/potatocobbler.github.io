@@ -298,23 +298,25 @@ main{padding:36px 0 60px}
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #11799d;
+  background: linear-gradient(135deg, #147da5, #075474);
   color: #fff !important;
   padding: 12px 24px;
   margin: 0;
   border-radius: 6px;
   font-size: 19px;
   font-weight: 700;
+  letter-spacing: .3px;
   text-decoration: none !important;
-  box-shadow: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(13, 111, 152, .25);
+  transition: all .2s ease;
 }
 
 .launch-button:hover {
-  background: #0c6382;
+  background: linear-gradient(135deg, #075474, #043e58);
   color: #fff !important;
   text-decoration: none !important;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 111, 152, .35);
 }
 
 .launch-button:focus-visible {
@@ -476,15 +478,6 @@ footer{border-top:1px solid #ddd;background:#fff;color:#777;text-align:center;pa
   .nmr-panel {padding: 18px 15px 10px;}
   
   .launch-button {padding: 12px 20px;font-size: 17px;}
-}
-
-@media(max-width:600px) {
-  .launch-button {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 17px 20px;
-    font-size: 17px;
-  }
 }
 
 @media(max-width:700px) {
