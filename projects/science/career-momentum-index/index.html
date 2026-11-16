@@ -14,7 +14,7 @@
   <!-- Main site stylesheet -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <!-- MathJax for rendering LaTeX equations -->
+  <!-- MathJax -->
   <script>
     window.MathJax = {
       tex: {
@@ -26,14 +26,17 @@
       }
     };
   </script>
-  <script async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+
+  <script
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
 
   <style>
-    /* ---------------------------------------------------------
-       Article layout
-       --------------------------------------------------------- */
+
+    /* =========================================================
+       Article
+       ========================================================= */
 
     .article {
       max-width: 1000px;
@@ -50,9 +53,9 @@
     }
 
     .article-lead {
+      max-width: 850px;
       font-size: 1.1rem;
       line-height: 1.65;
-      max-width: 850px;
     }
 
     .article h2 {
@@ -70,13 +73,9 @@
       line-height: 1.7;
     }
 
-    .article ul {
-      padding-left: 24px;
-    }
-
-    /* ---------------------------------------------------------
+    /* =========================================================
        Equations
-       --------------------------------------------------------- */
+       ========================================================= */
 
     .equation {
       margin: 28px 0;
@@ -91,9 +90,9 @@
       font-size: 115% !important;
     }
 
-    /* ---------------------------------------------------------
-       Definition table
-       --------------------------------------------------------- */
+    /* =========================================================
+       Definitions
+       ========================================================= */
 
     .definition-table {
       width: 100%;
@@ -113,9 +112,9 @@
       white-space: nowrap;
     }
 
-    /* ---------------------------------------------------------
-       Concept box
-       --------------------------------------------------------- */
+    /* =========================================================
+       Concept boxes
+       ========================================================= */
 
     .concept-box {
       margin: 28px 0;
@@ -128,9 +127,9 @@
       margin-bottom: 0;
     }
 
-    /* ---------------------------------------------------------
-       Citation metrics
-       --------------------------------------------------------- */
+    /* =========================================================
+       Google Scholar citation section
+       ========================================================= */
 
     .citation-section {
       margin-top: 42px;
@@ -184,65 +183,24 @@
       font-weight: 600;
     }
 
+    /* =========================================================
+       Citation histogram canvas
+       ========================================================= */
+
     .citation-chart {
-      min-height: 270px;
-    }
-
-    .citation-bars {
-      height: 245px;
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
-      padding: 20px 10px 0;
-      border-bottom: 1px solid #999;
-      border-left: 1px solid #999;
-      position: relative;
-    }
-
-    .citation-bar-group {
-      height: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      min-width: 35px;
-    }
-
-    .citation-bar {
-      width: 70%;
-      max-width: 52px;
-      background: #003f5c;
-      min-height: 2px;
-      position: relative;
-    }
-
-    .citation-value {
-      position: absolute;
-      top: -21px;
       width: 100%;
-      text-align: center;
-      font-size: 0.78rem;
+      min-width: 0;
     }
 
-    .citation-year {
-      margin-top: 8px;
-      font-size: 0.78rem;
-      white-space: nowrap;
+    #citationChart {
+      display: block;
+      width: 100%;
+      height: 280px;
     }
 
-    .citation-axis {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 5px;
-      padding-left: 5px;
-    }
-
-    /* ---------------------------------------------------------
-       Momentum chart
-       --------------------------------------------------------- */
+    /* =========================================================
+       Career Momentum chart
+       ========================================================= */
 
     .momentum-section {
       margin-top: 45px;
@@ -289,9 +247,9 @@
       background: #bc5090;
     }
 
-    /* ---------------------------------------------------------
-       Momentum data table
-       --------------------------------------------------------- */
+    /* =========================================================
+       Momentum table
+       ========================================================= */
 
     .momentum-table {
       width: 100%;
@@ -316,40 +274,9 @@
       font-weight: 600;
     }
 
-    /* ---------------------------------------------------------
-       Metric summary
-       --------------------------------------------------------- */
-
-    .metric-summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 30px 0;
-    }
-
-    .metric-card {
-      padding: 20px;
-      border: 1px solid #ddd;
-      background: #fafafa;
-      text-align: center;
-    }
-
-    .metric-card .metric-value {
-      display: block;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      color: #003f5c;
-    }
-
-    .metric-card .metric-label {
-      font-size: 0.85rem;
-      color: #555;
-    }
-
-    /* ---------------------------------------------------------
+    /* =========================================================
        Responsive layout
-       --------------------------------------------------------- */
+       ========================================================= */
 
     @media (max-width: 760px) {
 
@@ -361,32 +288,27 @@
         grid-template-columns: 1fr;
       }
 
-      .metric-summary {
-        grid-template-columns: 1fr;
+      #momentumChart {
+        height: 320px;
       }
 
-      .citation-bars {
-        gap: 5px;
-      }
-
-      .citation-bar {
-        width: 65%;
+      #citationChart {
+        height: 260px;
       }
 
       .definition-table td:first-child {
         width: auto;
       }
-
-      #momentumChart {
-        height: 320px;
-      }
     }
+
   </style>
 </head>
+
 
 <body>
 
 <header class="site-header">
+
   <div class="header-inner">
 
     <div class="brand">
@@ -398,13 +320,18 @@
     </div>
 
     <nav class="nav">
+
       <a href="/">Home</a>
+
       <a href="/research/">Research</a>
+
       <a href="/cv/">CV</a>
+
       <a href="/publications/">Publications</a>
 
       <details>
         <summary>Projects ▾</summary>
+
         <div class="dropdown">
           <a href="/projects/">Projects</a>
           <a href="/projects/writings/">Writings</a>
@@ -413,16 +340,23 @@
       </details>
 
       <a href="/periodic-table/">Periodic table</a>
+
       <a href="/nmrpaint-info/">NMRpaint</a>
+
     </nav>
 
   </div>
+
 </header>
 
 
 <main>
 
 <article class="article">
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
 
   <header class="article-header">
 
@@ -446,10 +380,10 @@
   <p>
     Conventional bibliometric indicators such as total citations,
     the h-index, and the i10-index are useful for describing the
-    accumulated impact of a scientist's work. However, these quantities
-    are strongly dependent on career length. A researcher with a long
-    publication history will generally accumulate more citations than
-    someone at an earlier stage of their career.
+    accumulated impact of a scientist's work. However, these
+    quantities are strongly dependent on career length. A researcher
+    with a long publication history will generally accumulate more
+    citations than someone at an earlier stage of their career.
   </p>
 
   <p>
@@ -464,8 +398,8 @@
     of career trajectory. A rising value may indicate increasingly
     influential or promising research activity, a stable value may
     indicate sustained impact, while a declining value may indicate
-    decreasing research momentum, reduced productivity, or the natural
-    slowing of a career.
+    decreasing research momentum, reduced productivity, or the
+    natural slowing of a career.
   </p>
 
 
@@ -483,10 +417,10 @@
 
   <div class="equation">
     \[
-    A(Y_i)
-    =
-    \sum_{\substack{n\\Y_n<Y_i}}
-    \frac{C_n}{Y_i-Y_n}
+      A(Y_i)
+      =
+      \sum_{Y_n < Y_i}
+      \frac{C_n}{Y_i-Y_n}
     \]
   </div>
 
@@ -498,22 +432,35 @@
   </p>
 
   <table class="definition-table">
+
     <tr>
       <td>\(A(Y_i)\)</td>
-      <td>Career Momentum Index evaluated in year \(Y_i\).</td>
+      <td>
+        Career Momentum Index evaluated in year \(Y_i\).
+      </td>
     </tr>
+
     <tr>
       <td>\(C_n\)</td>
-      <td>Total citation count of publication \(n\).</td>
+      <td>
+        Total citation count of publication \(n\).
+      </td>
     </tr>
+
     <tr>
       <td>\(Y_i\)</td>
-      <td>Year at which the index is evaluated.</td>
+      <td>
+        Year at which the index is evaluated.
+      </td>
     </tr>
+
     <tr>
       <td>\(Y_n\)</td>
-      <td>Publication year of article \(n\).</td>
+      <td>
+        Publication year of article \(n\).
+      </td>
     </tr>
+
   </table>
 
   <p>
@@ -554,28 +501,27 @@
   </p>
 
   <p>
-    The factor
+    The temporal weighting factor is
   </p>
 
   <div class="equation">
     \[
-    \frac{1}{Y_i-Y_n}
+      \frac{1}{Y_i-Y_n}
     \]
   </div>
 
   <p>
-    introduces a simple temporal weighting. A recent paper with many
-    citations therefore has a large contribution, while an old paper
-    must demonstrate sustained citation activity to maintain a large
-    contribution.
+    A recent paper with many citations therefore has a large
+    contribution, while an old paper must demonstrate sustained
+    citation activity to maintain a large contribution.
   </p>
 
   <p>
-    This also gives the index an interesting property: a publication
-    does not permanently disappear from the measure simply because it
-    becomes old. If an older paper continues to receive citations, its
-    cumulative citation count can compensate for the increasing age
-    denominator.
+    This also gives the index an important property: a publication
+    does not permanently disappear from the measure simply because
+    it becomes old. If an older paper continues to receive citations,
+    its cumulative citation count can compensate for the increasing
+    age denominator.
   </p>
 
   <p>
@@ -605,28 +551,27 @@
 
   <div class="equation">
     \[
-    A(Y_i)=mY_i+b
+      A(Y_i)=mY_i+b
     \]
   </div>
 
   <p>
-    where \(m\) is the slope of the Career Momentum Index with respect
-    to time. The slope is obtained by ordinary least squares:
+    where \(m\) is the slope of the Career Momentum Index with
+    respect to time. The slope is obtained by ordinary least squares:
   </p>
 
   <div class="equation">
     \[
-    m=
-    \frac{
-      \displaystyle
-      \sum_i
-      (Y_i-\overline{Y})
-      \left[A(Y_i)-\overline{A}\right]
-    }{
-      \displaystyle
-      \sum_i
-      (Y_i-\overline{Y})^2
-    }
+      m
+      =
+      \frac{
+        \sum_i
+        (Y_i-\overline{Y})
+        (A(Y_i)-\overline{A})
+      }{
+        \sum_i
+        (Y_i-\overline{Y})^2
+      }
     \]
   </div>
 
@@ -636,22 +581,20 @@
     the rate at which the Career Momentum Index changes with time.
   </p>
 
-  <div class="metric-summary">
+  <div class="concept-box">
 
-    <div class="metric-card">
-      <span class="metric-value">\(m&gt;0\)</span>
-      <span class="metric-label">Increasing momentum</span>
-    </div>
+    <p>
+      <strong>\(m>0\)</strong> indicates increasing citation momentum.
+    </p>
 
-    <div class="metric-card">
-      <span class="metric-value">\(m\approx0\)</span>
-      <span class="metric-label">Stable momentum</span>
-    </div>
+    <p>
+      <strong>\(m\approx0\)</strong> indicates relatively stable
+      citation momentum.
+    </p>
 
-    <div class="metric-card">
-      <span class="metric-value">\(m&lt;0\)</span>
-      <span class="metric-label">Declining momentum</span>
-    </div>
+    <p>
+      <strong>\(m<0\)</strong> indicates declining citation momentum.
+    </p>
 
   </div>
 
@@ -664,7 +607,7 @@
 
 
   <!-- =======================================================
-       CITATION METRICS
+       GOOGLE SCHOLAR
        ======================================================= -->
 
   <h2>Citation metrics</h2>
@@ -684,6 +627,7 @@
       </a>
 
     </div>
+
 
     <div class="citation-content">
 
@@ -714,13 +658,7 @@
 
       <div class="citation-chart">
 
-        <div class="citation-bars" id="citationBars"></div>
-
-        <div class="citation-axis">
-          <span>0</span>
-          <span>25</span>
-          <span>50</span>
-        </div>
+        <canvas id="citationChart"></canvas>
 
       </div>
 
@@ -743,6 +681,7 @@
       shows the resulting trajectory together with its linear
       regression.
     </p>
+
 
     <div class="chart-wrapper">
 
@@ -768,15 +707,18 @@
     <table class="momentum-table">
 
       <thead>
+
         <tr>
           <th>Year</th>
           <th>Career Momentum Index \(A(Y)\)</th>
         </tr>
+
       </thead>
 
       <tbody id="momentumTableBody"></tbody>
 
     </table>
+
 
     <div class="concept-box">
 
@@ -820,12 +762,6 @@
        ======================================================= -->
 
   <h2>What the index captures</h2>
-
-  <p>
-    The index is designed to capture several different career
-    trajectories that conventional cumulative citation counts can
-    obscure.
-  </p>
 
   <h3>Early-career growth</h3>
 
@@ -907,10 +843,10 @@
 
   <div class="equation">
     \[
-    A(Y_i)
-    =
-    \sum_{\substack{n\\Y_n<Y_i}}
-    \frac{C_n}{Y_i-Y_n}
+      A(Y_i)
+      =
+      \sum_{Y_n < Y_i}
+      \frac{C_n}{Y_i-Y_n}
     \]
   </div>
 
@@ -921,7 +857,7 @@
 
   <div class="equation">
     \[
-    A(Y_i)=mY_i+b
+      A(Y_i)=mY_i+b
     \]
   </div>
 
@@ -955,6 +891,7 @@
 
 
 <script>
+
 /* =============================================================
    Citation data
    ============================================================= */
@@ -973,8 +910,6 @@ const publicationCitations = {
 /* =============================================================
    Citation histogram
    ============================================================= */
-
-const citationBars = document.getElementById("citationBars");
 
 const citationYears = [
   2019,
@@ -998,56 +933,296 @@ const citationValues = [
   2
 ];
 
-const citationMaximum = 50;
 
-citationYears.forEach((year, index) => {
+const citationCanvas =
+  document.getElementById("citationChart");
 
-  const value = citationValues[index];
+const citationCtx =
+  citationCanvas.getContext("2d");
 
-  const group = document.createElement("div");
-  group.className = "citation-bar-group";
 
-  const bar = document.createElement("div");
-  bar.className = "citation-bar";
+function drawCitationChart() {
 
-  bar.style.height =
-    Math.max(0, (value / citationMaximum) * 100) + "%";
+  const rect =
+    citationCanvas.getBoundingClientRect();
 
-  const valueLabel = document.createElement("span");
-  valueLabel.className = "citation-value";
-  valueLabel.textContent = value;
+  const dpr =
+    window.devicePixelRatio || 1;
 
-  bar.appendChild(valueLabel);
+  citationCanvas.width =
+    rect.width * dpr;
 
-  const yearLabel = document.createElement("div");
-  yearLabel.className = "citation-year";
-  yearLabel.textContent = year;
+  citationCanvas.height =
+    rect.height * dpr;
 
-  group.appendChild(bar);
-  group.appendChild(yearLabel);
+  citationCtx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
 
-  citationBars.appendChild(group);
-});
+
+  const width =
+    rect.width;
+
+  const height =
+    rect.height;
+
+
+  const marginLeft = 45;
+  const marginRight = 20;
+  const marginTop = 30;
+  const marginBottom = 45;
+
+
+  const plotWidth =
+    width -
+    marginLeft -
+    marginRight;
+
+  const plotHeight =
+    height -
+    marginTop -
+    marginBottom;
+
+
+  const maximumY = 50;
+
+
+  function xPosition(index) {
+
+    const step =
+      plotWidth / citationYears.length;
+
+    return (
+      marginLeft +
+      step * index +
+      step / 2
+    );
+  }
+
+
+  function yPosition(value) {
+
+    return (
+      marginTop +
+      plotHeight -
+      (value / maximumY) *
+      plotHeight
+    );
+  }
+
+
+  citationCtx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  /* ---------------------------------------------------------
+     Horizontal grid lines
+     --------------------------------------------------------- */
+
+  citationCtx.lineWidth = 1;
+  citationCtx.strokeStyle = "#dddddd";
+
+  [0, 10, 20, 30, 40, 50].forEach(value => {
+
+    const y =
+      yPosition(value);
+
+    citationCtx.beginPath();
+
+    citationCtx.moveTo(
+      marginLeft,
+      y
+    );
+
+    citationCtx.lineTo(
+      width - marginRight,
+      y
+    );
+
+    citationCtx.stroke();
+
+
+    citationCtx.fillStyle = "#555555";
+    citationCtx.font = "12px sans-serif";
+    citationCtx.textAlign = "right";
+    citationCtx.textBaseline = "middle";
+
+    citationCtx.fillText(
+      value,
+      marginLeft - 8,
+      y
+    );
+
+  });
+
+
+  /* ---------------------------------------------------------
+     Axes
+     --------------------------------------------------------- */
+
+  citationCtx.strokeStyle = "#555555";
+  citationCtx.lineWidth = 1.2;
+
+  citationCtx.beginPath();
+
+  citationCtx.moveTo(
+    marginLeft,
+    marginTop
+  );
+
+  citationCtx.lineTo(
+    marginLeft,
+    marginTop + plotHeight
+  );
+
+  citationCtx.lineTo(
+    width - marginRight,
+    marginTop + plotHeight
+  );
+
+  citationCtx.stroke();
+
+
+  /* ---------------------------------------------------------
+     Bars
+     --------------------------------------------------------- */
+
+  const step =
+    plotWidth / citationYears.length;
+
+  const barWidth =
+    Math.min(
+      42,
+      step * 0.58
+    );
+
+
+  citationValues.forEach(
+    (value, index) => {
+
+      const x =
+        xPosition(index) -
+        barWidth / 2;
+
+      const y =
+        yPosition(value);
+
+      const barHeight =
+        plotHeight -
+        (y - marginTop);
+
+
+      /*
+        Only draw a bar when the value is greater than zero.
+        This prevents zero-value years from producing unwanted
+        visual artifacts.
+      */
+
+      if (value > 0) {
+
+        citationCtx.fillStyle =
+          "#003f5c";
+
+        citationCtx.fillRect(
+          x,
+          y,
+          barWidth,
+          barHeight
+        );
+
+      }
+
+
+      /* Citation value */
+
+      citationCtx.fillStyle =
+        "#333333";
+
+      citationCtx.font =
+        "11px sans-serif";
+
+      citationCtx.textAlign =
+        "center";
+
+      citationCtx.textBaseline =
+        "bottom";
+
+      citationCtx.fillText(
+        value,
+        xPosition(index),
+        y - 5
+      );
+
+
+      /* Year */
+
+      citationCtx.fillStyle =
+        "#555555";
+
+      citationCtx.font =
+        "12px sans-serif";
+
+      citationCtx.textAlign =
+        "center";
+
+      citationCtx.textBaseline =
+        "top";
+
+      citationCtx.fillText(
+        citationYears[index],
+        xPosition(index),
+        marginTop + plotHeight + 12
+      );
+
+    }
+  );
+
+
+  /* Axis label */
+
+  citationCtx.fillStyle =
+    "#444444";
+
+  citationCtx.font =
+    "13px sans-serif";
+
+  citationCtx.textAlign =
+    "center";
+
+  citationCtx.textBaseline =
+    "bottom";
+
+  citationCtx.fillText(
+    "Publication year",
+    marginLeft + plotWidth / 2,
+    height - 5
+  );
+
+}
+
+
+drawCitationChart();
 
 
 /* =============================================================
    Career Momentum Index
    ============================================================= */
 
-/*
-   The present year is 2026.
-
-   Following the definition of the index, the trajectory is
-   evaluated through the year before the present year, i.e. 2025.
-
-   Publications from 2026 therefore do not enter the current
-   Career Momentum Index series.
-*/
-
 const evaluationYears = [];
 
 for (let year = 2020; year <= 2025; year++) {
+
   evaluationYears.push(year);
+
 }
 
 
@@ -1058,16 +1233,19 @@ for (let year = 2020; year <= 2025; year++) {
 
        publication year < evaluation year
 
-   are included, avoiding a zero publication-age denominator.
+   are included.
 */
 
 function careerMomentum(year) {
 
   let value = 0;
 
-  for (const publicationYear in publicationCitations) {
+  for (
+    const publicationYear in publicationCitations
+  ) {
 
-    const pubYear = Number(publicationYear);
+    const pubYear =
+      Number(publicationYear);
 
     if (pubYear < year) {
 
@@ -1077,24 +1255,29 @@ function careerMomentum(year) {
       const age =
         year - pubYear;
 
-      value += citations / age;
+      value +=
+        citations / age;
+
     }
+
   }
 
   return value;
+
 }
 
 
-/* Generate the index data */
+/* Generate index data */
 
-const momentumData = evaluationYears.map(year => {
+const momentumData =
+  evaluationYears.map(year => {
 
-  return {
-    year: year,
-    value: careerMomentum(year)
-  };
+    return {
+      year: year,
+      value: careerMomentum(year)
+    };
 
-});
+  });
 
 
 /* =============================================================
@@ -1103,22 +1286,27 @@ const momentumData = evaluationYears.map(year => {
 
 function linearRegression(data) {
 
-  const n = data.length;
+  const n =
+    data.length;
 
   const meanX =
     data.reduce(
-      (sum, point) => sum + point.year,
+      (sum, point) =>
+        sum + point.year,
       0
     ) / n;
 
   const meanY =
     data.reduce(
-      (sum, point) => sum + point.value,
+      (sum, point) =>
+        sum + point.value,
       0
     ) / n;
 
+
   let numerator = 0;
   let denominator = 0;
+
 
   data.forEach(point => {
 
@@ -1127,20 +1315,27 @@ function linearRegression(data) {
       (point.value - meanY);
 
     denominator +=
-      Math.pow(point.year - meanX, 2);
+      Math.pow(
+        point.year - meanX,
+        2
+      );
 
   });
+
 
   const slope =
     numerator / denominator;
 
   const intercept =
-    meanY - slope * meanX;
+    meanY -
+    slope * meanX;
+
 
   return {
     slope: slope,
     intercept: intercept
   };
+
 }
 
 
@@ -1149,16 +1344,20 @@ const regression =
 
 
 /* =============================================================
-   Populate data table
+   Populate table
    ============================================================= */
 
 const momentumTableBody =
-  document.getElementById("momentumTableBody");
+  document.getElementById(
+    "momentumTableBody"
+  );
+
 
 momentumData.forEach(point => {
 
   const row =
     document.createElement("tr");
+
 
   const yearCell =
     document.createElement("td");
@@ -1166,14 +1365,17 @@ momentumData.forEach(point => {
   yearCell.textContent =
     point.year;
 
+
   const valueCell =
     document.createElement("td");
 
   valueCell.textContent =
     point.value.toFixed(2);
 
+
   row.appendChild(yearCell);
   row.appendChild(valueCell);
+
 
   momentumTableBody.appendChild(row);
 
@@ -1181,11 +1383,13 @@ momentumData.forEach(point => {
 
 
 /* =============================================================
-   Career Momentum canvas graph
+   Career Momentum graph
    ============================================================= */
 
 const canvas =
-  document.getElementById("momentumChart");
+  document.getElementById(
+    "momentumChart"
+  );
 
 const ctx =
   canvas.getContext("2d");
@@ -1199,11 +1403,13 @@ function drawMomentumChart() {
   const dpr =
     window.devicePixelRatio || 1;
 
+
   canvas.width =
     rect.width * dpr;
 
   canvas.height =
     rect.height * dpr;
+
 
   ctx.setTransform(
     dpr,
@@ -1222,8 +1428,6 @@ function drawMomentumChart() {
     rect.height;
 
 
-  /* Margins */
-
   const marginLeft = 65;
   const marginRight = 25;
   const marginTop = 25;
@@ -1241,21 +1445,28 @@ function drawMomentumChart() {
     marginBottom;
 
 
-  /* Determine Y range */
-
   const maximumDataValue =
     Math.max(
-      ...momentumData.map(point => point.value)
+      ...momentumData.map(
+        point => point.value
+      )
     );
+
 
   const regressionValues =
-    momentumData.map(point =>
-      regression.slope * point.year +
-      regression.intercept
+    momentumData.map(
+      point =>
+        regression.slope *
+        point.year +
+        regression.intercept
     );
 
+
   const maximumRegressionValue =
-    Math.max(...regressionValues);
+    Math.max(
+      ...regressionValues
+    );
+
 
   const maximumY =
     Math.ceil(
@@ -1265,37 +1476,34 @@ function drawMomentumChart() {
       ) / 10
     ) * 10;
 
-  const minimumY = 0;
-
-
-  /* X coordinate */
 
   function xPosition(year) {
 
-    return marginLeft +
+    return (
+      marginLeft +
       (
         (year - 2020) /
         (2025 - 2020)
       ) *
-      plotWidth;
+      plotWidth
+    );
+
   }
 
-
-  /* Y coordinate */
 
   function yPosition(value) {
 
-    return marginTop +
+    return (
+      marginTop +
       plotHeight -
       (
-        (value - minimumY) /
-        (maximumY - minimumY)
+        value / maximumY
       ) *
-      plotHeight;
+      plotHeight
+    );
+
   }
 
-
-  /* Clear canvas */
 
   ctx.clearRect(
     0,
@@ -1306,25 +1514,31 @@ function drawMomentumChart() {
 
 
   /* ---------------------------------------------------------
-     Grid and axes
+     Grid
      --------------------------------------------------------- */
 
   ctx.lineWidth = 1;
   ctx.strokeStyle = "#dddddd";
 
-  const numberOfGridLines = 5;
+
+  const gridValues = [];
 
   for (
-    let i = 0;
-    i <= numberOfGridLines;
-    i++
+    let value = 0;
+    value <= maximumY;
+    value += 10
   ) {
 
-    const value =
-      (maximumY / numberOfGridLines) * i;
+    gridValues.push(value);
+
+  }
+
+
+  gridValues.forEach(value => {
 
     const y =
       yPosition(value);
+
 
     ctx.beginPath();
 
@@ -1340,23 +1554,39 @@ function drawMomentumChart() {
 
     ctx.stroke();
 
-    ctx.fillStyle = "#555555";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "right";
-    ctx.textBaseline = "middle";
+
+    ctx.fillStyle =
+      "#555555";
+
+    ctx.font =
+      "12px sans-serif";
+
+    ctx.textAlign =
+      "right";
+
+    ctx.textBaseline =
+      "middle";
+
 
     ctx.fillText(
       value.toFixed(0),
       marginLeft - 10,
       y
     );
-  }
+
+  });
 
 
-  /* Axes */
+  /* ---------------------------------------------------------
+     Axes
+     --------------------------------------------------------- */
 
-  ctx.strokeStyle = "#555555";
-  ctx.lineWidth = 1.2;
+  ctx.strokeStyle =
+    "#555555";
+
+  ctx.lineWidth =
+    1.2;
+
 
   ctx.beginPath();
 
@@ -1378,21 +1608,28 @@ function drawMomentumChart() {
   ctx.stroke();
 
 
-  /* X-axis labels */
+  /* ---------------------------------------------------------
+     X labels
+     --------------------------------------------------------- */
 
-  ctx.fillStyle = "#555555";
-  ctx.font = "12px sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
+  ctx.fillStyle =
+    "#555555";
+
+  ctx.font =
+    "12px sans-serif";
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "top";
+
 
   evaluationYears.forEach(year => {
 
-    const x =
-      xPosition(year);
-
     ctx.fillText(
       year,
-      x,
+      xPosition(year),
       marginTop + plotHeight + 12
     );
 
@@ -1400,7 +1637,7 @@ function drawMomentumChart() {
 
 
   /* ---------------------------------------------------------
-     Axis labels
+     Y axis label
      --------------------------------------------------------- */
 
   ctx.save();
@@ -1410,11 +1647,19 @@ function drawMomentumChart() {
     marginTop + plotHeight / 2
   );
 
-  ctx.rotate(-Math.PI / 2);
+  ctx.rotate(
+    -Math.PI / 2
+  );
 
-  ctx.fillStyle = "#444444";
-  ctx.font = "13px sans-serif";
-  ctx.textAlign = "center";
+  ctx.fillStyle =
+    "#444444";
+
+  ctx.font =
+    "13px sans-serif";
+
+  ctx.textAlign =
+    "center";
+
 
   ctx.fillText(
     "Career Momentum Index A(Y)",
@@ -1422,12 +1667,23 @@ function drawMomentumChart() {
     0
   );
 
+
   ctx.restore();
 
 
-  ctx.fillStyle = "#444444";
-  ctx.font = "13px sans-serif";
-  ctx.textAlign = "center";
+  /* ---------------------------------------------------------
+     X axis label
+     --------------------------------------------------------- */
+
+  ctx.fillStyle =
+    "#444444";
+
+  ctx.font =
+    "13px sans-serif";
+
+  ctx.textAlign =
+    "center";
+
 
   ctx.fillText(
     "Evaluation year",
@@ -1442,27 +1698,39 @@ function drawMomentumChart() {
 
   ctx.beginPath();
 
-  ctx.strokeStyle = "#bc5090";
-  ctx.lineWidth = 2;
-  ctx.setLineDash([7, 5]);
+  ctx.strokeStyle =
+    "#bc5090";
+
+  ctx.lineWidth =
+    2;
+
+  ctx.setLineDash([
+    7,
+    5
+  ]);
+
 
   const regressionStart =
     regression.slope * 2020 +
     regression.intercept;
 
+
   const regressionEnd =
     regression.slope * 2025 +
     regression.intercept;
+
 
   ctx.moveTo(
     xPosition(2020),
     yPosition(regressionStart)
   );
 
+
   ctx.lineTo(
     xPosition(2025),
     yPosition(regressionEnd)
   );
+
 
   ctx.stroke();
 
@@ -1475,8 +1743,12 @@ function drawMomentumChart() {
 
   ctx.beginPath();
 
-  ctx.strokeStyle = "#003f5c";
-  ctx.lineWidth = 3;
+  ctx.strokeStyle =
+    "#003f5c";
+
+  ctx.lineWidth =
+    3;
+
 
   momentumData.forEach(
     (point, index) => {
@@ -1487,14 +1759,26 @@ function drawMomentumChart() {
       const y =
         yPosition(point.value);
 
+
       if (index === 0) {
-        ctx.moveTo(x, y);
+
+        ctx.moveTo(
+          x,
+          y
+        );
+
       } else {
-        ctx.lineTo(x, y);
+
+        ctx.lineTo(
+          x,
+          y
+        );
+
       }
 
     }
   );
+
 
   ctx.stroke();
 
@@ -1511,9 +1795,12 @@ function drawMomentumChart() {
     const y =
       yPosition(point.value);
 
+
     ctx.beginPath();
 
-    ctx.fillStyle = "#003f5c";
+    ctx.fillStyle =
+      "#003f5c";
+
 
     ctx.arc(
       x,
@@ -1523,6 +1810,7 @@ function drawMomentumChart() {
       Math.PI * 2
     );
 
+
     ctx.fill();
 
   });
@@ -1530,21 +1818,27 @@ function drawMomentumChart() {
 }
 
 
-/* Draw chart */
-
 drawMomentumChart();
 
 
-/* Redraw when window size changes */
+/* =============================================================
+   Redraw charts on resize
+   ============================================================= */
 
 window.addEventListener(
   "resize",
-  drawMomentumChart
+  () => {
+
+    drawCitationChart();
+
+    drawMomentumChart();
+
+  }
 );
 
 
 /* =============================================================
-   Expose calculated values for debugging if desired
+   Console information
    ============================================================= */
 
 console.log(
