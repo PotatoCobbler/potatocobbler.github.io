@@ -381,9 +381,13 @@
     Conventional bibliometric indicators such as total citations,
     the h-index, and the i10-index are useful for describing the
     accumulated impact of a scientist's work. However, these
-    quantities are strongly dependent on career length. A researcher
+    quantities are strongly dependent on factors such as career length,
+    as well as the field in which one is active: some fields are larger than
+    others, naturally resulting in more citations, and researchers
     with a long publication history will generally accumulate more
-    citations than someone at an earlier stage of their career.
+    citations than someone at an earlier stage of their career. Moreover
+    these metrics cannot decrease over time, citations on a publication
+    from long ago contributes as much as one published today.
   </p>
 
   <p>
@@ -393,15 +397,14 @@
   </p>
 
   <p>
-    The aim is therefore not to produce an absolute ranking of
-    scientists. Instead, the index is intended as an internal measure
-    of career trajectory. A rising value may indicate increasingly
+    Rather than tracking the aforementioned measures over time, we here
+    describe an internally relative metric which explicitely uses the age
+    of the publication. A positive value value may indicate increasingly
     influential or promising research activity, a stable value may
-    indicate sustained impact, while a declining value may indicate
-    decreasing research momentum, reduced productivity, or the
-    natural slowing of a career.
+    indicate sustained impact, whereas a declining value may indicate
+    decreasing research momentum, reduced productivity, or the natural
+    slowing of a career.
   </p>
-
 
   <!-- =======================================================
        CAREER MOMENTUM INDEX
@@ -410,9 +413,12 @@
   <h2>The Career Momentum Index</h2>
 
   <p>
-    For a given evaluation year \(Y_i\), each publication contributes
-    its total citation count divided by its age. The Career Momentum
-    Index is defined as
+    For a given evaluation year \(Y_i\), take the total citation count 
+    for a given publication \(n\) in the present year \(C_n\) and divide 
+    that number by that publications age (\(Y_i\) - \(Y_n\). Do this for
+    all publications with a publication year preceding the current year, 
+    i.e. (\(Y_i\) < \(Y_n\), and sum everything up: this is the Career 
+    Momentum Index for that year \(A(Y_i)\).
   </p>
 
   <div class="equation">
@@ -423,13 +429,6 @@
       \frac{C_n}{Y_i-Y_n}
     \]
   </div>
-
-  <p>
-    where \(C_n\) is the total number of citations received by
-    publication \(n\), \(Y_n\) is its year of publication, and the sum
-    includes only publications that appeared before the year being
-    evaluated.
-  </p>
 
   <table class="definition-table">
 
@@ -464,74 +463,25 @@
   </table>
 
   <p>
-    The central idea is that recent influential work contributes
-    strongly to the index, whereas older publications contribute less
-    unless they have accumulated a correspondingly large number of
-    citations.
+    The index \(A(Y_i)\) for a certain year is thus not fixed, and
+    has to be recalculated each year.
   </p>
 
   <div class="concept-box">
 
     <p>
       <strong>Key principle:</strong>
-      the index does not simply reward publication recency.
-      It rewards the combination of citation impact and temporal
-      persistence.
+      the index does not simply reward more recent publications, rather, 
+      it measures the impactfulness of ones entire scientific output 
+      throughout ones career: old publications start weighting less and less, 
+      unless they continue to receive citations.
     </p>
 
     <p>
-      Consequently, an old paper that continues to attract citations
-      can remain an important contributor to the index.
+      In contrast to other career metrics, the index can there decrease over time.
     </p>
 
   </div>
-
-
-  <!-- =======================================================
-       AGE WEIGHTING
-       ======================================================= -->
-
-  <h2>Why divide by publication age?</h2>
-
-  <p>
-    Citation counts accumulate over time. Without an age correction,
-    a paper published twenty years ago has had substantially more
-    opportunity to accumulate citations than a paper published two
-    years ago.
-  </p>
-
-  <p>
-    The temporal weighting factor is
-  </p>
-
-  <div class="equation">
-    \[
-      \frac{1}{Y_i-Y_n}
-    \]
-  </div>
-
-  <p>
-    A recent paper with many citations therefore has a large
-    contribution, while an old paper must demonstrate sustained
-    citation activity to maintain a large contribution.
-  </p>
-
-  <p>
-    This also gives the index an important property: a publication
-    does not permanently disappear from the measure simply because
-    it becomes old. If an older paper continues to receive citations,
-    its cumulative citation count can compensate for the increasing
-    age denominator.
-  </p>
-
-  <p>
-    For example, if a paper published in 2016 receives a large number
-    of additional citations in 2026, its contribution to a present-day
-    assessment increases. This captures the idea that scientific
-    influence can sometimes emerge or strengthen long after
-    publication.
-  </p>
-
 
   <!-- =======================================================
        TRAJECTORY
@@ -540,13 +490,9 @@
   <h2>From the index to career trajectory</h2>
 
   <p>
-    Calculating \(A(Y_i)\) for successive years produces a time series
-    describing the evolution of a researcher's citation momentum.
-  </p>
-
-  <p>
-    The trajectory can then be summarized by fitting a linear
-    regression:
+    More interesting than individual career momentum indices, is their change over time:
+    the Career Momentum Gradient. Calculating \(A(Y_i)\) for successive years and calculate
+    the trajectory by fitting a simple linear regression:
   </p>
 
   <div class="equation">
@@ -562,7 +508,7 @@
 
   <div class="equation">
     \[
-      m
+      \Gamma
       =
       \frac{
         \sum_i
@@ -629,7 +575,9 @@
 
 
     <div class="citation-content">
-
+    <p>
+      Example numbers
+    </p>
       <table class="citation-table">
 
         <tr>
@@ -749,26 +697,11 @@
   <h2>Interpretation</h2>
 
   <p>
-    The important quantity for characterizing the trajectory is the
-    slope of the fitted line. A positive slope indicates increasing
-    citation momentum, a slope close to zero indicates a relatively
-    stable trajectory, and a negative slope indicates declining
-    momentum.
+    The Career Momentum Gradient is deliberately an internal career metric:
+    it does not change solely based on the absolute number of citations. As
+    such, it can put a number to the stage of ones scientific career, for 
+    example:
   </p>
-
-  <p>
-    This measure is deliberately an internal career metric. Its
-    primary purpose is to examine how the citation impact of one
-    scientist changes over time, rather than to establish an absolute
-    ranking between scientists.
-  </p>
-
-
-  <!-- =======================================================
-       WHAT THE INDEX CAPTURES
-       ======================================================= -->
-
-  <h2>What the index captures</h2>
 
   <h3>Early-career growth</h3>
 
@@ -827,13 +760,18 @@
   <p>
     The index is therefore most informative when applied
     longitudinally to the same researcher and interpreted alongside
-    their publication record and research context.
+    their publication record and research context. In particular, 
+    the gradient \(\Gamma\) should be understood as a measure
+    of <strong>citation momentum</strong>, rather than as a direct
+    measurement of scientific ability, productivity, or quality.
   </p>
 
   <p>
-    In particular, the slope \(\Gamma\) should be understood as a measure
-    of <strong>citation momentum</strong>, rather than as a direct
-    measurement of scientific ability, productivity, or quality.
+    Lastly, the gradient as defined above covers the entire scientific
+    career. It may in cases be more informative to evaluate it only for 
+    the past, say, 5 years \(\Gamma_5\). This would artificially neglect 
+    older publications, and thus evaluate only recent progress, for example
+    during ones PhD or postdoc, etcetera.
   </p>
 
 
@@ -864,7 +802,7 @@
 
   <div class="equation">
     \[
-      A(Y_i)=mY_i+b
+      A(Y_i)=\Gamma Y_i+b
     \]
   </div>
 
@@ -905,8 +843,8 @@
 
 const publicationCitations = {
   2019: 34,
-  2021: 11,
-  2022: 24,
+  2021: 10,
+  2022: 23,
   2023: 14,
   2024: 47,
   2025: 9,
@@ -1226,10 +1164,8 @@ drawCitationChart();
 
 const evaluationYears = [];
 
-for (let year = 2020; year <= 2025; year++) {
-
+for (let year = 2020; year <= 2026; year++) {
   evaluationYears.push(year);
-
 }
 
 
@@ -1475,9 +1411,8 @@ function drawMomentumChart() {
       ) / 10
     ) * 10;
 
-
   function xPosition(year) {
-
+  
     return (
       marginLeft +
       (
@@ -1486,7 +1421,7 @@ function drawMomentumChart() {
       ) *
       plotWidth
     );
-
+  
   }
 
 
@@ -1708,28 +1643,24 @@ function drawMomentumChart() {
     5
   ]);
 
-
+  
   const regressionStart =
-    regression.gamma * 2020 +
+    regression.gamma * minimumYear +
     regression.intercept;
-
-
+  
   const regressionEnd =
-    regression.gamma * 2025 +
+    regression.gamma * maximumYear +
     regression.intercept;
-
-
+  
   ctx.moveTo(
-    xPosition(2020),
+    xPosition(minimumYear),
     yPosition(regressionStart)
   );
-
-
+  
   ctx.lineTo(
-    xPosition(2025),
+    xPosition(maximumYear),
     yPosition(regressionEnd)
   );
-
 
   ctx.stroke();
 
