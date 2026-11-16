@@ -551,12 +551,12 @@
 
   <div class="equation">
     \[
-      A(Y_i)=mY_i+b
+      A(Y_i)=\Gamma Y_i+b
     \]
   </div>
 
   <p>
-    where \(m\) is the slope of the Career Momentum Index with
+    where \(\Gamma\) is the slope of the Career Momentum Index with
     respect to time. The slope is obtained by ordinary least squares:
   </p>
 
@@ -576,24 +576,23 @@
   </div>
 
   <p>
-    The slope \(m\), rather than the Pearson correlation coefficient,
-    is used as the principal descriptor because it directly measures
+    The slope \(\Gamma\), is used as the principal descriptor as it directly measures
     the rate at which the Career Momentum Index changes with time.
   </p>
 
   <div class="concept-box">
 
     <p>
-      <strong>\(m>0\)</strong> indicates increasing citation momentum.
+      <strong>\(\Gamma>0\)</strong> indicates increasing citation momentum.
     </p>
 
     <p>
-      <strong>\(m\approx0\)</strong> indicates relatively stable
+      <strong>\(\Gamma\approx0\)</strong> indicates relatively stable
       citation momentum.
     </p>
 
     <p>
-      <strong>\(m<0\)</strong> indicates declining citation momentum.
+      <strong>\(\Gamma<0\)</strong> indicates declining citation momentum.
     </p>
 
   </div>
@@ -601,7 +600,7 @@
   <p>
     Thus, the index and its slope provide two complementary pieces
     of information: \(A(Y_i)\) describes the citation-weighted state
-    of a career at a particular point in time, while \(m\) describes
+    of a career at a particular point in time, while \(\Gamma\) describes
     its direction of change.
   </p>
 
@@ -703,6 +702,14 @@
 
     </div>
 
+    <div class="concept-box">
+
+      <p>
+        <strong>Career Momentum Gradient:</strong>
+        <span id="gammaValue"></span>
+      </p>
+    
+    </div>
 
     <table class="momentum-table">
 
@@ -824,7 +831,7 @@
   </p>
 
   <p>
-    In particular, the slope \(m\) should be understood as a measure
+    In particular, the slope \(\Gamma\) should be understood as a measure
     of <strong>citation momentum</strong>, rather than as a direct
     measurement of scientific ability, productivity, or quality.
   </p>
@@ -862,7 +869,7 @@
   </div>
 
   <p>
-    The sign of \(m\) provides a simple description of the direction
+    The sign of \(\Gamma\) provides a simple description of the direction
     of the career trajectory: positive for increasing momentum,
     approximately zero for stable momentum, and negative for
     declining momentum.
@@ -1281,32 +1288,27 @@ const momentumData =
 
 
 /* =============================================================
-   Linear regression
+   Linear regression / Career Momentum Gradient Γ
    ============================================================= */
 
 function linearRegression(data) {
 
-  const n =
-    data.length;
+  const n = data.length;
 
   const meanX =
     data.reduce(
-      (sum, point) =>
-        sum + point.year,
+      (sum, point) => sum + point.year,
       0
     ) / n;
 
   const meanY =
     data.reduce(
-      (sum, point) =>
-        sum + point.value,
+      (sum, point) => sum + point.value,
       0
     ) / n;
 
-
   let numerator = 0;
   let denominator = 0;
-
 
   data.forEach(point => {
 
@@ -1315,33 +1317,30 @@ function linearRegression(data) {
       (point.value - meanY);
 
     denominator +=
-      Math.pow(
-        point.year - meanX,
-        2
-      );
+      Math.pow(point.year - meanX, 2);
 
   });
 
-
-  const slope =
+  const gamma =
     numerator / denominator;
 
   const intercept =
-    meanY -
-    slope * meanX;
-
+    meanY - gamma * meanX;
 
   return {
-    slope: slope,
+    gamma: gamma,
     intercept: intercept
   };
 
 }
 
-
 const regression =
   linearRegression(momentumData);
 
+document.getElementById("gammaValue").textContent =
+"Γ = " +
+regression.gamma.toFixed(2) +
+" index units/year";
 
 /* =============================================================
    Populate table
@@ -1456,7 +1455,7 @@ function drawMomentumChart() {
   const regressionValues =
     momentumData.map(
       point =>
-        regression.slope *
+        regression.gamma *
         point.year +
         regression.intercept
     );
@@ -1711,12 +1710,12 @@ function drawMomentumChart() {
 
 
   const regressionStart =
-    regression.slope * 2020 +
+    regression.gamma * 2020 +
     regression.intercept;
 
 
   const regressionEnd =
-    regression.slope * 2025 +
+    regression.gamma * 2025 +
     regression.intercept;
 
 
@@ -1848,7 +1847,7 @@ console.log(
 
 console.log(
   "Linear regression slope:",
-  regression.slope
+  regression.gamma
 );
 
 console.log(
