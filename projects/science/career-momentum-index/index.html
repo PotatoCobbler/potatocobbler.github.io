@@ -1375,8 +1375,13 @@ function drawMomentumChart() {
     height -
     marginTop -
     marginBottom;
-
-
+  
+  const minimumYear =
+    Math.min(...evaluationYears);
+  
+  const maximumYear =
+    Math.max(...evaluationYears);
+  
   const maximumDataValue =
     Math.max(
       ...momentumData.map(
@@ -1409,16 +1414,14 @@ function drawMomentumChart() {
     ) * 10;
 
   function xPosition(year) {
-  
     return (
       marginLeft +
       (
-        (year - 2020) /
-        (2025 - 2020)
+        (year - minimumYear) /
+        (maximumYear - minimumYear)
       ) *
       plotWidth
     );
-  
   }
 
 
