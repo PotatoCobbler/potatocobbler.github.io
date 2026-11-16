@@ -5,25 +5,44 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <meta name="description"
-        content="A citation-based Career Momentum Index for describing the evolution of a scientist's research impact over time.">
+        content="A citation-based Career Momentum Index for describing the evolution of a scientist's citation impact over the course of a career.">
 
   <link rel="icon" href="/favicon.png" type="image/x-icon">
+
   <title>Career Momentum Index — van der Ham NMR</title>
+
+  <!-- Main site stylesheet -->
   <link rel="stylesheet" href="/css/style.css">
 
+  <!-- MathJax for rendering LaTeX equations -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
   <style>
-    /* =========================================================
-       Career Momentum article
-       ========================================================= */
+    /* ---------------------------------------------------------
+       Article layout
+       --------------------------------------------------------- */
 
     .article {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 50px 24px 80px;
+      padding: 40px 24px 60px;
     }
 
     .article-header {
-      margin-bottom: 45px;
+      margin-bottom: 42px;
     }
 
     .article-header h1 {
@@ -31,127 +50,122 @@
     }
 
     .article-lead {
-      max-width: 780px;
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: #555;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      max-width: 850px;
     }
 
     .article h2 {
-      margin-top: 48px;
+      margin-top: 46px;
       margin-bottom: 18px;
     }
 
     .article h3 {
-      margin-top: 32px;
+      margin-top: 30px;
       margin-bottom: 12px;
     }
 
-    .article p {
-      max-width: 820px;
+    .article p,
+    .article li {
       line-height: 1.7;
     }
 
+    .article ul {
+      padding-left: 24px;
+    }
+
+    /* ---------------------------------------------------------
+       Equations
+       --------------------------------------------------------- */
+
     .equation {
-      margin: 28px auto;
-      padding: 22px;
-      max-width: 780px;
+      margin: 28px 0;
+      padding: 18px 20px;
+      background: #f6f6f6;
+      border-left: 4px solid #003f5c;
       overflow-x: auto;
       text-align: center;
-      font-family: "Times New Roman", serif;
-      font-size: 1.25rem;
-      background: #f7f7f7;
-      border-left: 4px solid #003f5c;
     }
+
+    .equation mjx-container {
+      font-size: 115% !important;
+    }
+
+    /* ---------------------------------------------------------
+       Definition table
+       --------------------------------------------------------- */
 
     .definition-table {
       width: 100%;
-      max-width: 820px;
       border-collapse: collapse;
-      margin: 25px 0;
+      margin: 25px 0 30px;
     }
 
-    .definition-table th,
     .definition-table td {
-      padding: 10px 12px;
+      padding: 9px 12px;
       border-bottom: 1px solid #ddd;
-      text-align: left;
       vertical-align: top;
     }
 
-    .definition-table th {
-      width: 120px;
-      font-family: "Times New Roman", serif;
-      font-size: 1.05rem;
+    .definition-table td:first-child {
+      width: 230px;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
+    /* ---------------------------------------------------------
+       Concept box
+       --------------------------------------------------------- */
+
     .concept-box {
-      margin: 30px 0;
-      padding: 22px 25px;
+      margin: 28px 0;
+      padding: 20px 22px;
       background: #f2f2f2;
-      border-left: 5px solid #003f5c;
+      border-left: 4px solid #bc5090;
     }
 
     .concept-box p:last-child {
       margin-bottom: 0;
     }
 
-    .metric-summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 30px 0;
-    }
-
-    .metric-card {
-      padding: 20px;
-      background: #f5f5f5;
-      text-align: center;
-    }
-
-    .metric-card .metric-value {
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .metric-card .metric-label {
-      display: block;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    /* =========================================================
-       Citation section
-       ========================================================= */
+    /* ---------------------------------------------------------
+       Citation metrics
+       --------------------------------------------------------- */
 
     .citation-section {
-      margin-top: 55px;
-      padding-top: 35px;
-      border-top: 1px solid #ddd;
+      margin-top: 42px;
+      padding: 25px;
+      border: 1px solid #ddd;
+      background: #fafafa;
     }
 
     .citation-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .citation-header h2 {
-      margin-top: 0;
+    .citation-header h3 {
+      margin: 0;
     }
 
     .scholar-link {
+      color: #003f5c;
       text-decoration: none;
-      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .scholar-link:hover {
+      text-decoration: underline;
     }
 
     .citation-content {
       display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 40px;
+      grid-template-columns: 230px 1fr;
+      gap: 30px;
       align-items: start;
     }
 
@@ -160,168 +174,113 @@
       border-collapse: collapse;
     }
 
-    .citation-table th,
     .citation-table td {
-      padding: 8px 6px;
+      padding: 7px 0;
       border-bottom: 1px solid #ddd;
     }
 
-    .citation-table th {
+    .citation-table td:last-child {
       text-align: right;
-    }
-
-    .citation-table th:first-child,
-    .citation-table td:first-child {
-      text-align: left;
+      font-weight: 600;
     }
 
     .citation-chart {
-      min-width: 0;
-    }
-
-    .chart-area {
-      position: relative;
-      height: 270px;
-      margin-top: 10px;
-      padding-left: 42px;
-      padding-bottom: 35px;
-      box-sizing: border-box;
-    }
-
-    .chart-gridline {
-      position: absolute;
-      left: 42px;
-      right: 0;
-      border-top: 1px solid #ddd;
-    }
-
-    .chart-0 {
-      bottom: 35px;
-    }
-
-    .chart-25 {
-      bottom: 140px;
-    }
-
-    .chart-50 {
-      bottom: 245px;
-    }
-
-    .chart-ylabel {
-      position: absolute;
-      left: 0;
-      width: 35px;
-      text-align: right;
-      font-size: 0.75rem;
-      color: #777;
-    }
-
-    .y0 {
-      bottom: 29px;
-    }
-
-    .y25 {
-      bottom: 134px;
-    }
-
-    .y50 {
-      bottom: 239px;
+      min-height: 270px;
     }
 
     .citation-bars {
-      position: absolute;
-      left: 42px;
-      right: 0;
-      bottom: 35px;
-      height: 210px;
+      height: 245px;
       display: flex;
       align-items: flex-end;
-      justify-content: space-around;
-      gap: 7px;
+      gap: 12px;
+      padding: 20px 10px 0;
+      border-bottom: 1px solid #999;
+      border-left: 1px solid #999;
+      position: relative;
+    }
+
+    .citation-bar-group {
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 35px;
     }
 
     .citation-bar {
-      position: relative;
-      flex: 1;
-      height: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .citation-bar .bar {
-      width: 65%;
-      max-width: 42px;
-      min-width: 8px;
+      width: 70%;
+      max-width: 52px;
       background: #003f5c;
-      transition: opacity 0.2s ease;
+      min-height: 2px;
+      position: relative;
     }
 
-    .citation-bar:hover .bar {
-      opacity: 0.7;
-    }
-
-    .bar-value {
+    .citation-value {
       position: absolute;
-      bottom: calc(var(--bar-height) + 5px);
+      top: -21px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    .citation-year {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .citation-axis {
+      display: flex;
+      justify-content: space-between;
       font-size: 0.75rem;
-      color: #444;
+      color: #666;
+      margin-top: 5px;
+      padding-left: 5px;
     }
 
-    .bar-year {
-      position: absolute;
-      top: calc(100% + 8px);
-      font-size: 0.72rem;
-      color: #555;
-    }
-
-    /* =========================================================
-       Career momentum graph
-       ========================================================= */
+    /* ---------------------------------------------------------
+       Momentum chart
+       --------------------------------------------------------- */
 
     .momentum-section {
-      margin-top: 55px;
-      padding-top: 35px;
-      border-top: 1px solid #ddd;
+      margin-top: 45px;
     }
 
-    .momentum-chart-wrapper {
-      margin-top: 30px;
-      padding: 20px;
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      margin: 30px 0 20px;
       background: #fafafa;
-      border: 1px solid #e1e1e1;
-      overflow-x: auto;
+      border: 1px solid #ddd;
+      padding: 12px;
+      box-sizing: border-box;
     }
 
     #momentumChart {
       display: block;
       width: 100%;
-      min-width: 700px;
-      height: 380px;
+      height: 430px;
     }
 
-    .chart-caption {
-      margin-top: 15px;
-      font-size: 0.88rem;
-      color: #666;
-    }
-
-    .legend {
+    .chart-legend {
       display: flex;
+      gap: 25px;
       flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 15px;
+      margin: 12px 5px 0;
       font-size: 0.9rem;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
     }
 
     .legend-line {
-      width: 28px;
+      display: inline-block;
+      width: 30px;
       height: 3px;
       background: #003f5c;
     }
@@ -330,20 +289,20 @@
       background: #bc5090;
     }
 
-    .data-table-wrapper {
-      overflow-x: auto;
-      margin-top: 30px;
-    }
+    /* ---------------------------------------------------------
+       Momentum data table
+       --------------------------------------------------------- */
 
     .momentum-table {
       width: 100%;
+      max-width: 650px;
       border-collapse: collapse;
-      min-width: 500px;
+      margin: 25px auto 35px;
     }
 
     .momentum-table th,
     .momentum-table td {
-      padding: 9px 12px;
+      padding: 9px 14px;
       border-bottom: 1px solid #ddd;
       text-align: right;
     }
@@ -357,22 +316,47 @@
       font-weight: 600;
     }
 
-    .interpretation {
-      margin-top: 35px;
+    /* ---------------------------------------------------------
+       Metric summary
+       --------------------------------------------------------- */
+
+    .metric-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 30px 0;
     }
 
-    .interpretation ul {
-      line-height: 1.8;
+    .metric-card {
+      padding: 20px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      text-align: center;
     }
 
-    .limitations {
-      margin-top: 35px;
-      padding: 20px 25px;
-      background: #f7f7f7;
-      border-left: 4px solid #888;
+    .metric-card .metric-value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #003f5c;
     }
 
-    @media (max-width: 800px) {
+    .metric-card .metric-label {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    /* ---------------------------------------------------------
+       Responsive layout
+       --------------------------------------------------------- */
+
+    @media (max-width: 760px) {
+
+      .article {
+        padding: 30px 18px 50px;
+      }
+
       .citation-content {
         grid-template-columns: 1fr;
       }
@@ -381,14 +365,20 @@
         grid-template-columns: 1fr;
       }
 
-      .citation-header {
-        align-items: flex-start;
-        flex-direction: column;
+      .citation-bars {
+        gap: 5px;
       }
 
-      .article {
-        padding-left: 18px;
-        padding-right: 18px;
+      .citation-bar {
+        width: 65%;
+      }
+
+      .definition-table td:first-child {
+        width: auto;
+      }
+
+      #momentumChart {
+        height: 320px;
       }
     }
   </style>
@@ -398,8 +388,14 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand"><a href="/">van der Ham NMR</a></div>
-    <div class="tagline">Magnetic resonance • NMR • DNP</div>
+
+    <div class="brand">
+      <a href="/">van der Ham NMR</a>
+    </div>
+
+    <div class="tagline">
+      Magnetic resonance • NMR • DNP
+    </div>
 
     <nav class="nav">
       <a href="/">Home</a>
@@ -419,6 +415,7 @@
       <a href="/periodic-table/">Periodic table</a>
       <a href="/nmrpaint-info/">NMRpaint</a>
     </nav>
+
   </div>
 </header>
 
@@ -426,10 +423,6 @@
 <main>
 
 <article class="article">
-
-  <!-- =======================================================
-       ARTICLE HEADER
-       ======================================================= -->
 
   <header class="article-header">
 
@@ -448,257 +441,245 @@
        INTRODUCTION
        ======================================================= -->
 
-  <section>
+  <h2>Introduction</h2>
 
-    <h2>Introduction</h2>
+  <p>
+    Conventional bibliometric indicators such as total citations,
+    the h-index, and the i10-index are useful for describing the
+    accumulated impact of a scientist's work. However, these quantities
+    are strongly dependent on career length. A researcher with a long
+    publication history will generally accumulate more citations than
+    someone at an earlier stage of their career.
+  </p>
 
-    <p>
-      Conventional bibliometric indicators such as total citations,
-      the h-index, and the i10-index are useful for describing the
-      accumulated impact of a scientist's work. However, these
-      quantities are strongly dependent on career length. A researcher
-      with a long publication history will generally accumulate more
-      citations than someone at an earlier stage of their career.
-    </p>
+  <p>
+    The question addressed here is different:
+    <strong>how is the scientific impact of an individual researcher
+    evolving over time?</strong>
+  </p>
 
-    <p>
-      The question addressed here is different: <em>how is the
-      scientific impact of an individual researcher evolving over
-      time?</em>
-    </p>
-
-    <p>
-      The aim is therefore not to produce an absolute ranking of
-      scientists. Instead, the index is intended as an internal
-      measure of career trajectory. A rising value may indicate an
-      increasingly influential or promising research career, a stable
-      value may indicate sustained impact, while a declining value may
-      indicate decreasing research momentum, reduced productivity, or
-      the natural slowing of a career.
-    </p>
-
-  </section>
+  <p>
+    The aim is therefore not to produce an absolute ranking of
+    scientists. Instead, the index is intended as an internal measure
+    of career trajectory. A rising value may indicate increasingly
+    influential or promising research activity, a stable value may
+    indicate sustained impact, while a declining value may indicate
+    decreasing research momentum, reduced productivity, or the natural
+    slowing of a career.
+  </p>
 
 
   <!-- =======================================================
-       INDEX DEFINITION
+       CAREER MOMENTUM INDEX
        ======================================================= -->
 
-  <section>
+  <h2>The Career Momentum Index</h2>
 
-    <h2>The Career Momentum Index</h2>
+  <p>
+    For a given evaluation year \(Y_i\), each publication contributes
+    its total citation count divided by its age. The Career Momentum
+    Index is defined as
+  </p>
+
+  <div class="equation">
+    \[
+    A(Y_i)
+    =
+    \sum_{\substack{n\\Y_n<Y_i}}
+    \frac{C_n}{Y_i-Y_n}
+    \]
+  </div>
+
+  <p>
+    where \(C_n\) is the total number of citations received by
+    publication \(n\), \(Y_n\) is its year of publication, and the sum
+    includes only publications that appeared before the year being
+    evaluated.
+  </p>
+
+  <table class="definition-table">
+    <tr>
+      <td>\(A(Y_i)\)</td>
+      <td>Career Momentum Index evaluated in year \(Y_i\).</td>
+    </tr>
+    <tr>
+      <td>\(C_n\)</td>
+      <td>Total citation count of publication \(n\).</td>
+    </tr>
+    <tr>
+      <td>\(Y_i\)</td>
+      <td>Year at which the index is evaluated.</td>
+    </tr>
+    <tr>
+      <td>\(Y_n\)</td>
+      <td>Publication year of article \(n\).</td>
+    </tr>
+  </table>
+
+  <p>
+    The central idea is that recent influential work contributes
+    strongly to the index, whereas older publications contribute less
+    unless they have accumulated a correspondingly large number of
+    citations.
+  </p>
+
+  <div class="concept-box">
 
     <p>
-      For a given year \(Y_i\), each publication contributes its total
-      citation count divided by its age. The Career Momentum Index is
-      defined as
+      <strong>Key principle:</strong>
+      the index does not simply reward publication recency.
+      It rewards the combination of citation impact and temporal
+      persistence.
     </p>
-
-    <div class="equation">
-      \( A(Y_i) =
-      \displaystyle\sum_{n=1}^{N(Y_i)}
-      \frac{C_n}{Y_i-Y_n} \)
-    </div>
 
     <p>
-      where \(C_n\) is the total number of citations received by
-      publication \(n\), \(Y_n\) is its year of publication, and
-      \(N(Y_i)\) is the number of publications available before the
-      year under consideration.
+      Consequently, an old paper that continues to attract citations
+      can remain an important contributor to the index.
     </p>
 
-    <table class="definition-table">
-
-      <tr>
-        <th>\(A(Y_i)\)</th>
-        <td>
-          Career Momentum Index evaluated in year \(Y_i\).
-        </td>
-      </tr>
-
-      <tr>
-        <th>\(C_n\)</th>
-        <td>
-          Total citation count of publication \(n\).
-        </td>
-      </tr>
-
-      <tr>
-        <th>\(Y_i\)</th>
-        <td>
-          Year at which the index is evaluated.
-        </td>
-      </tr>
-
-      <tr>
-        <th>\(Y_n\)</th>
-        <td>
-          Publication year of article \(n\).
-        </td>
-      </tr>
-
-    </table>
-
-    <div class="concept-box">
-
-      <p>
-        <strong>The central idea:</strong> recent influential work
-        contributes strongly to the index, whereas older publications
-        contribute less unless they have accumulated a correspondingly
-        large number of citations.
-      </p>
-
-      <p>
-        Consequently, an old paper that continues to attract citations
-        can remain an important contributor to the index. The metric
-        therefore does not simply reward publication recency; it rewards
-        the combination of <strong>citation impact and temporal
-        persistence</strong>.
-      </p>
-
-    </div>
-
-  </section>
+  </div>
 
 
   <!-- =======================================================
-       WHY AGE WEIGHTING
+       AGE WEIGHTING
        ======================================================= -->
 
-  <section>
+  <h2>Why divide by publication age?</h2>
 
-    <h2>Why divide by publication age?</h2>
+  <p>
+    Citation counts accumulate over time. Without an age correction,
+    a paper published twenty years ago has had substantially more
+    opportunity to accumulate citations than a paper published two
+    years ago.
+  </p>
 
-    <p>
-      Citation counts accumulate over time. Without an age correction,
-      a paper published twenty years ago has had substantially more
-      opportunity to accumulate citations than a paper published two
-      years ago.
-    </p>
+  <p>
+    The factor
+  </p>
 
-    <p>
-      The factor
-    </p>
+  <div class="equation">
+    \[
+    \frac{1}{Y_i-Y_n}
+    \]
+  </div>
 
-    <div class="equation">
-      \( \frac{1}{Y_i-Y_n} \)
-    </div>
+  <p>
+    introduces a simple temporal weighting. A recent paper with many
+    citations therefore has a large contribution, while an old paper
+    must demonstrate sustained citation activity to maintain a large
+    contribution.
+  </p>
 
-    <p>
-      introduces a simple temporal weighting. A recent paper with many
-      citations therefore has a large contribution, while an old paper
-      must demonstrate sustained citation activity to maintain a large
-      contribution.
-    </p>
+  <p>
+    This also gives the index an interesting property: a publication
+    does not permanently disappear from the measure simply because it
+    becomes old. If an older paper continues to receive citations, its
+    cumulative citation count can compensate for the increasing age
+    denominator.
+  </p>
 
-    <p>
-      This also gives the index an interesting property: a publication
-      does not permanently disappear from the measure simply because it
-      becomes old. If an older paper continues to receive citations, its
-      cumulative citation count can compensate for the increasing age
-      denominator.
-    </p>
-
-    <p>
-      For example, if a paper published in 2016 receives a large number
-      of additional citations in 2026, its contribution to the
-      researcher's present-day index increases. This captures the idea
-      that scientific influence can sometimes emerge or strengthen long
-      after publication.
-    </p>
-
-  </section>
+  <p>
+    For example, if a paper published in 2016 receives a large number
+    of additional citations in 2026, its contribution to a present-day
+    assessment increases. This captures the idea that scientific
+    influence can sometimes emerge or strengthen long after
+    publication.
+  </p>
 
 
   <!-- =======================================================
-       FROM INDEX TO CAREER TRAJECTORY
+       TRAJECTORY
        ======================================================= -->
 
-  <section>
+  <h2>From the index to career trajectory</h2>
 
-    <h2>From the index to career trajectory</h2>
+  <p>
+    Calculating \(A(Y_i)\) for successive years produces a time series
+    describing the evolution of a researcher's citation momentum.
+  </p>
 
-    <p>
-      Calculating \(A(Y_i)\) for successive years produces a time
-      series describing the evolution of the researcher's citation
-      momentum.
-    </p>
+  <p>
+    The trajectory can then be summarized by fitting a linear
+    regression:
+  </p>
 
-    <p>
-      The trajectory can then be summarized by fitting a linear
-      regression,
-    </p>
+  <div class="equation">
+    \[
+    A(Y_i)=mY_i+b
+    \]
+  </div>
 
-    <div class="equation">
-      \( A(Y_i) = mY_i+b \)
-    </div>
+  <p>
+    where \(m\) is the slope of the Career Momentum Index with respect
+    to time. The slope is obtained by ordinary least squares:
+  </p>
 
-    <p>
-      where \(m\) is the slope of the Career Momentum Index with respect
-      to time. The slope is obtained by ordinary least squares:
-    </p>
-
-    <div class="equation">
-      \( m =
-      \frac{
-      \displaystyle\sum_i
+  <div class="equation">
+    \[
+    m=
+    \frac{
+      \displaystyle
+      \sum_i
       (Y_i-\overline{Y})
       \left[A(Y_i)-\overline{A}\right]
-      }{
-      \displaystyle\sum_i
+    }{
+      \displaystyle
+      \sum_i
       (Y_i-\overline{Y})^2
-      } \)
+    }
+    \]
+  </div>
+
+  <p>
+    The slope \(m\), rather than the Pearson correlation coefficient,
+    is used as the principal descriptor because it directly measures
+    the rate at which the Career Momentum Index changes with time.
+  </p>
+
+  <div class="metric-summary">
+
+    <div class="metric-card">
+      <span class="metric-value">\(m&gt;0\)</span>
+      <span class="metric-label">Increasing momentum</span>
     </div>
 
-    <p>
-      The slope \(m\), rather than the Pearson correlation coefficient,
-      is used as the principal descriptor because it directly measures
-      the rate at which the career momentum index changes with time.
-    </p>
-
-    <div class="metric-summary">
-
-      <div class="metric-card">
-        <span class="metric-value">\(m &gt; 0\)</span>
-        <span class="metric-label">Increasing momentum</span>
-      </div>
-
-      <div class="metric-card">
-        <span class="metric-value">\(m \approx 0\)</span>
-        <span class="metric-label">Stable momentum</span>
-      </div>
-
-      <div class="metric-card">
-        <span class="metric-value">\(m &lt; 0\)</span>
-        <span class="metric-label">Declining momentum</span>
-      </div>
-
+    <div class="metric-card">
+      <span class="metric-value">\(m\approx0\)</span>
+      <span class="metric-label">Stable momentum</span>
     </div>
 
-    <p>
-      Thus, the index and its slope provide two complementary pieces
-      of information: \(A(Y_i)\) describes the current citation-weighted
-      state of a career, while \(m\) describes its direction of change.
-    </p>
+    <div class="metric-card">
+      <span class="metric-value">\(m&lt;0\)</span>
+      <span class="metric-label">Declining momentum</span>
+    </div>
 
-  </section>
+  </div>
+
+  <p>
+    Thus, the index and its slope provide two complementary pieces
+    of information: \(A(Y_i)\) describes the citation-weighted state
+    of a career at a particular point in time, while \(m\) describes
+    its direction of change.
+  </p>
 
 
   <!-- =======================================================
-       CITATION DATA
+       CITATION METRICS
        ======================================================= -->
 
-  <section class="section citation-section">
+  <h2>Citation metrics</h2>
+
+  <section class="citation-section">
 
     <div class="citation-header">
 
-      <h2>Citation metrics</h2>
+      <h3>Google Scholar statistics</h3>
 
       <a
+        class="scholar-link"
         href="https://scholar.google.com/citations?user=7lr7UaUAAAAJ&hl=en"
         target="_blank"
-        rel="noopener noreferrer"
-        class="scholar-link">
+        rel="noopener noreferrer">
         Google Scholar ↗
       </a>
 
@@ -706,111 +687,39 @@
 
     <div class="citation-content">
 
-      <div class="citation-metrics">
+      <table class="citation-table">
 
-        <table class="citation-table">
+        <tr>
+          <td>Citations</td>
+          <td>141</td>
+        </tr>
 
-          <thead>
-            <tr>
-              <th></th>
-              <th>All</th>
-            </tr>
-          </thead>
+        <tr>
+          <td>h-index</td>
+          <td>6</td>
+        </tr>
 
-          <tbody>
+        <tr>
+          <td>i10-index</td>
+          <td>4</td>
+        </tr>
 
-            <tr>
-              <td>Citations</td>
-              <td>141</td>
-            </tr>
+        <tr>
+          <td>Total no. of publications</td>
+          <td>14</td>
+        </tr>
 
-            <tr>
-              <td>h-index</td>
-              <td>6</td>
-            </tr>
+      </table>
 
-            <tr>
-              <td>i10-index</td>
-              <td>4</td>
-            </tr>
-
-            <tr>
-              <td>Total no. of publications</td>
-              <td>14</td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-
-      <!-- Citation histogram -->
 
       <div class="citation-chart">
 
-        <div class="chart-area">
+        <div class="citation-bars" id="citationBars"></div>
 
-          <div class="chart-gridline chart-0"></div>
-          <div class="chart-gridline chart-25"></div>
-          <div class="chart-gridline chart-50"></div>
-
-          <div class="chart-ylabel y0">0</div>
-          <div class="chart-ylabel y25">25</div>
-          <div class="chart-ylabel y50">50</div>
-
-          <div class="citation-bars">
-
-            <div class="citation-bar">
-              <div class="bar" style="height:72%;"></div>
-              <span class="bar-value">34</span>
-              <span class="bar-year">2019</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:0%;"></div>
-              <span class="bar-value">0</span>
-              <span class="bar-year">2020</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:23.4%;"></div>
-              <span class="bar-value">11</span>
-              <span class="bar-year">2021</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:51.1%;"></div>
-              <span class="bar-value">24</span>
-              <span class="bar-year">2022</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:29.8%;"></div>
-              <span class="bar-value">14</span>
-              <span class="bar-year">2023</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:100%;"></div>
-              <span class="bar-value">47</span>
-              <span class="bar-year">2024</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:19.1%;"></div>
-              <span class="bar-value">9</span>
-              <span class="bar-year">2025</span>
-            </div>
-
-            <div class="citation-bar">
-              <div class="bar" style="height:4.3%;"></div>
-              <span class="bar-value">2</span>
-              <span class="bar-year">2026</span>
-            </div>
-
-          </div>
+        <div class="citation-axis">
+          <span>0</span>
+          <span>25</span>
+          <span>50</span>
         </div>
 
       </div>
@@ -821,7 +730,7 @@
 
 
   <!-- =======================================================
-       EXAMPLE CAREER MOMENTUM
+       CAREER MOMENTUM GRAPH
        ======================================================= -->
 
   <section class="momentum-section">
@@ -829,16 +738,17 @@
     <h2>Career Momentum Index</h2>
 
     <p>
-      Using the publication-year citation data above, the index can be
-      calculated retrospectively for each year. The graph below shows
-      the resulting trajectory together with its linear regression.
+      Using the publication-year citation data above, the index can
+      be calculated retrospectively for each year. The graph below
+      shows the resulting trajectory together with its linear
+      regression.
     </p>
 
-    <div class="momentum-chart-wrapper">
+    <div class="chart-wrapper">
 
-      <canvas id="momentumChart" width="900" height="380"></canvas>
+      <canvas id="momentumChart"></canvas>
 
-      <div class="legend">
+      <div class="chart-legend">
 
         <div class="legend-item">
           <span class="legend-line"></span>
@@ -852,51 +762,30 @@
 
       </div>
 
-      <p class="chart-caption">
-        The index is evaluated only for years after publication. The
-        current implementation uses cumulative citation counts and
-        therefore represents a retrospective assessment of the career
-        trajectory.
-      </p>
-
     </div>
 
 
-    <div class="data-table-wrapper">
+    <table class="momentum-table">
 
-      <table class="momentum-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Career Momentum Index \(A(Y)\)</th>
+        </tr>
+      </thead>
 
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Career Momentum Index \(A(Y)\)</th>
-          </tr>
-        </thead>
+      <tbody id="momentumTableBody"></tbody>
 
-        <tbody id="momentumTableBody"></tbody>
+    </table>
 
-      </table>
-
-    </div>
-
-
-    <div class="interpretation">
-
-      <h3>Interpretation</h3>
+    <div class="concept-box">
 
       <p>
-        The important quantity for characterizing the trajectory is the
-        slope of the fitted line. A positive slope indicates increasing
-        citation momentum, a slope close to zero indicates a relatively
-        stable trajectory, and a negative slope indicates declining
-        momentum.
-      </p>
-
-      <p>
-        This measure is deliberately an <strong>internal career
-        metric</strong>. Its primary purpose is to examine how the
-        citation impact of one scientist changes over time, rather than
-        to establish an absolute ranking between scientists.
+        <strong>Important:</strong>
+        the index is evaluated only for years after publication.
+        The current implementation uses cumulative citation counts
+        and therefore represents a retrospective assessment of the
+        career trajectory.
       </p>
 
     </div>
@@ -905,137 +794,152 @@
 
 
   <!-- =======================================================
-       EXAMPLE / INTERPRETATION
+       INTERPRETATION
        ======================================================= -->
 
-  <section>
+  <h2>Interpretation</h2>
 
-    <h2>What the index captures</h2>
+  <p>
+    The important quantity for characterizing the trajectory is the
+    slope of the fitted line. A positive slope indicates increasing
+    citation momentum, a slope close to zero indicates a relatively
+    stable trajectory, and a negative slope indicates declining
+    momentum.
+  </p>
 
-    <p>
-      The index is designed to capture several different career
-      trajectories that conventional cumulative citation counts can
-      obscure.
-    </p>
+  <p>
+    This measure is deliberately an internal career metric. Its
+    primary purpose is to examine how the citation impact of one
+    scientist changes over time, rather than to establish an absolute
+    ranking between scientists.
+  </p>
 
-    <h3>Early-career growth</h3>
 
-    <p>
-      A researcher who begins producing highly cited work can show a
-      rapid increase in \(A(Y)\). Because recent publications have a
-      relatively small age denominator, successful new work can have a
-      particularly strong effect on the index.
-    </p>
+  <!-- =======================================================
+       WHAT THE INDEX CAPTURES
+       ======================================================= -->
 
-    <h3>Sustained influence</h3>
+  <h2>What the index captures</h2>
 
-    <p>
-      An older publication does not necessarily become irrelevant. If
-      it continues to accumulate citations, its increasing citation
-      count can compensate for its increasing age. This allows the
-      index to recognize long-lasting scientific influence.
-    </p>
+  <p>
+    The index is designed to capture several different career
+    trajectories that conventional cumulative citation counts can
+    obscure.
+  </p>
 
-    <h3>Stagnation</h3>
+  <h3>Early-career growth</h3>
 
-    <p>
-      If a researcher stops producing influential work and their
-      existing publications cease to accumulate citations, the
-      denominators of the existing contributions continue to increase.
-      The overall index will consequently tend to decline.
-    </p>
+  <p>
+    A researcher who begins producing highly cited work can show a
+    rapid increase in \(A(Y)\). Because recent publications have a
+    relatively small age denominator, successful new work can have
+    a particularly strong effect on the index.
+  </p>
 
-    <h3>Declining momentum</h3>
+  <h3>Sustained influence</h3>
 
-    <p>
-      A sustained negative slope may indicate decreasing research
-      activity or influence. However, it should not automatically be
-      interpreted as a decline in scientific quality: career breaks,
-      changes of research field, changes in citation practices, and
-      retirement can all produce similar trajectories.
-    </p>
+  <p>
+    An older publication does not necessarily become irrelevant.
+    If it continues to accumulate citations, its increasing citation
+    count can compensate for its increasing age. This allows the
+    index to recognize long-lasting scientific influence.
+  </p>
 
-  </section>
+  <h3>Stagnation</h3>
+
+  <p>
+    If a researcher stops producing influential work and their
+    existing publications cease to accumulate citations, the
+    denominators of the existing contributions continue to increase.
+    The overall index will consequently tend to decline.
+  </p>
+
+  <h3>Declining momentum</h3>
+
+  <p>
+    A sustained negative slope may indicate decreasing research
+    activity or influence. However, it should not automatically be
+    interpreted as a decline in scientific quality. Career breaks,
+    changes of research field, changes in citation practices, and
+    retirement can all produce similar trajectories.
+  </p>
 
 
   <!-- =======================================================
        LIMITATIONS
        ======================================================= -->
 
-  <section class="limitations">
+  <h2>Limitations</h2>
 
-    <h2>Limitations</h2>
+  <p>
+    The Career Momentum Index is intentionally simple and should not
+    be interpreted as a complete measure of scientific quality.
+    Citation practices differ substantially between fields, papers
+    may accumulate citations for reasons unrelated to scientific
+    importance, and citation counts themselves are affected by
+    publication type, collaboration size, and the size of the
+    relevant research community.
+  </p>
 
-    <p>
-      The Career Momentum Index is intentionally simple and should not
-      be interpreted as a complete measure of scientific quality.
-      Citation practices differ substantially between fields, papers
-      may accumulate citations for reasons unrelated to scientific
-      importance, and citation counts themselves are affected by
-      publication type, collaboration size, and the size of the
-      relevant research community.
-    </p>
+  <p>
+    The index is therefore most informative when applied
+    longitudinally to the same researcher and interpreted alongside
+    their publication record and research context.
+  </p>
 
-    <p>
-      The index is therefore most informative when applied
-      longitudinally to the same researcher and interpreted alongside
-      their publication record and research context.
-    </p>
-
-    <p>
-      In particular, the slope \(m\) should be understood as a measure
-      of <em>citation momentum</em>, rather than as a direct measurement
-      of scientific ability, productivity, or quality.
-    </p>
-
-  </section>
+  <p>
+    In particular, the slope \(m\) should be understood as a measure
+    of <strong>citation momentum</strong>, rather than as a direct
+    measurement of scientific ability, productivity, or quality.
+  </p>
 
 
   <!-- =======================================================
-       CONCLUSION
+       SUMMARY
        ======================================================= -->
 
-  <section>
+  <h2>Summary</h2>
 
-    <h2>Summary</h2>
+  <p>
+    The Career Momentum Index combines cumulative citation impact
+    with publication age:
+  </p>
 
-    <p>
-      The Career Momentum Index combines cumulative citation impact
-      with publication age:
-    </p>
+  <div class="equation">
+    \[
+    A(Y_i)
+    =
+    \sum_{\substack{n\\Y_n<Y_i}}
+    \frac{C_n}{Y_i-Y_n}
+    \]
+  </div>
 
-    <div class="equation">
-      \( A(Y_i) =
-      \displaystyle\sum_n
-      \frac{C_n}{Y_i-Y_n} \)
-    </div>
+  <p>
+    The resulting time series can then be summarized by its linear
+    slope:
+  </p>
 
-    <p>
-      The resulting time series can then be summarized by its linear
-      slope:
-    </p>
+  <div class="equation">
+    \[
+    A(Y_i)=mY_i+b
+    \]
+  </div>
 
-    <div class="equation">
-      \( A(Y_i)=mY_i+b \)
-    </div>
+  <p>
+    The sign of \(m\) provides a simple description of the direction
+    of the career trajectory: positive for increasing momentum,
+    approximately zero for stable momentum, and negative for
+    declining momentum.
+  </p>
 
-    <p>
-      The sign of \(m\) provides a simple description of the direction
-      of the career trajectory: positive for increasing momentum,
-      approximately zero for stable momentum, and negative for
-      declining momentum.
-    </p>
-
-    <p>
-      The strength of the approach lies in its simplicity. Rather than
-      attempting to assign an absolute numerical value to a scientist's
-      importance, it asks a more focused question:
-      <strong>is the citation-based impact of this scientist's work
-      increasing, stable, or declining over the course of their
-      career?</strong>
-    </p>
-
-  </section>
+  <p>
+    The strength of the approach lies in its simplicity. Rather than
+    attempting to assign an absolute numerical value to a scientist's
+    importance, it asks a more focused question:
+    <strong>is the citation-based impact of this scientist's work
+    increasing, stable, or declining over the course of their
+    career?</strong>
+  </p>
 
 </article>
 
@@ -1049,25 +953,11 @@
 
 <script src="/js/main.js"></script>
 
+
 <script>
 /* =============================================================
-   Career Momentum calculation
+   Citation data
    ============================================================= */
-
-/*
- * Citation data grouped by publication year.
- *
- * The original publication list contained multiple papers
- * published in some years. These have been combined here:
- *
- * 2019 = 34
- * 2021 = 9 + 1 + 1 = 11
- * 2022 = 23 + 1 = 24
- * 2023 = 14
- * 2024 = 41 + 6 = 47
- * 2025 = 7 + 2 = 9
- * 2026 = 2
- */
 
 const publicationCitations = {
   2019: 34,
@@ -1080,15 +970,79 @@ const publicationCitations = {
 };
 
 
+/* =============================================================
+   Citation histogram
+   ============================================================= */
+
+const citationBars = document.getElementById("citationBars");
+
+const citationYears = [
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+];
+
+const citationValues = [
+  34,
+  0,
+  11,
+  24,
+  14,
+  47,
+  9,
+  2
+];
+
+const citationMaximum = 50;
+
+citationYears.forEach((year, index) => {
+
+  const value = citationValues[index];
+
+  const group = document.createElement("div");
+  group.className = "citation-bar-group";
+
+  const bar = document.createElement("div");
+  bar.className = "citation-bar";
+
+  bar.style.height =
+    Math.max(0, (value / citationMaximum) * 100) + "%";
+
+  const valueLabel = document.createElement("span");
+  valueLabel.className = "citation-value";
+  valueLabel.textContent = value;
+
+  bar.appendChild(valueLabel);
+
+  const yearLabel = document.createElement("div");
+  yearLabel.className = "citation-year";
+  yearLabel.textContent = year;
+
+  group.appendChild(bar);
+  group.appendChild(yearLabel);
+
+  citationBars.appendChild(group);
+});
+
+
+/* =============================================================
+   Career Momentum Index
+   ============================================================= */
+
 /*
- * Calculate A(Y).
- *
- * Only publications preceding the evaluation year are included,
- * because a publication cannot have a non-zero age in its own
- * publication year.
- *
- * The final evaluation year is 2025, i.e. one year before 2026.
- */
+   The present year is 2026.
+
+   Following the definition of the index, the trajectory is
+   evaluated through the year before the present year, i.e. 2025.
+
+   Publications from 2026 therefore do not enter the current
+   Career Momentum Index series.
+*/
 
 const evaluationYears = [];
 
@@ -1096,6 +1050,16 @@ for (let year = 2020; year <= 2025; year++) {
   evaluationYears.push(year);
 }
 
+
+/*
+   Calculate A(Y).
+
+   Only publications satisfying
+
+       publication year < evaluation year
+
+   are included, avoiding a zero publication-age denominator.
+*/
 
 function careerMomentum(year) {
 
@@ -1107,8 +1071,11 @@ function careerMomentum(year) {
 
     if (pubYear < year) {
 
-      const citations = publicationCitations[publicationYear];
-      const age = year - pubYear;
+      const citations =
+        publicationCitations[publicationYear];
+
+      const age =
+        year - pubYear;
 
       value += citations / age;
     }
@@ -1118,10 +1085,16 @@ function careerMomentum(year) {
 }
 
 
-const momentumData = evaluationYears.map(year => ({
-  year: year,
-  value: careerMomentum(year)
-}));
+/* Generate the index data */
+
+const momentumData = evaluationYears.map(year => {
+
+  return {
+    year: year,
+    value: careerMomentum(year)
+  };
+
+});
 
 
 /* =============================================================
@@ -1133,10 +1106,16 @@ function linearRegression(data) {
   const n = data.length;
 
   const meanX =
-    data.reduce((sum, point) => sum + point.year, 0) / n;
+    data.reduce(
+      (sum, point) => sum + point.year,
+      0
+    ) / n;
 
   const meanY =
-    data.reduce((sum, point) => sum + point.value, 0) / n;
+    data.reduce(
+      (sum, point) => sum + point.value,
+      0
+    ) / n;
 
   let numerator = 0;
   let denominator = 0;
@@ -1152,8 +1131,11 @@ function linearRegression(data) {
 
   });
 
-  const slope = numerator / denominator;
-  const intercept = meanY - slope * meanX;
+  const slope =
+    numerator / denominator;
+
+  const intercept =
+    meanY - slope * meanX;
 
   return {
     slope: slope,
@@ -1162,292 +1144,422 @@ function linearRegression(data) {
 }
 
 
-const regression = linearRegression(momentumData);
+const regression =
+  linearRegression(momentumData);
 
 
 /* =============================================================
-   Populate table
+   Populate data table
    ============================================================= */
 
-const tableBody =
+const momentumTableBody =
   document.getElementById("momentumTableBody");
 
 momentumData.forEach(point => {
 
-  const row = document.createElement("tr");
+  const row =
+    document.createElement("tr");
 
-  row.innerHTML = `
-    <td>${point.year}</td>
-    <td>${point.value.toFixed(2)}</td>
-  `;
+  const yearCell =
+    document.createElement("td");
 
-  tableBody.appendChild(row);
+  yearCell.textContent =
+    point.year;
+
+  const valueCell =
+    document.createElement("td");
+
+  valueCell.textContent =
+    point.value.toFixed(2);
+
+  row.appendChild(yearCell);
+  row.appendChild(valueCell);
+
+  momentumTableBody.appendChild(row);
 
 });
 
 
 /* =============================================================
-   Draw chart
+   Career Momentum canvas graph
    ============================================================= */
 
 const canvas =
   document.getElementById("momentumChart");
 
-const ctx = canvas.getContext("2d");
-
-const width = canvas.width;
-const height = canvas.height;
-
-const margin = {
-  left: 75,
-  right: 25,
-  top: 25,
-  bottom: 55
-};
-
-const plotWidth =
-  width - margin.left - margin.right;
-
-const plotHeight =
-  height - margin.top - margin.bottom;
+const ctx =
+  canvas.getContext("2d");
 
 
-const xMin =
-  Math.min(...momentumData.map(d => d.year));
+function drawMomentumChart() {
 
-const xMax =
-  Math.max(...momentumData.map(d => d.year));
+  const rect =
+    canvas.getBoundingClientRect();
 
+  const dpr =
+    window.devicePixelRatio || 1;
 
-const rawMax =
-  Math.max(...momentumData.map(d => d.value));
+  canvas.width =
+    rect.width * dpr;
 
-const yMax =
-  Math.ceil(rawMax / 10) * 10;
+  canvas.height =
+    rect.height * dpr;
 
-
-function xScale(year) {
-
-  return margin.left +
-    ((year - xMin) / (xMax - xMin)) *
-    plotWidth;
-
-}
-
-
-function yScale(value) {
-
-  return margin.top +
-    plotHeight -
-    (value / yMax) * plotHeight;
-
-}
-
-
-/* Clear canvas */
-
-ctx.clearRect(0, 0, width, height);
-
-
-/* =============================================================
-   Grid
-   ============================================================= */
-
-ctx.font = "12px Arial";
-ctx.textAlign = "right";
-ctx.textBaseline = "middle";
-
-const gridSteps = 5;
-
-for (let i = 0; i <= gridSteps; i++) {
-
-  const value =
-    (yMax / gridSteps) * i;
-
-  const y =
-    yScale(value);
-
-  ctx.beginPath();
-  ctx.moveTo(margin.left, y);
-  ctx.lineTo(width - margin.right, y);
-  ctx.strokeStyle = "#dddddd";
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  ctx.fillStyle = "#666666";
-
-  ctx.fillText(
-    value.toFixed(0),
-    margin.left - 10,
-    y
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
   );
 
-}
+
+  const width =
+    rect.width;
+
+  const height =
+    rect.height;
 
 
-/* =============================================================
-   Axes
-   ============================================================= */
+  /* Margins */
 
-ctx.strokeStyle = "#333333";
-ctx.lineWidth = 1.5;
-
-ctx.beginPath();
-ctx.moveTo(margin.left, margin.top);
-ctx.lineTo(margin.left, height - margin.bottom);
-ctx.lineTo(width - margin.right, height - margin.bottom);
-ctx.stroke();
+  const marginLeft = 65;
+  const marginRight = 25;
+  const marginTop = 25;
+  const marginBottom = 55;
 
 
-/* =============================================================
-   X-axis labels
-   ============================================================= */
+  const plotWidth =
+    width -
+    marginLeft -
+    marginRight;
 
-ctx.textAlign = "center";
-ctx.textBaseline = "top";
-ctx.fillStyle = "#555555";
-
-evaluationYears.forEach(year => {
-
-  const x = xScale(year);
-
-  ctx.fillText(
-    year,
-    x,
-    height - margin.bottom + 12
-  );
-
-});
+  const plotHeight =
+    height -
+    marginTop -
+    marginBottom;
 
 
-/* =============================================================
-   Axis labels
-   ============================================================= */
+  /* Determine Y range */
 
-ctx.save();
+  const maximumDataValue =
+    Math.max(
+      ...momentumData.map(point => point.value)
+    );
 
-ctx.translate(18, height / 2);
-ctx.rotate(-Math.PI / 2);
+  const regressionValues =
+    momentumData.map(point =>
+      regression.slope * point.year +
+      regression.intercept
+    );
 
-ctx.textAlign = "center";
-ctx.textBaseline = "middle";
-ctx.fillStyle = "#444444";
+  const maximumRegressionValue =
+    Math.max(...regressionValues);
 
-ctx.fillText(
-  "Career Momentum Index A(Y)",
-  0,
-  0
-);
+  const maximumY =
+    Math.ceil(
+      Math.max(
+        maximumDataValue,
+        maximumRegressionValue
+      ) / 10
+    ) * 10;
 
-ctx.restore();
-
-
-ctx.textAlign = "center";
-ctx.textBaseline = "top";
-
-ctx.fillText(
-  "Year",
-  margin.left + plotWidth / 2,
-  height - 20
-);
+  const minimumY = 0;
 
 
-/* =============================================================
-   Career Momentum line
-   ============================================================= */
+  /* X coordinate */
 
-ctx.beginPath();
+  function xPosition(year) {
 
-momentumData.forEach((point, index) => {
-
-  const x = xScale(point.year);
-  const y = yScale(point.value);
-
-  if (index === 0) {
-    ctx.moveTo(x, y);
-  } else {
-    ctx.lineTo(x, y);
+    return marginLeft +
+      (
+        (year - 2020) /
+        (2025 - 2020)
+      ) *
+      plotWidth;
   }
 
-});
 
-ctx.strokeStyle = "#003f5c";
-ctx.lineWidth = 3;
-ctx.stroke();
+  /* Y coordinate */
+
+  function yPosition(value) {
+
+    return marginTop +
+      plotHeight -
+      (
+        (value - minimumY) /
+        (maximumY - minimumY)
+      ) *
+      plotHeight;
+  }
 
 
-/* =============================================================
-   Data points
-   ============================================================= */
+  /* Clear canvas */
 
-momentumData.forEach(point => {
+  ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
 
-  const x = xScale(point.year);
-  const y = yScale(point.value);
+
+  /* ---------------------------------------------------------
+     Grid and axes
+     --------------------------------------------------------- */
+
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#dddddd";
+
+  const numberOfGridLines = 5;
+
+  for (
+    let i = 0;
+    i <= numberOfGridLines;
+    i++
+  ) {
+
+    const value =
+      (maximumY / numberOfGridLines) * i;
+
+    const y =
+      yPosition(value);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      marginLeft,
+      y
+    );
+
+    ctx.lineTo(
+      width - marginRight,
+      y
+    );
+
+    ctx.stroke();
+
+    ctx.fillStyle = "#555555";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+      value.toFixed(0),
+      marginLeft - 10,
+      y
+    );
+  }
+
+
+  /* Axes */
+
+  ctx.strokeStyle = "#555555";
+  ctx.lineWidth = 1.2;
 
   ctx.beginPath();
-  ctx.arc(x, y, 5, 0, 2 * Math.PI);
 
-  ctx.fillStyle = "#003f5c";
-  ctx.fill();
+  ctx.moveTo(
+    marginLeft,
+    marginTop
+  );
 
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 2;
+  ctx.lineTo(
+    marginLeft,
+    marginTop + plotHeight
+  );
+
+  ctx.lineTo(
+    width - marginRight,
+    marginTop + plotHeight
+  );
+
   ctx.stroke();
 
-});
+
+  /* X-axis labels */
+
+  ctx.fillStyle = "#555555";
+  ctx.font = "12px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+
+  evaluationYears.forEach(year => {
+
+    const x =
+      xPosition(year);
+
+    ctx.fillText(
+      year,
+      x,
+      marginTop + plotHeight + 12
+    );
+
+  });
+
+
+  /* ---------------------------------------------------------
+     Axis labels
+     --------------------------------------------------------- */
+
+  ctx.save();
+
+  ctx.translate(
+    16,
+    marginTop + plotHeight / 2
+  );
+
+  ctx.rotate(-Math.PI / 2);
+
+  ctx.fillStyle = "#444444";
+  ctx.font = "13px sans-serif";
+  ctx.textAlign = "center";
+
+  ctx.fillText(
+    "Career Momentum Index A(Y)",
+    0,
+    0
+  );
+
+  ctx.restore();
+
+
+  ctx.fillStyle = "#444444";
+  ctx.font = "13px sans-serif";
+  ctx.textAlign = "center";
+
+  ctx.fillText(
+    "Evaluation year",
+    marginLeft + plotWidth / 2,
+    height - 10
+  );
+
+
+  /* ---------------------------------------------------------
+     Regression line
+     --------------------------------------------------------- */
+
+  ctx.beginPath();
+
+  ctx.strokeStyle = "#bc5090";
+  ctx.lineWidth = 2;
+  ctx.setLineDash([7, 5]);
+
+  const regressionStart =
+    regression.slope * 2020 +
+    regression.intercept;
+
+  const regressionEnd =
+    regression.slope * 2025 +
+    regression.intercept;
+
+  ctx.moveTo(
+    xPosition(2020),
+    yPosition(regressionStart)
+  );
+
+  ctx.lineTo(
+    xPosition(2025),
+    yPosition(regressionEnd)
+  );
+
+  ctx.stroke();
+
+  ctx.setLineDash([]);
+
+
+  /* ---------------------------------------------------------
+     Momentum line
+     --------------------------------------------------------- */
+
+  ctx.beginPath();
+
+  ctx.strokeStyle = "#003f5c";
+  ctx.lineWidth = 3;
+
+  momentumData.forEach(
+    (point, index) => {
+
+      const x =
+        xPosition(point.year);
+
+      const y =
+        yPosition(point.value);
+
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+
+    }
+  );
+
+  ctx.stroke();
+
+
+  /* ---------------------------------------------------------
+     Data points
+     --------------------------------------------------------- */
+
+  momentumData.forEach(point => {
+
+    const x =
+      xPosition(point.year);
+
+    const y =
+      yPosition(point.value);
+
+    ctx.beginPath();
+
+    ctx.fillStyle = "#003f5c";
+
+    ctx.arc(
+      x,
+      y,
+      5,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+  });
+
+}
+
+
+/* Draw chart */
+
+drawMomentumChart();
+
+
+/* Redraw when window size changes */
+
+window.addEventListener(
+  "resize",
+  drawMomentumChart
+);
 
 
 /* =============================================================
-   Regression line
+   Expose calculated values for debugging if desired
    ============================================================= */
 
-const regressionStart =
-  regression.slope * xMin +
-  regression.intercept;
-
-const regressionEnd =
-  regression.slope * xMax +
-  regression.intercept;
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-  xScale(xMin),
-  yScale(regressionStart)
+console.log(
+  "Career Momentum Index:",
+  momentumData
 );
 
-ctx.lineTo(
-  xScale(xMax),
-  yScale(regressionEnd)
+console.log(
+  "Linear regression slope:",
+  regression.slope
 );
 
-ctx.strokeStyle = "#bc5090";
-ctx.lineWidth = 2;
-ctx.setLineDash([7, 5]);
-ctx.stroke();
-ctx.setLineDash([]);
-
-
-/* =============================================================
-   Display regression slope
-   ============================================================= */
-
-const slopeLabel =
-  "Linear slope: " +
-  regression.slope.toFixed(2) +
-  " index units/year";
-
-ctx.font = "13px Arial";
-ctx.textAlign = "right";
-ctx.textBaseline = "top";
-ctx.fillStyle = "#bc5090";
-
-ctx.fillText(
-  slopeLabel,
-  width - margin.right,
-  margin.top
+console.log(
+  "Linear regression intercept:",
+  regression.intercept
 );
 
 </script>
