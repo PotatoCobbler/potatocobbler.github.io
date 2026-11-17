@@ -217,7 +217,8 @@ window.MathJax = {
 
 .nuclei-table td:nth-child(2),
 .nuclei-table td:nth-child(3),
-.nuclei-table td:nth-child(4) {
+.nuclei-table td:nth-child(4),
+.nuclei-table td:nth-child(5) {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
@@ -337,9 +338,24 @@ window.MathJax = {
 <p>
   where \(P\) is the polarization, \(B\) is the magnetic field in
   tesla, \(T\) is the temperature in kelvin, and \(\gamma\) is the
-  gyromagnetic ratio in rad s\(^{-1}\) T\(^{-1}\). Because the
-  polarization depends on \(B/T\), the horizontal axis is expressed
-  in T K\(^{-1}\).
+  gyromagnetic ratio in rad s\(^{-1}\) T\(^{-1}\). For nuclei with
+  spin \(I>\tfrac{1}{2}\), the calculation uses the corresponding
+  Brillouin function,
+  \[
+    P =
+    B_I(x)
+    =
+    \frac{2I+1}{2I}
+    \coth\left(\frac{2I+1}{2I}x\right)
+    -
+    \frac{1}{2I}
+    \coth\left(\frac{x}{2I}\right),
+    \qquad
+    x=\frac{\hbar\lvert\gamma\rvert B}{k_{\mathrm B}T}.
+  \]
+  This reduces exactly to the hyperbolic tangent expression for
+  \(I=\tfrac{1}{2}\). Because the polarization depends on \(B/T\),
+  the horizontal axis is expressed in T K\(^{-1}\).
 </p>
 
 <p>
@@ -470,6 +486,7 @@ Select one or more species to display on the graph.
 <tr>
   <th>Plot</th>
   <th>Isotope</th>
+  <th>Spin \(I\)</th>
   <th>\(\gamma\) (rad s\(^{-1}\) T\(^{-1}\))</th>
   <th>\(\gamma/2\pi\) (MHz T\(^{-1}\))</th>
 </tr>
@@ -528,6 +545,7 @@ const species = [
     id: "1H",
     name: "¹H",
     gamma: 267.52218744e6,
+    spin: 0.5,
     selected: true
   },
 
@@ -535,6 +553,7 @@ const species = [
     id: "2H",
     name: "²H",
     gamma: 41.065e6,
+    spin: 1,
     selected: false
   },
 
@@ -542,6 +561,7 @@ const species = [
     id: "3He",
     name: "³He",
     gamma: 203.789e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -549,6 +569,7 @@ const species = [
     id: "7Li",
     name: "⁷Li",
     gamma: 103.962e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -556,6 +577,7 @@ const species = [
     id: "13C",
     name: "¹³C",
     gamma: 67.28284e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -563,6 +585,7 @@ const species = [
     id: "15N",
     name: "¹⁵N",
     gamma: 27.116e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -570,6 +593,7 @@ const species = [
     id: "17O",
     name: "¹⁷O",
     gamma: 36.264e6,
+    spin: 2.5,
     selected: false
   },
 
@@ -577,6 +601,7 @@ const species = [
     id: "19F",
     name: "¹⁹F",
     gamma: 251.662e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -584,6 +609,7 @@ const species = [
     id: "23Na",
     name: "²³Na",
     gamma: 70.761e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -591,6 +617,7 @@ const species = [
     id: "27Al",
     name: "²⁷Al",
     gamma: 69.763e6,
+    spin: 2.5,
     selected: false
   },
 
@@ -598,6 +625,7 @@ const species = [
     id: "29Si",
     name: "²⁹Si",
     gamma: 53.190e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -605,6 +633,7 @@ const species = [
     id: "31P",
     name: "³¹P",
     gamma: 108.291e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -612,6 +641,7 @@ const species = [
     id: "39K",
     name: "³⁹K",
     gamma: 12.546e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -619,6 +649,7 @@ const species = [
     id: "43Ca",
     name: "⁴³Ca",
     gamma: 18.404e6,
+    spin: 3.5,
     selected: false
   },
 
@@ -626,6 +657,7 @@ const species = [
     id: "59Co",
     name: "⁵⁹Co",
     gamma: 62.91e6,
+    spin: 3.5,
     selected: false
   },
 
@@ -633,6 +665,7 @@ const species = [
     id: "63Cu",
     name: "⁶³Cu",
     gamma: 70.733e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -640,6 +673,7 @@ const species = [
     id: "65Cu",
     name: "⁶⁵Cu",
     gamma: 75.431e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -647,6 +681,7 @@ const species = [
     id: "67Zn",
     name: "⁶⁷Zn",
     gamma: 16.717e6,
+    spin: 2.5,
     selected: false
   },
 
@@ -654,6 +689,7 @@ const species = [
     id: "77Se",
     name: "⁷⁷Se",
     gamma: 51.081e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -661,6 +697,7 @@ const species = [
     id: "89Y",
     name: "⁸⁹Y",
     gamma: 13.157e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -668,6 +705,7 @@ const species = [
     id: "109Ag",
     name: "¹⁰⁹Ag",
     gamma: 17.797e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -675,6 +713,7 @@ const species = [
     id: "129Xe",
     name: "¹²⁹Xe",
     gamma: 74.451e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -682,6 +721,7 @@ const species = [
     id: "131Xe",
     name: "¹³¹Xe",
     gamma: 23.900e6,
+    spin: 1.5,
     selected: false
   },
 
@@ -689,6 +729,7 @@ const species = [
     id: "195Pt",
     name: "¹⁹⁵Pt",
     gamma: 58.390e6,
+    spin: 0.5,
     selected: false
   },
 
@@ -696,6 +737,7 @@ const species = [
     id: "electron",
     name: "e⁻",
     gamma: 1.76085963023e11,
+    spin: 0.5,
     selected: false,
     electron: true
   }
@@ -704,20 +746,114 @@ const species = [
 
 
 /*
- * Calculate polarization.
+ * Hyperbolic cotangent.
  *
- * x = B/T
- *
- * P = tanh(hbar * gamma * x / (2 kB))
+ * Used by the Brillouin function for I > 1/2.
  */
+function coth(x) {
 
-function polarizationFromBT(gamma, B_over_T) {
+  return 1 / Math.tanh(x);
+
+}
+
+
+/*
+ * Calculate thermal equilibrium polarization.
+ *
+ * x = hbar * |gamma| * (B/T) / kB
+ *
+ * For spin I = 1/2:
+ *
+ *   P = tanh(x)
+ *
+ * For arbitrary spin I:
+ *
+ *   P = B_I(x)
+ *
+ * where B_I is the Brillouin function:
+ *
+ *   B_I(x) =
+ *     [(2I+1)/(2I)] coth[(2I+1)x/(2I)]
+ *     -
+ *     [1/(2I)] coth[x/(2I)]
+ *
+ * The small-x expansion is used to avoid numerical cancellation
+ * between the two coth terms when x is close to zero.
+ */
+function polarizationFromBT(gamma, B_over_T, spin) {
 
   const x =
     HBAR * Math.abs(gamma) * B_over_T /
-    (2 * KB);
+    KB;
 
-  return Math.tanh(x);
+
+  /*
+   * Spin-1/2 has the exact closed form tanh(x).
+   */
+  if (spin === 0.5) {
+    return Math.tanh(x);
+  }
+
+
+  /*
+   * Small-x expansion of the Brillouin function:
+   *
+   * B_I(x) =
+   *   (I+1)/(3I) x
+   *   - (I+1)(2I^2+2I+1)/(90 I^3) x^3
+   *   + O(x^5)
+   *
+   * The x^5 term is retained for better accuracy.
+   */
+  if (Math.abs(x) < 1e-3) {
+
+    const I = spin;
+
+    const x2 = x * x;
+    const x3 = x * x2;
+    const x5 = x3 * x2;
+
+    const c1 =
+      (I + 1) / (3 * I);
+
+    const c3 =
+      (I + 1) *
+      (2 * I * I + 2 * I + 1) /
+      (90 * I * I * I);
+
+    const c5 =
+      2 / 945 +
+      2 / (315 * I) +
+      1 / (126 * I * I) +
+      1 / (189 * I * I * I) +
+      1 / (504 * I * I * I * I) +
+      1 / (2520 * I * I * I * I * I);
+
+    return (
+      c1 * x -
+      c3 * x3 +
+      c5 * x5
+    );
+  }
+
+
+  const I = spin;
+
+  const term1 =
+    ((2 * I + 1) / (2 * I)) *
+    coth(
+      ((2 * I + 1) * x) /
+      (2 * I)
+    );
+
+  const term2 =
+    (1 / (2 * I)) *
+    coth(
+      x /
+      (2 * I)
+    );
+
+  return term1 - term2;
 
 }
 
@@ -726,7 +862,7 @@ function polarizationFromBT(gamma, B_over_T) {
  * Calculate polarization from B and T.
  */
 
-function polarizationFromBTValues(gamma, B, T) {
+function polarizationFromBTValues(gamma, B, T, spin) {
 
   if (T <= 0 || B < 0) {
     return NaN;
@@ -734,7 +870,8 @@ function polarizationFromBTValues(gamma, B, T) {
 
   return polarizationFromBT(
     gamma,
-    B / T
+    B / T,
+    spin
   );
 
 }
@@ -796,6 +933,16 @@ const tableBody =
 const calcIsotope =
   document.getElementById("calcIsotope");
 
+
+function formatSpin(spin) {
+  // Nuclear spin is conventionally displayed as an integer or half-integer fraction.
+  if (Number.isInteger(spin)) {
+    return String(spin);
+  }
+
+  const numerator = Math.round(2 * spin);
+  return `${numerator}/2`;
+}
 
 function formatGamma(gamma) {
 
@@ -867,6 +1014,12 @@ species.forEach((item, index) => {
   isotopeCell.textContent =
     item.name;
 
+  const spinCell =
+    document.createElement("td");
+
+  spinCell.textContent =
+    formatSpin(item.spin);
+
   const gammaCell =
     document.createElement("td");
 
@@ -882,6 +1035,7 @@ species.forEach((item, index) => {
 
   row.appendChild(plotCell);
   row.appendChild(isotopeCell);
+  row.appendChild(spinCell);
   row.appendChild(gammaCell);
   row.appendChild(MHzCell);
 
@@ -959,7 +1113,8 @@ function getDatasets() {
                 x: x,
                 y: polarizationFromBT(
                   item.gamma,
-                  x
+                  x,
+                  item.spin
                 )
               })
             ),
@@ -1150,6 +1305,7 @@ const chart =
     }
   );
 
+     
 /*
  * Redraw graph after isotope selection.
  */
@@ -1433,7 +1589,8 @@ function updateCalculator() {
     polarizationFromBTValues(
       item.gamma,
       B,
-      T
+      T,
+      item.spin
     );
 
 
