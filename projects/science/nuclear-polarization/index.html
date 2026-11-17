@@ -540,208 +540,165 @@ const KB   = 1.380649e-23;          // J K^-1
  */
 
 const species = [
-
-  {
-    id: "1H",
-    name: "¹H",
-    gamma: 267.52218744e6,
-    spin: 0.5,
-    selected: true
-  },
-
-  {
-    id: "2H",
-    name: "²H",
-    gamma: 41.065e6,
-    spin: 1,
-    selected: false
-  },
-
-  {
-    id: "3He",
-    name: "³He",
-    gamma: 203.789e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "7Li",
-    name: "⁷Li",
-    gamma: 103.962e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "13C",
-    name: "¹³C",
-    gamma: 67.28284e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "15N",
-    name: "¹⁵N",
-    gamma: 27.116e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "17O",
-    name: "¹⁷O",
-    gamma: 36.264e6,
-    spin: 2.5,
-    selected: false
-  },
-
-  {
-    id: "19F",
-    name: "¹⁹F",
-    gamma: 251.662e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "23Na",
-    name: "²³Na",
-    gamma: 70.761e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "27Al",
-    name: "²⁷Al",
-    gamma: 69.763e6,
-    spin: 2.5,
-    selected: false
-  },
-
-  {
-    id: "29Si",
-    name: "²⁹Si",
-    gamma: 53.190e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "31P",
-    name: "³¹P",
-    gamma: 108.291e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "39K",
-    name: "³⁹K",
-    gamma: 12.546e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "43Ca",
-    name: "⁴³Ca",
-    gamma: 18.404e6,
-    spin: 3.5,
-    selected: false
-  },
-
-  {
-    id: "59Co",
-    name: "⁵⁹Co",
-    gamma: 62.91e6,
-    spin: 3.5,
-    selected: false
-  },
-
-  {
-    id: "63Cu",
-    name: "⁶³Cu",
-    gamma: 70.733e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "65Cu",
-    name: "⁶⁵Cu",
-    gamma: 75.431e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "67Zn",
-    name: "⁶⁷Zn",
-    gamma: 16.717e6,
-    spin: 2.5,
-    selected: false
-  },
-
-  {
-    id: "77Se",
-    name: "⁷⁷Se",
-    gamma: 51.081e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "89Y",
-    name: "⁸⁹Y",
-    gamma: 13.157e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "109Ag",
-    name: "¹⁰⁹Ag",
-    gamma: 17.797e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "129Xe",
-    name: "¹²⁹Xe",
-    gamma: 74.451e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "131Xe",
-    name: "¹³¹Xe",
-    gamma: 23.900e6,
-    spin: 1.5,
-    selected: false
-  },
-
-  {
-    id: "195Pt",
-    name: "¹⁹⁵Pt",
-    gamma: 58.390e6,
-    spin: 0.5,
-    selected: false
-  },
-
-  {
-    id: "electron",
-    name: "e⁻",
-    gamma: 1.76085963023e11,
-    spin: 0.5,
-    selected: false,
-    electron: true
-  }
-
+{ id: "1H", name: "¹H", gamma: 267.522208e6, spin: 0.5, selected: true},
+{ id: "2H", name: "²H", gamma: 41.0662919e6, spin: 1, selected: false},
+{ id: "3H", name: "³H", gamma: 285.349865e6, spin: 0.5, selected: false},
+{ id: "3He", name: "³He", gamma: -203.789473e6, spin: 0.5, selected: false},
+{ id: "6Li", name: "⁶Li", gamma: 39.37127e6, spin: 1, selected: false},
+{ id: "7Li", name: "⁷Li", gamma: 103.97704e6, spin: 1.5, selected: false},
+{ id: "9Be", name: "⁹Be", gamma: -37.5966e6, spin: 1.5, selected: false},
+{ id: "10B", name: "¹⁰B", gamma: 28.7467955e6, spin: 3, selected: false},
+{ id: "11B", name: "¹¹B", gamma: 85.84707e6, spin: 1.5, selected: false},
+{ id: "13C", name: "¹³C", gamma: 67.28286e6, spin: 0.5, selected: false},
+{ id: "14N", name: "¹⁴N", gamma: 19.337798e6, spin: 1, selected: false},
+{ id: "15N", name: "¹⁵N", gamma: -27.126189e6, spin: 0.5, selected: false},
+{ id: "17O", name: "¹⁷O", gamma: -36.2806e6, spin: 2.5, selected: false},
+{ id: "19F", name: "¹⁹F", gamma: 251.6233e6, spin: 0.5, selected: false},
+{ id: "21Ne", name: "²¹Ne", gamma: 21.13081e6, spin: 1.5, selected: false},
+{ id: "23Na", name: "²³Na", gamma: 70.808516e6, spin: 1.5, selected: false},
+{ id: "25Mg", name: "²⁵Mg", gamma: -16.3884e6, spin: 2.5, selected: false},
+{ id: "26Al", name: "²⁶Al", gamma: 26.86e6, spin: 5, selected: false},
+{ id: "27Al", name: "²⁷Al", gamma: 69.76278e6, spin: 2.5, selected: false},
+{ id: "29Si", name: "²⁹Si", gamma: -63.1903e6, spin: 0.5, selected: false},
+{ id: "31P", name: "³¹P", gamma: 108.394e6, spin: 0.5, selected: false},
+{ id: "33S", name: "³³S", gamma: 20.55685e6, spin: 1.5, selected: false},
+{ id: "35Cl", name: "³⁵Cl", gamma: 26.241991e6, spin: 1.5, selected: false},
+{ id: "37Cl", name: "³⁷Cl", gamma: 21.843688e6, spin: 1.5, selected: false},
+{ id: "39Ar", name: "³⁹Ar", gamma: -21.7e6, spin: 3.5, selected: false},
+{ id: "39K", name: "³⁹K", gamma: 12.500612e6, spin: 1.5, selected: false},
+{ id: "40K", name: "⁴⁰K", gamma: -15.54286e6, spin: 4, selected: false},
+{ id: "41K", name: "⁴¹K", gamma: 6.8614062e6, spin: 1.5, selected: false},
+{ id: "41Ca", name: "⁴¹Ca", gamma: -21.82306e6, spin: 3.5, selected: false},
+{ id: "43Ca", name: "⁴³Ca", gamma: -18.03069e6, spin: 3.5, selected: false},
+{ id: "45Sc", name: "⁴⁵Sc", gamma: 65.08800e6, spin: 3.5, selected: false},
+{ id: "47Ti", name: "⁴⁷Ti", gamma: -15.1054e6, spin: 2.5, selected: false},
+{ id: "49Ti", name: "⁴⁹Ti", gamma: -15.1095e6, spin: 3.5, selected: false},
+{ id: "50V", name: "⁵⁰V", gamma: 26.70650e6, spin: 6, selected: false},
+{ id: "51V", name: "⁵¹V", gamma: 70.455139e6, spin: 3.5, selected: false},
+{ id: "53Cr", name: "⁵³Cr", gamma: -15.1518e6, spin: 1.5, selected: false},
+{ id: "53Mn", name: "⁵³Mn", gamma: 68.75e6, spin: 3.5, selected: false},
+{ id: "55Mn", name: "⁵⁵Mn", gamma: 66.4525453e6, spin: 2.5, selected: false},
+{ id: "57Fe", name: "⁵⁷Fe", gamma: 8.680627e6, spin: 0.5, selected: false},
+{ id: "59Fe", name: "⁵⁹Fe", gamma: -10.722e6, spin: 1.5, selected: false},
+{ id: "59Co", name: "⁵⁹Co", gamma: 63.32e6, spin: 3.5, selected: false},
+{ id: "60Co", name: "⁶⁰Co", gamma: 36.39e6, spin: 5, selected: false},
+{ id: "61Ni", name: "⁶¹Ni", gamma: -23.9477e6, spin: 1.5, selected: false},
+{ id: "63Cu", name: "⁶³Cu", gamma: 71.11791e6, spin: 1.5, selected: false},
+{ id: "65Cu", name: "⁶⁵Cu", gamma: 76.043e6, spin: 1.5, selected: false},
+{ id: "67Zn", name: "⁶⁷Zn", gamma: 16.766885e6, spin: 2.5, selected: false},
+{ id: "69Ga", name: "⁶⁹Ga", gamma: 64.3886e6, spin: 1.5, selected: false},
+{ id: "71Ga", name: "⁷¹Ga", gamma: 81.8117e6, spin: 1.5, selected: false},
+{ id: "73Ge", name: "⁷³Ge", gamma: -9.360306e6, spin: 4.5, selected: false},
+{ id: "75As", name: "⁷⁵As", gamma: 45.9615e6, spin: 1.5, selected: false},
+{ id: "77Se", name: "⁷⁷Se", gamma: 51.25388e6, spin: 0.5, selected: false},
+{ id: "79Se", name: "⁷⁹Se", gamma: -13.93e6, spin: 3.5, selected: false},
+{ id: "79Br", name: "⁷⁹Br", gamma: 67.25619e6, spin: 1.5, selected: false},
+{ id: "81Br", name: "⁸¹Br", gamma: 72.49779e6, spin: 1.5, selected: false},
+{ id: "83Kr", name: "⁸³Kr", gamma: -10.33097e6, spin: 4.5, selected: false},
+{ id: "85Rb", name: "⁸⁵Rb", gamma: 25.927059e6, spin: 2.5, selected: false},
+{ id: "87Rb", name: "⁸⁷Rb", gamma: 87.86403e6, spin: 1.5, selected: false},
+{ id: "87Sr", name: "⁸⁷Sr", gamma: -11.63938e6, spin: 4.5, selected: false},
+{ id: "89Y", name: "⁸⁹Y", gamma: -13.16279e6, spin: 0.5, selected: false},
+{ id: "91Zr", name: "⁹¹Zr", gamma: -24.9743e6, spin: 2.5, selected: false},
+{ id: "93Nb", name: "⁹³Nb", gamma: 65.674e6, spin: 4.5, selected: false},
+{ id: "95Mo", name: "⁹⁵Mo", gamma: -17.514e6, spin: 2.5, selected: false},
+{ id: "97Mo", name: "⁹⁷Mo", gamma: -17.884e6, spin: 2.5, selected: false},
+{ id: "99Mo", name: "⁹⁹Mo", gamma: 35.9e6, spin: 0.5, selected: false},
+{ id: "99Tc", name: "⁹⁹Tc", gamma: 60.503e6, spin: 4.5, selected: false},
+{ id: "99Ru", name: "⁹⁹Ru", gamma: -12.28e6, spin: 2.5, selected: false},
+{ id: "101Ru", name: "¹⁰¹Ru", gamma: -13.72e6, spin: 2.5, selected: false},
+{ id: "103Rh", name: "¹⁰³Rh", gamma: -8.4677e6, spin: 0.5, selected: false},
+{ id: "105Pd", name: "¹⁰⁵Pd", gamma: -12.30e6, spin: 2.5, selected: false},
+{ id: "107Ag", name: "¹⁰⁷Ag", gamma: -10.88918e6, spin: 0.5, selected: false},
+{ id: "109Ag", name: "¹⁰⁹Ag", gamma: -12.519e6, spin: 0.5, selected: false},
+{ id: "111Cd", name: "¹¹¹Cd", gamma: -56.98315e6, spin: 0.5, selected: false},
+{ id: "113Cd", name: "¹¹³Cd", gamma: -69.60917e6, spin: 0.5, selected: false},
+{ id: "113In", name: "¹¹³In", gamma: 58.845e6, spin: 4.5, selected: false},
+{ id: "115In", name: "¹¹⁵In", gamma: 58.972e6, spin: 4.5, selected: false},
+{ id: "115Sn", name: "¹¹⁵Sn", gamma: -88.013e6, spin: 0.5, selected: false},
+{ id: "117Sn", name: "¹¹⁷Sn", gamma: -95.8880e6, spin: 0.5, selected: false},
+{ id: "119Sn", name: "¹¹⁹Sn", gamma: -100.317e6, spin: 0.5, selected: false},
+{ id: "121Sb", name: "¹²¹Sb", gamma: 64.435e6, spin: 2.5, selected: false},
+{ id: "123Sb", name: "¹²³Sb", gamma: 34.892e6, spin: 3.5, selected: false},
+{ id: "125Sb", name: "¹²⁵Sb", gamma: 36.0e6, spin: 3.5, selected: false},
+{ id: "123Te", name: "¹²³Te", gamma: -70.59101e6, spin: 0.5, selected: false},
+{ id: "125Te", name: "¹²⁵Te", gamma: -85.10843e6, spin: 0.5, selected: false},
+{ id: "127I", name: "¹²⁷I", gamma: 53.8957e6, spin: 2.5, selected: false},
+{ id: "129I", name: "¹²⁹I", gamma: 35.866e6, spin: 3.5, selected: false},
+{ id: "129Xe", name: "¹²⁹Xe", gamma: -74.5210e6, spin: 0.5, selected: false},
+{ id: "131Xe", name: "¹³¹Xe", gamma: 22.09077e6, spin: 1.5, selected: false},
+{ id: "133Cs", name: "¹³³Cs", gamma: 35.33256e6, spin: 3.5, selected: false},
+{ id: "135Ba", name: "¹³⁵Ba", gamma: 26.77690e6, spin: 1.5, selected: false},
+{ id: "137Ba", name: "¹³⁷Ba", gamma: 29.9287e6, spin: 1.5, selected: false},
+{ id: "137La", name: "¹³⁷La", gamma: 36.88e6, spin: 3.5, selected: false},
+{ id: "138La", name: "¹³⁸La", gamma: 35.57240e6, spin: 5, selected: false},
+{ id: "139La", name: "¹³⁹La", gamma: 38.08333e6, spin: 3.5, selected: false},
+{ id: "139Ce", name: "¹³⁹Ce", gamma: 33.8e6, spin: 1.5, selected: false},
+{ id: "141Ce", name: "¹⁴¹Ce", gamma: 14.9e6, spin: 3.5, selected: false},
+{ id: "141Pr", name: "¹⁴¹Pr", gamma: 81.907e6, spin: 2.5, selected: false},
+{ id: "143Nd", name: "¹⁴³Nd", gamma: -14.574e6, spin: 3.5, selected: false},
+{ id: "145Nd", name: "¹⁴⁵Nd", gamma: -8.98e6, spin: 3.5, selected: false},
+{ id: "145Pm", name: "¹⁴⁵Pm", gamma: 73.0e6, spin: 2.5, selected: false},
+{ id: "147Sm", name: "¹⁴⁷Sm", gamma: -11.15e6, spin: 3.5, selected: false},
+{ id: "149Sm", name: "¹⁴⁹Sm", gamma: -9.192e6, spin: 3.5, selected: false},
+{ id: "151Eu", name: "¹⁵¹Eu", gamma: 66.510e6, spin: 2.5, selected: false},
+{ id: "153Eu", name: "¹⁵³Eu", gamma: 29.357e6, spin: 2.5, selected: false},
+{ id: "155Gd", name: "¹⁵⁵Gd", gamma: 8.212e6, spin: 1.5, selected: false},
+{ id: "157Gd", name: "¹⁵⁷Gd", gamma: -10.770e6, spin: 1.5, selected: false},
+{ id: "159Tb", name: "¹⁵⁹Tb", gamma: 64.31e6, spin: 1.5, selected: false},
+{ id: "161Dy", name: "¹⁶¹Dy", gamma: 9.20e6, spin: 2.5, selected: false},
+{ id: "163Dy", name: "¹⁶³Dy", gamma: 12.89e6, spin: 2.5, selected: false},
+{ id: "163Ho", name: "¹⁶³Ho", gamma: 57.9e6, spin: 3.5, selected: false},
+{ id: "165Ho", name: "¹⁶⁵Ho", gamma: 56.54e6, spin: 3.5, selected: false},
+{ id: "166Ho", name: "¹⁶⁶Ho", gamma: 24.6e6, spin: 7, selected: false},
+{ id: "167Er", name: "¹⁶⁷Er", gamma: 7.716e6, spin: 3.5, selected: false},
+{ id: "169Er", name: "¹⁶⁹Er", gamma: 46.46e6, spin: 0.5, selected: false},
+{ id: "169Tm", name: "¹⁶⁹Tm", gamma: -22.1e6, spin: 0.5, selected: false},
+{ id: "171Tm", name: "¹⁷¹Tm", gamma: -21.8e6, spin: 0.5, selected: false},
+{ id: "171Yb", name: "¹⁷¹Yb", gamma: 47.288e6, spin: 0.5, selected: false},
+{ id: "173Yb", name: "¹⁷³Yb", gamma: -13.0251e6, spin: 2.5, selected: false},
+{ id: "175Lu", name: "¹⁷⁵Lu", gamma: 30.547e6, spin: 3.5, selected: false},
+{ id: "176Lu", name: "¹⁷⁶Lu", gamma: 21.68e6, spin: 7, selected: false},
+{ id: "177Hf", name: "¹⁷⁷Hf", gamma: 10.858e6, spin: 3.5, selected: false},
+{ id: "179Hf", name: "¹⁷⁹Hf", gamma: -6.82e6, spin: 4.5, selected: false},
+{ id: "179Ta", name: "¹⁷⁹Ta", gamma: 31.32e6, spin: 3.5, selected: false},
+{ id: "180Ta", name: "¹⁸⁰Ta", gamma: 25.68e6, spin: 9, selected: false},
+{ id: "181Ta", name: "¹⁸¹Ta", gamma: 32.438e6, spin: 3.5, selected: false},
+{ id: "183W", name: "¹⁸³W", gamma: 11.282407e6, spin: 0.5, selected: false},
+{ id: "185Re", name: "¹⁸⁵Re", gamma: 61.057e6, spin: 2.5, selected: false},
+{ id: "187Re", name: "¹⁸⁷Re", gamma: 61.682e6, spin: 2.5, selected: false},
+{ id: "187Os", name: "¹⁸⁷Os", gamma: 6.192897e6, spin: 0.5, selected: false},
+{ id: "189Os", name: "¹⁸⁹Os", gamma: 21.07130e6, spin: 1.5, selected: false},
+{ id: "191Ir", name: "¹⁹¹Ir", gamma: 4.812e6, spin: 1.5, selected: false},
+{ id: "193Ir", name: "¹⁹³Ir", gamma: 5.227e6, spin: 1.5, selected: false},
+{ id: "195Pt", name: "¹⁹⁵Pt", gamma: 58.385e6, spin: 0.5, selected: false},
+{ id: "197Au", name: "¹⁹⁷Au", gamma: 4.73060e6, spin: 1.5, selected: false},
+{ id: "199Hg", name: "¹⁹⁹Hg", gamma: 48.45793e6, spin: 0.5, selected: false},
+{ id: "201Hg", name: "²⁰¹Hg", gamma: -17.88770e6, spin: 1.5, selected: false},
+{ id: "203Tl", name: "²⁰³Tl", gamma: 155.39339e6, spin: 0.5, selected: false},
+{ id: "205Tl", name: "²⁰⁵Tl", gamma: 156.92186e6, spin: 0.5, selected: false},
+{ id: "205Pb", name: "²⁰⁵Pb", gamma: 13.635e6, spin: 2.5, selected: false},
+{ id: "207Pb", name: "²⁰⁷Pb", gamma: 55.767e6, spin: 0.5, selected: false},
+{ id: "209Bi", name: "²⁰⁹Bi", gamma: 43.747e6, spin: 4.5, selected: false},
+{ id: "209Po", name: "²⁰⁹Po", gamma: 65.1e6, spin: 0.5, selected: false},
+{ id: "211Rn", name: "²¹¹Rn", gamma: 57.6e6, spin: 0.5, selected: false},
+{ id: "212Fr", name: "²¹²Fr", gamma: 44.3e6, spin: 5, selected: false},
+{ id: "225Ra", name: "²²⁵Ra", gamma: -70.3e6, spin: 0.5, selected: false},
+{ id: "227Ac", name: "²²⁷Ac", gamma: 35.0e6, spin: 1.5, selected: false},
+{ id: "229Th", name: "²²⁹Th", gamma: 8.8e6, spin: 2.5, selected: false},
+{ id: "231Pa", name: "²³¹Pa", gamma: 64.2e6, spin: 1.5, selected: false},
+{ id: "233U", name: "²³³U", gamma: 11.3e6, spin: 2.5, selected: false},
+{ id: "235U", name: "²³⁵U", gamma: -5.2e6, spin: 3.5, selected: false},
+{ id: "237Np", name: "²³⁷Np", gamma: 60.2e6, spin: 2.5, selected: false},
+{ id: "239Pu", name: "²³⁹Pu", gamma: 19.4e6, spin: 0.5, selected: false},
+{ id: "241Pu", name: "²⁴¹Pu", gamma: -13.0e6, spin: 2.5, selected: false},
+{ id: "241Am", name: "²⁴¹Am", gamma: 30.3e6, spin: 2.5, selected: false},
+{ id: "243Am", name: "²⁴³Am", gamma: 28.7e6, spin: 2.5, selected: false},
+{ id: "243Cm", name: "²⁴³Cm", gamma: 7.9e6, spin: 2.5, selected: false},
+{ id: "245Cm", name: "²⁴⁵Cm", gamma: 6.8e6, spin: 3.5, selected: false},
+{ id: "247Cm", name: "²⁴⁷Cm", gamma: 3.9e6, spin: 4.5, selected: false},
+{ id: "249Bk", name: "²⁴⁹Bk", gamma: 27.0e6, spin: 3.5, selected: false},
+{ id: "253Es", name: "²⁵³Es", gamma: 56.1e6, spin: 3.5, selected: false},
 ];
 
 
