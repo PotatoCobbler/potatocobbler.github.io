@@ -1165,26 +1165,53 @@ function updateChart() {
 
 }
 
-
 /* =============================================================
    AXIS SCALE CONTROLS
    ============================================================= */
 
 /*
- * X-axis scale
+ * Convert the dropdown value to the Chart.js scale type.
+ *
+ * The dropdown uses:
+ *   "linear"
+ *   "log"
+ *
+ * Chart.js expects:
+ *   "linear"
+ *   "logarithmic"
+ */
+function getChartScaleType(scale) {
+
+  return scale === "log"
+    ? "logarithmic"
+    : "linear";
+
+}
+
+
+/*
+ * Update X-axis scale
  */
 function updateXAxisScale(scale) {
 
+  const chartScale =
+    getChartScaleType(scale);
+
   chart.options.scales.x = {
 
-    type: scale,
+    type: chartScale,
 
-    min: scale === "log" ? X_MIN : 0,
+    min:
+      scale === "log"
+        ? X_MIN
+        : 0,
+
     max: X_MAX,
 
     title: {
       display: true,
-      text: "Magnetic field / temperature, B/T (T K⁻¹)"
+      text:
+        "Magnetic field / temperature, B/T (T K⁻¹)"
     },
 
     ticks: {
@@ -1193,16 +1220,21 @@ function updateXAxisScale(scale) {
 
         if (scale === "log") {
 
-          const exponent = Math.log10(value);
+          const exponent =
+            Math.log10(value);
 
-          if (Number.isInteger(exponent)) {
+          if (
+            Number.isInteger(exponent)
+          ) {
             return value;
           }
 
           return "";
+
         }
 
-        return Number(value).toPrecision(3);
+        return Number(value)
+          .toPrecision(3);
 
       }
 
@@ -1210,20 +1242,26 @@ function updateXAxisScale(scale) {
 
   };
 
-  chart.update();
-
 }
 
+
 /*
- * Y-axis scale
+ * Update Y-axis scale
  */
 function updateYAxisScale(scale) {
 
+  const chartScale =
+    getChartScaleType(scale);
+
   chart.options.scales.y = {
 
-    type: scale,
+    type: chartScale,
 
-    min: scale === "log" ? 1e-7 : 0,
+    min:
+      scale === "log"
+        ? 1e-7
+        : 0,
+
     max: 1,
 
     title: {
@@ -1237,21 +1275,30 @@ function updateYAxisScale(scale) {
 
         if (scale === "log") {
 
-          const exponent = Math.log10(value);
+          const exponent =
+            Math.log10(value);
 
-          if (Number.isInteger(exponent)) {
+          if (
+            Number.isInteger(exponent)
+          ) {
 
             if (exponent === 0) {
               return "1";
             }
 
-            return "10" + toSuperscript(exponent);
+            return (
+              "10" +
+              toSuperscript(exponent)
+            );
+
           }
 
           return "";
+
         }
 
-        return Number(value).toPrecision(3);
+        return Number(value)
+          .toPrecision(3);
 
       }
 
@@ -1259,17 +1306,16 @@ function updateYAxisScale(scale) {
 
   };
 
-  chart.update();
-
 }
+
 
 /*
  * Convert exponent to superscript
  */
-
 function toSuperscript(number) {
 
   const superscripts = {
+
     "-": "⁻",
     "0": "⁰",
     "1": "¹",
@@ -1281,12 +1327,42 @@ function toSuperscript(number) {
     "7": "⁷",
     "8": "⁸",
     "9": "⁹"
+
   };
 
   return String(number)
     .split("")
-    .map(char => superscripts[char] || char)
+    .map(
+      char =>
+        superscripts[char] || char
+    )
     .join("");
+
+}
+
+
+/*
+ * Apply both axis settings
+ */
+function updateAxes() {
+
+  updateXAxisScale(
+    xAxisScale.value
+  );
+
+  updateYAxisScale(
+    yAxisScale.value
+  );
+
+  /*
+   * X-axis data sampling depends on whether
+   * the X-axis is linear or logarithmic.
+   */
+  chart.data.datasets =
+    getDatasets();
+
+  chart.update();
+
 }
 
 
@@ -1294,17 +1370,16 @@ function toSuperscript(number) {
  * Attach event listeners
  */
 
-xAxisScale.addEventListener("change", function() {
-  updateXAxisScale(this.value);
-  updateChart();
-});
+xAxisScale.addEventListener(
+  "change",
+  updateAxes
+);
 
-yAxisScale.addEventListener("change", function() {
-  updateYAxisScale(this.value);
-updateChart();
-});
-
-
+yAxisScale.addEventListener(
+  "change",
+  updateAxes
+);
+     
 /* =============================================================
    POLARIZATION CALCULATOR
    ============================================================= */
