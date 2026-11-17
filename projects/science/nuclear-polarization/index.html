@@ -94,40 +94,38 @@ window.MathJax = {
   max-width: 1200px;
   margin: 0 auto;
 }
+/* ============================================================
+   Axis controls
+   ============================================================ */
 
-<!-- ============================================================
-     AXIS CONTROLS
-     ============================================================ -->
+.polarization-axis-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin: 25px 0 10px;
+}
 
-<div class="polarization-axis-controls">
+.axis-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  <div class="axis-control">
+.axis-control label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
-    <label for="xAxisScale">
-      X-axis
-    </label>
-
-    <select id="xAxisScale">
-      <option value="log" selected>Logarithmic</option>
-      <option value="linear">Linear</option>
-    </select>
-
-  </div>
-
-  <div class="axis-control">
-
-    <label for="yAxisScale">
-      Y-axis
-    </label>
-
-    <select id="yAxisScale">
-      <option value="linear" selected>Linear</option>
-      <option value="log">Logarithmic</option>
-    </select>
-
-  </div>
-
-</div>
+.axis-control select {
+  padding: 7px 10px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  background: white;
+  font: inherit;
+  cursor: pointer;
+}
 
 
 /* ============================================================
@@ -373,46 +371,48 @@ to be calculated directly.
 <div class="polarization-axis-controls">
 
   <div class="axis-control">
+    <label for="xAxisScale">X-axis</label>
 
-    <label for="xAxisScale">
-      X-axis
-    </label>
-
-     <select id="xAxisScale">
-       <option value="log" selected>Logarithmic</option>
-       <option value="linear">Linear</option>
-     </select>
-     
-     <select id="yAxisScale">
-       <option value="linear" selected>Linear</option>
-       <option value="log">Logarithmic</option>
-     </select>
-
+    <select id="xAxisScale">
+      <option value="log" selected>Logarithmic</option>
+      <option value="linear">Linear</option>
+    </select>
   </div>
 
-
   <div class="axis-control">
-
-    <label for="yAxisScale">
-      Y-axis
-    </label>
+    <label for="yAxisScale">Y-axis</label>
 
     <select id="yAxisScale">
-
-      <option value="linear" selected>
-        Linear
-      </option>
-
-      <option value="log">
-        Logarithmic
-      </option>
-
+      <option value="linear" selected>Linear</option>
+      <option value="log">Logarithmic</option>
     </select>
-
   </div>
 
 </div>
 
+<!-- AXIS CONTROLS -->
+
+<div class="axis-controls">
+
+  <div class="axis-control">
+    <label for="xAxisScale">X-axis</label>
+
+    <select id="xAxisScale">
+      <option value="log" selected>Logarithmic</option>
+      <option value="linear">Linear</option>
+    </select>
+  </div>
+
+  <div class="axis-control">
+    <label for="yAxisScale">Y-axis</label>
+
+    <select id="yAxisScale">
+      <option value="linear" selected>Linear</option>
+      <option value="log">Logarithmic</option>
+    </select>
+  </div>
+
+</div>
 
 <!-- ============================================================
      GRAPH
