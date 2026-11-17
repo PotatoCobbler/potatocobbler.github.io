@@ -97,16 +97,7 @@ window.MathJax = {
 /* ============================================================
    Axis controls
    ============================================================ */
-
-.polarization-axis-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin: 25px 0 10px;
-}
-
+     
 .axis-control {
   display: flex;
   align-items: center;
@@ -255,10 +246,6 @@ window.MathJax = {
 
 @media (max-width: 700px) {
 
-  .polarization-axis-controls {
-    gap: 15px;
-  }
-
   .polarization-graph-container {
     height: 420px;
     padding: 10px;
@@ -362,33 +349,6 @@ rad s\(^{-1}\) T\(^{-1}\) and MHz T\(^{-1}\), while the calculator
 allows the polarization at a specific magnetic field and temperature
 to be calculated directly.
 </p>
-
-
-<!-- ============================================================
-     AXIS CONTROLS
-     ============================================================ -->
-
-<div class="polarization-axis-controls">
-
-  <div class="axis-control">
-    <label for="xAxisScale">X-axis</label>
-
-    <select id="xAxisScale">
-      <option value="log" selected>Logarithmic</option>
-      <option value="linear">Linear</option>
-    </select>
-  </div>
-
-  <div class="axis-control">
-    <label for="yAxisScale">Y-axis</label>
-
-    <select id="yAxisScale">
-      <option value="linear" selected>Linear</option>
-      <option value="log">Logarithmic</option>
-    </select>
-  </div>
-
-</div>
 
 <!-- AXIS CONTROLS -->
 
