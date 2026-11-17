@@ -775,12 +775,16 @@ function logspace(min, max, points) {
   return result;
 }
 
-const xValues = logspace(
+const xValuesLog = logspace(
   X_MIN,
   X_MAX,
   500
 );
 
+const xValuesLinear = Array.from(
+  { length: 500 },
+  (_, i) => X_MIN + i * (X_MAX - X_MIN) / 499
+);
 
 /* =============================================================
    TABLE
@@ -941,16 +945,19 @@ function getDatasets() {
         label:
           item.name,
 
-        data:
-          xValues.map(
-            x => ({
-              x: x,
-              y: polarizationFromBT(
-                item.gamma,
-                x
-              )
-            })
-          ),
+          data:
+            (xAxisScale.value === "log"
+              ? xValuesLog
+              : xValuesLinear
+            ).map(
+              x => ({
+                x: x,
+                y: polarizationFromBT(
+                  item.gamma,
+                  x
+                )
+              })
+            ),
 
         borderColor:
           lineColors[
@@ -1167,77 +1174,95 @@ const yAxisScale =
 /*
  * X-axis scale
  */
-
 function updateXAxisScale(scale) {
 
-  chart.options.scales.x.type = scale;
+  chart.options.scales.x = {
 
-  chart.options.scales.x.min = X_MIN;
-  chart.options.scales.x.max = X_MAX;
+    type: scale,
 
-  chart.options.scales.x.title.text =
-    "Magnetic field / temperature, B/T (T K⁻¹)";
+    min: scale === "log" ? X_MIN : 0,
+    max: X_MAX,
 
-  chart.options.scales.x.ticks.callback =
-    function(value) {
+    title: {
+      display: true,
+      text: "Magnetic field / temperature, B/T (T K⁻¹)"
+    },
 
-      if (scale === "log") {
+    ticks: {
 
-        const exponent = Math.log10(value);
+      callback: function(value) {
 
-        if (Number.isInteger(exponent)) {
-          return value;
+        if (scale === "log") {
+
+          const exponent = Math.log10(value);
+
+          if (Number.isInteger(exponent)) {
+            return value;
+          }
+
+          return "";
         }
 
-        return "";
+        return Number(value).toPrecision(3);
+
       }
 
-      return Number(value).toPrecision(3);
-    };
+    }
+
+  };
 
   chart.update();
-}
 
+}
 
 /*
  * Y-axis scale
  */
-
 function updateYAxisScale(scale) {
 
-  chart.options.scales.y.type = scale;
+  chart.options.scales.y = {
 
-  chart.options.scales.y.min = 1e-7;
-  chart.options.scales.y.max = 1;
+    type: scale,
 
-  chart.options.scales.y.title.text =
-    "Polarization, P";
+    min: scale === "log" ? 1e-7 : 0,
+    max: 1,
 
-  chart.options.scales.y.ticks.callback =
-    function(value) {
+    title: {
+      display: true,
+      text: "Polarization, P"
+    },
 
-      if (scale === "log") {
+    ticks: {
 
-        const exponent = Math.log10(value);
+      callback: function(value) {
 
-        if (Number.isInteger(exponent)) {
+        if (scale === "log") {
 
-          if (exponent === 0) {
-            return "1";
+          const exponent = Math.log10(value);
+
+          if (Number.isInteger(exponent)) {
+
+            if (exponent === 0) {
+              return "1";
+            }
+
+            return "10" + toSuperscript(exponent);
           }
 
-          return "10" + toSuperscript(exponent);
+          return "";
         }
 
-        return "";
+        return Number(value).toPrecision(3);
+
       }
 
-      return Number(value).toExponential(0);
-    };
+    }
+
+  };
 
   chart.update();
-}
 
+}
 
 /*
  * Convert exponent to superscript
@@ -1272,6 +1297,7 @@ function toSuperscript(number) {
 
 xAxisScale.addEventListener("change", function() {
   updateXAxisScale(this.value);
+  updateChart();
 });
 
 yAxisScale.addEventListener("change", function() {
