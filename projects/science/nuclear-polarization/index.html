@@ -378,17 +378,15 @@ to be calculated directly.
       X-axis
     </label>
 
-    <select id="xAxisScale">
-
-      <option value="log" selected>
-        Logarithmic
-      </option>
-
-      <option value="linear">
-        Linear
-      </option>
-
-    </select>
+     <select id="xAxisScale">
+       <option value="log" selected>Logarithmic</option>
+       <option value="linear">Linear</option>
+     </select>
+     
+     <select id="yAxisScale">
+       <option value="linear" selected>Linear</option>
+       <option value="log">Logarithmic</option>
+     </select>
 
   </div>
 
@@ -1210,39 +1208,138 @@ const yAxisScale =
   );
 
 
-/*
- * X-axis: logarithmic / linear
- */
+/* =============================================================
+   Axis scale controls
+   ============================================================= */
 
-xAxisScale.addEventListener(
-  "change",
-  function() {
+function updateXAxisScale(scale) {
 
-    chart.options.scales.x.type =
-      this.value;
+  chart.options.scales.x = {
+    type: scale,
+    min: 0.01,
+    max: 400,
 
-    chart.update();
+    title: {
+      display: true,
+      text: "B/T (T K⁻¹)"
+    },
 
-  }
-);
+    ticks: {
+      autoSkip: true,
+      maxTicksLimit: 12,
+
+      callback: function(value) {
+
+        if (scale === "log") {
+
+          const exponent = Math.log10(value);
+
+          if (Number.isInteger(exponent)) {
+            return value;
+          }
+
+          return "";
+        }
+
+        /* Linear axis */
+        if (value === 0) {
+          return "0";
+        }
+
+        return Number(value).toPrecision(2);
+      }
+    },
+
+    grid: {
+      display: true
+    }
+  };
+
+  chart.update("none");
+}
 
 
-/*
- * Y-axis: linear / logarithmic
- */
+function updateYAxisScale(scale) {
 
-yAxisScale.addEventListener(
-  "change",
-  function() {
+  chart.options.scales.y = {
+    type: scale,
+    min: 1e-7,
+    max: 1,
 
-    chart.options.scales.y.type =
-      this.value;
+    title: {
+      display: true,
+      text: "Polarization"
+    },
 
-    chart.update();
+    ticks: {
 
-  }
-);
+      callback: function(value) {
 
+        if (scale === "log") {
+
+          const exponent = Math.log10(value);
+
+          if (Number.isInteger(exponent)) {
+
+            if (exponent === 0) {
+              return "1";
+            }
+
+            return "10" + toSuperscript(exponent);
+          }
+
+          return "";
+        }
+
+        /* Linear axis */
+        return Number(value).toExponential(0);
+      }
+    },
+
+    grid: {
+      display: true
+    }
+  };
+
+  chart.update("none");
+}
+
+
+/* Convert an integer exponent to superscript characters */
+function toSuperscript(number) {
+
+  const superscripts = {
+    "-": "⁻",
+    "0": "⁰",
+    "1": "¹",
+    "2": "²",
+    "3": "³",
+    "4": "⁴",
+    "5": "⁵",
+    "6": "⁶",
+    "7": "⁷",
+    "8": "⁸",
+    "9": "⁹"
+  };
+
+  return String(number)
+    .split("")
+    .map(char => superscripts[char] || char)
+    .join("");
+}
+
+
+/* =============================================================
+   Axis selectors
+   ============================================================= */
+
+xAxisScale.addEventListener("change", function () {
+  updateXAxisScale(this.value);
+});
+
+yAxisScale.addEventListener("change", function () {
+  updateYAxisScale(this.value);
+});
 
 /* =============================================================
    POLARIZATION CALCULATOR
