@@ -95,39 +95,39 @@ window.MathJax = {
   margin: 0 auto;
 }
 
+<!-- ============================================================
+     AXIS CONTROLS
+     ============================================================ -->
 
-/* ============================================================
-   Axis controls
-   ============================================================ */
+<div class="polarization-axis-controls">
 
-.polarization-axis-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin: 25px 0 10px;
-}
+  <div class="axis-control">
 
-.axis-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    <label for="xAxisScale">
+      X-axis
+    </label>
 
-.axis-control label {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
+    <select id="xAxisScale">
+      <option value="log" selected>Logarithmic</option>
+      <option value="linear">Linear</option>
+    </select>
 
-.axis-control select {
-  padding: 7px 10px;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  background: white;
-  font: inherit;
-  cursor: pointer;
-}
+  </div>
+
+  <div class="axis-control">
+
+    <label for="yAxisScale">
+      Y-axis
+    </label>
+
+    <select id="yAxisScale">
+      <option value="linear" selected>Linear</option>
+      <option value="log">Logarithmic</option>
+    </select>
+
+  </div>
+
+</div>
 
 
 /* ============================================================
@@ -1198,114 +1198,91 @@ function updateChart() {
    ============================================================= */
 
 const xAxisScale =
-  document.getElementById(
-    "xAxisScale"
-  );
+  document.getElementById("xAxisScale");
 
 const yAxisScale =
-  document.getElementById(
-    "yAxisScale"
-  );
+  document.getElementById("yAxisScale");
 
 
-/* =============================================================
-   Axis scale controls
-   ============================================================= */
+/*
+ * X-axis scale
+ */
 
 function updateXAxisScale(scale) {
 
-  chart.options.scales.x = {
-    type: scale,
-    min: 0.01,
-    max: 400,
+  chart.options.scales.x.type = scale;
 
-    title: {
-      display: true,
-      text: "B/T (T K⁻¹)"
-    },
+  chart.options.scales.x.min = X_MIN;
+  chart.options.scales.x.max = X_MAX;
 
-    ticks: {
-      autoSkip: true,
-      maxTicksLimit: 12,
+  chart.options.scales.x.title.text =
+    "Magnetic field / temperature, B/T (T K⁻¹)";
 
-      callback: function(value) {
+  chart.options.scales.x.ticks.callback =
+    function(value) {
 
-        if (scale === "log") {
+      if (scale === "log") {
 
-          const exponent = Math.log10(value);
+        const exponent = Math.log10(value);
 
-          if (Number.isInteger(exponent)) {
-            return value;
-          }
-
-          return "";
+        if (Number.isInteger(exponent)) {
+          return value;
         }
 
-        /* Linear axis */
-        if (value === 0) {
-          return "0";
-        }
-
-        return Number(value).toPrecision(2);
+        return "";
       }
-    },
 
-    grid: {
-      display: true
-    }
-  };
+      return Number(value).toPrecision(3);
+    };
 
-  chart.update("none");
+  chart.update();
 }
 
+
+/*
+ * Y-axis scale
+ */
 
 function updateYAxisScale(scale) {
 
-  chart.options.scales.y = {
-    type: scale,
-    min: 1e-7,
-    max: 1,
+  chart.options.scales.y.type = scale;
 
-    title: {
-      display: true,
-      text: "Polarization"
-    },
+  chart.options.scales.y.min = 1e-7;
+  chart.options.scales.y.max = 1;
 
-    ticks: {
+  chart.options.scales.y.title.text =
+    "Polarization, P";
 
-      callback: function(value) {
+  chart.options.scales.y.ticks.callback =
+    function(value) {
 
-        if (scale === "log") {
+      if (scale === "log") {
 
-          const exponent = Math.log10(value);
+        const exponent = Math.log10(value);
 
-          if (Number.isInteger(exponent)) {
+        if (Number.isInteger(exponent)) {
 
-            if (exponent === 0) {
-              return "1";
-            }
-
-            return "10" + toSuperscript(exponent);
+          if (exponent === 0) {
+            return "1";
           }
 
-          return "";
+          return "10" + toSuperscript(exponent);
         }
 
-        /* Linear axis */
-        return Number(value).toExponential(0);
+        return "";
       }
-    },
 
-    grid: {
-      display: true
-    }
-  };
+      return Number(value).toExponential(0);
+    };
 
-  chart.update("none");
+  chart.update();
 }
 
 
-/* Convert an integer exponent to superscript characters */
+/*
+ * Convert exponent to superscript
+ */
+
 function toSuperscript(number) {
 
   const superscripts = {
@@ -1329,17 +1306,18 @@ function toSuperscript(number) {
 }
 
 
-/* =============================================================
-   Axis selectors
-   ============================================================= */
+/*
+ * Attach event listeners
+ */
 
-xAxisScale.addEventListener("change", function () {
+xAxisScale.addEventListener("change", function() {
   updateXAxisScale(this.value);
 });
 
-yAxisScale.addEventListener("change", function () {
+yAxisScale.addEventListener("change", function() {
   updateYAxisScale(this.value);
 });
+
 
 /* =============================================================
    POLARIZATION CALCULATOR
