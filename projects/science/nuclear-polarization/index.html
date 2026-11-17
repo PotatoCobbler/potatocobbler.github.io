@@ -1150,7 +1150,8 @@ const chart =
     }
   );
 
-
+updateAxisScales();
+     
 /*
  * Redraw graph after isotope selection.
  */
@@ -1300,6 +1301,7 @@ xAxisScale.addEventListener("change", function() {
 
 yAxisScale.addEventListener("change", function() {
   updateYAxisScale(this.value);
+updateChart();
 });
 
 
