@@ -1,1100 +1,1600 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- ============================================================
-     SEO
-     ============================================================ -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>NMR Thermal Polarization Calculator — Polarization vs B/T | van der Ham NMR</title>
+  <!-- =========================================================
+       SEO
+       ========================================================= -->
 
-<meta name="description"
-  content="Calculate and visualize the thermal equilibrium polarization of NMR nuclei 
-  and electrons as a function of magnetic field and temperature. Explore polarization versus 
-  B/T using isotope-specific gyromagnetic ratios.">
+  <title>
+    NMR Thermal Polarization Calculator — Polarization vs B/T | van der Ham NMR
+  </title>
 
-<meta name="keywords"
-      content="NMR polarization, thermal polarization, nuclear polarization,
-      equilibrium polarization, Boltzmann polarization, NMR calculator,
-      gyromagnetic ratio, magnetic field, temperature, B/T,
-      nuclear magnetic resonance, DNP, dynamic nuclear polarization,
-      electron polarization, proton polarization, 1H polarization">
+  <meta
+    name="description"
+    content="Calculate and visualize the thermal equilibrium polarization of NMR nuclei and electrons as a function of magnetic field and temperature. Explore polarization versus B/T using isotope-specific gyromagnetic ratios."
+  >
 
-<meta name="author"
-      content="Alex van der Ham">
+  <meta
+    name="keywords"
+    content="NMR polarization, thermal polarization, nuclear polarization, equilibrium polarization, Boltzmann polarization, NMR calculator, gyromagnetic ratio, magnetic field, temperature, B/T, nuclear magnetic resonance, DNP, dynamic nuclear polarization, electron polarization, proton polarization, 1H polarization"
+  >
 
-<meta name="robots"
-      content="index, follow">
+  <meta name="author" content="Alex van der Ham">
+  <meta name="robots" content="index, follow">
 
-<link rel="canonical"
-      href="https://vanderhamnmr.com/projects/science/nuclear-polarization/">
+  <link
+    rel="canonical"
+    href="https://vanderhamnmr.com/projects/science/nuclear-polarization/"
+  >
 
-<!-- ============================================================
-     Open Graph / social sharing
-     ============================================================ -->
+  <!-- =========================================================
+       Open Graph
+       ========================================================= -->
 
-<meta property="og:type"
-      content="website">
-<meta property="og:title"
-      content="NMR Thermal Polarization Calculator">
-<meta property="og:description"
-      content="Interactive visualization and calculator for thermal equilibrium polarization as a function of magnetic field, temperature, and isotope gyromagnetic ratio.">
-<meta property="og:url"
-      content="https://vanderhamnmr.com/projects/science/nuclear-polarization/">
-<meta property="og:site_name"
-      content="van der Ham NMR">
+  <meta property="og:type" content="website">
 
-<link rel="icon"
-      href="/favicon.png"
-      type="image/x-icon">
+  <meta
+    property="og:title"
+    content="NMR Thermal Polarization Calculator"
+  >
 
-<link rel="stylesheet"
-      href="/css/style.css">
+  <meta
+    property="og:description"
+    content="Interactive visualization and calculator for thermal equilibrium polarization as a function of magnetic field, temperature, and isotope gyromagnetic ratio."
+  >
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+  <meta
+    property="og:url"
+    content="https://vanderhamnmr.com/projects/science/nuclear-polarization/"
+  >
 
-<style>
+  <meta
+    property="og:site_name"
+    content="van der Ham NMR"
+  >
 
-/* ============================================================
-   Thermal polarization page
-   ============================================================ */
+  <!-- =========================================================
+       Favicon / Styles / Libraries
+       ========================================================= -->
 
-.polarization-page {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  <link
+    rel="icon"
+    href="/favicon.png"
+    type="image/x-icon"
+  >
 
-/* Graph */
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
 
-.polarization-graph-container {
-  position: relative;
-  width: 100%;
-  height: 560px;
-  margin: 30px 0 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  background: #f2f2f2;
-  border-radius: 4px;
-}
+  <!-- Chart.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js">
+  </script>
 
-#polarizationChart {
-  width: 100% !important;
-  height: 100% !important;
-}
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+  </script>
 
-/* Calculator */
+  <script
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+  </script>
 
-.polarization-calculator {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 18px;
-  padding: 18px 20px;
-  margin: 20px 0 30px;
-  background: #f2f2f2;
-  border-radius: 4px;
-}
+  <!-- =========================================================
+       Page-specific CSS
+       ========================================================= -->
 
-.calc-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+  <style>
 
-.calc-field label {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
+    /* ---------------------------------------------------------
+       Main page
+       --------------------------------------------------------- */
 
-.calc-field input,
-.calc-field select {
-  box-sizing: border-box;
-  min-width: 150px;
-  padding: 8px 10px;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  background: white;
-  font: inherit;
-}
+    .polarization-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
 
-.calc-result {
-  min-width: 190px;
-  padding: 8px 12px;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  background: white;
-  font-weight: 600;
-  box-sizing: border-box;
-}
+    .polarization-page h2 {
+      margin-top: 0;
+    }
 
-/* Nuclei table */
+    .polarization-page p {
+      line-height: 1.6;
+    }
 
-.nuclei-table-wrapper {
-  overflow-x: auto;
-  margin-top: 15px;
-}
 
-.nuclei-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-}
+    /* ---------------------------------------------------------
+       Introduction / equation
+       --------------------------------------------------------- */
 
-.nuclei-table th,
-.nuclei-table td {
-  padding: 9px 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
+    .equation {
+      text-align: center;
+      margin: 25px 0;
+      font-size: 1.15rem;
+    }
 
-.nuclei-table th {
-  font-weight: 600;
-  background: #f2f2f2;
-}
 
-.nuclei-table td:nth-child(2),
-.nuclei-table td:nth-child(3),
-.nuclei-table td:nth-child(4) {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
+    /* ---------------------------------------------------------
+       Chart controls
+       --------------------------------------------------------- */
 
-.nuclei-table input[type="checkbox"] {
-  transform: scale(1.1);
-  cursor: pointer;
-}
+    .axis-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 25px 0 15px;
+      flex-wrap: wrap;
+    }
 
-.nuclei-table tr:hover {
-  background: #fafafa;
-}
+    .axis-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-.nuclei-table .electron-row {
-  border-top: 2px solid #aaa;
-}
+    .axis-control label {
+      font-weight: 600;
+    }
 
-.nuclei-table .electron-row td {
-  font-weight: 500;
-}
+    .axis-control select {
+      padding: 6px 10px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 0.95rem;
+    }
 
-/* Small screens */
 
-@media (max-width: 700px) {
+    /* ---------------------------------------------------------
+       Chart
+       --------------------------------------------------------- */
 
-  .polarization-graph-container {
-    height: 420px;
-    padding: 10px;
-  }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      margin-bottom: 35px;
+    }
 
-  .polarization-calculator {
-    align-items: stretch;
-    flex-direction: column;
-  }
 
-  .calc-field input,
-  .calc-field select,
-  .calc-result {
-    width: 100%;
-  }
+    /* ---------------------------------------------------------
+       Calculator
+       --------------------------------------------------------- */
 
-}
+    .polarization-calculator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
 
-</style>
+      background: #f2f2f2;
+      padding: 15px 20px;
+      margin: 25px 0 35px;
+
+      border-radius: 4px;
+    }
+
+    .polarization-calculator label {
+      font-weight: 600;
+    }
+
+    .polarization-calculator select,
+    .polarization-calculator input {
+      padding: 7px 9px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 0.95rem;
+    }
+
+    .polarization-calculator input {
+      width: 100px;
+    }
+
+    .calculator-result {
+      min-width: 120px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+
+    /* ---------------------------------------------------------
+       Nuclei table
+       --------------------------------------------------------- */
+
+    .nuclei-table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    .nuclei-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f2f2f2;
+    }
+
+    .nuclei-table th,
+    .nuclei-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #d0d0d0;
+      text-align: left;
+    }
+
+    .nuclei-table th {
+      font-weight: 600;
+    }
+
+    .nuclei-table td:nth-child(1),
+    .nuclei-table th:nth-child(1) {
+      text-align: center;
+      width: 50px;
+    }
+
+    .nuclei-table td:nth-child(2) {
+      font-weight: 600;
+    }
+
+    .nuclei-table input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+
+    /* ---------------------------------------------------------
+       Notes
+       --------------------------------------------------------- */
+
+    .polarization-note {
+      margin-top: 25px;
+      padding: 15px 18px;
+      background: #f2f2f2;
+      border-left: 4px solid #003f5c;
+      line-height: 1.6;
+    }
+
+
+    /* ---------------------------------------------------------
+       Mobile
+       --------------------------------------------------------- */
+
+    @media (max-width: 700px) {
+
+      .polarization-page {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .chart-container {
+        height: 420px;
+      }
+
+      .axis-controls {
+        gap: 15px;
+      }
+
+      .polarization-calculator {
+        justify-content: flex-start;
+      }
+
+      .calculator-result {
+        width: 100%;
+        text-align: left;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
 
-    <div class="brand">
-      <a href="/">van der Ham NMR</a>
+  <!-- =========================================================
+       Site header
+       ========================================================= -->
+
+  <header class="site-header">
+
+    <!--
+      Keep your existing site header/navigation here.
+      This section is intentionally kept compatible with
+      your existing /css/style.css and /js/main.js.
+    -->
+
+    <div class="site-header-inner">
+
+      <a
+        href="/"
+        class="site-title"
+      >
+        van der Ham NMR
+      </a>
+
+      <nav class="site-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/projects/">Projects</a>
+
+        <a href="/about/">About</a>
+
+      </nav>
+
     </div>
 
-    <div class="tagline">
-      Magnetic resonance • NMR • DNP
+  </header>
+
+
+  <!-- =========================================================
+       Main content
+       ========================================================= -->
+
+  <main class="polarization-page">
+
+
+    <!-- =======================================================
+         Introduction
+         ======================================================= -->
+
+    <h2>
+      Thermal polarization in NMR
+    </h2>
+
+    <p>
+      This interactive NMR polarization calculator shows the
+      <strong>thermal equilibrium polarization</strong> of nuclear
+      spins and electrons as a function of magnetic field and
+      temperature.
+      The graph plots polarization against the ratio of magnetic
+      field to temperature, \(B/T\), allowing different nuclei to
+      be compared directly through their gyromagnetic ratios.
+    </p>
+
+    <p>
+      For a spin-\(\tfrac{1}{2}\) particle at thermal equilibrium,
+      the magnitude of the polarization is given by the Boltzmann
+      expression
+    </p>
+
+    <p class="equation">
+      \[
+        P =
+        \tanh\left(
+          \frac{\hbar |\gamma| B}
+               {2 k_{\mathrm B} T}
+        \right)
+      \]
+    </p>
+
+    <p>
+      where \(\hbar\) is the reduced Planck constant,
+      \(\gamma\) is the gyromagnetic ratio,
+      \(B\) is the magnetic field,
+      \(k_{\mathrm B}\) is the Boltzmann constant,
+      and \(T\) is the absolute temperature.
+    </p>
+
+    <p>
+      For nuclei with spin \(I > \tfrac{1}{2}\), the polarization is
+      calculated from the complete Boltzmann distribution over the
+      \(2I+1\) Zeeman energy levels.
+    </p>
+
+
+    <!-- =======================================================
+         Axis controls
+         ======================================================= -->
+
+    <div class="axis-controls">
+
+      <div class="axis-control">
+
+        <label for="xScale">
+          X-axis:
+        </label>
+
+        <select id="xScale">
+
+          <option value="log" selected>
+            Logarithmic
+          </option>
+
+          <option value="linear">
+            Linear
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="axis-control">
+
+        <label for="yScale">
+          Y-axis:
+        </label>
+
+        <select id="yScale">
+
+          <option value="linear" selected>
+            Linear
+          </option>
+
+          <option value="log">
+            Logarithmic
+          </option>
+
+        </select>
+
+      </div>
+
     </div>
 
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/research/">Research</a>
-      <a href="/cv/">CV</a>
-      <a href="/publications/">Publications</a>
 
-      <details>
-        <summary>Projects ▾</summary>
-        <div class="dropdown">
-          <a href="/projects/">Projects</a>
-          <a href="/projects/writings/">Writings</a>
-          <a href="/projects/science/">Science</a>
-        </div>
-      </details>
+    <!-- =======================================================
+         Graph
+         ======================================================= -->
 
-      <a href="/periodic-table/">Periodic table</a>
-      <a href="/nmrpaint-info/">NMRpaint</a>
-    </nav>
+    <div class="chart-container">
 
-  </div>
-</header>
+      <canvas id="polarizationChart"></canvas>
 
-<main>
-
-<div class="container">
-
-<div class="section polarization-page">
-
-<h2>Thermal polarization in NMR</h2>
-
-<p>
-  This interactive NMR polarization calculator shows the
-  <strong>thermal equilibrium polarization</strong> of nuclear spins
-  and electrons as a function of magnetic field and temperature.
-  The graph plots polarization against the ratio of magnetic field
-  to temperature, \(B/T\), allowing different nuclei to be compared
-  directly through their gyromagnetic ratios.
-</p>
-
-<p>
-  For a spin-\(\tfrac{1}{2}\) particle at thermal equilibrium, the
-  magnitude of the polarization is given by the Boltzmann expression
-</p>
-
-<p style="text-align:center;">
-  \[P=\tanh\left(\frac{\hbar\lvert\gamma\rvert B}{2k_{\mathrm B}T}\right)\]
-</p>
-
-<p>
-  where \(P\) is the polarization, \(B\) is the magnetic field in
-  tesla, \(T\) is the temperature in kelvin, and \(\gamma\) is the
-  gyromagnetic ratio in rad s\(^{-1}\) T\(^{-1}\). Because the
-  polarization depends on \(B/T\), the horizontal axis is expressed
-  in T K\(^{-1}\) on a logarithmic scale.
-</p>
-
-<p>
-Select one or more nuclei below the graph to compare their thermal
-polarization. The table gives the gyromagnetic ratio both in
-rad s\(^{-1}\) T\(^{-1}\) and MHz T\(^{-1}\), while the calculator
-allows the polarization at a specific magnetic field and temperature
-to be calculated directly.
-</p>
-
-
-<!-- ============================================================
-     GRAPH
-     ============================================================ -->
-
-<div class="polarization-graph-container">
-
-  <canvas id="polarizationChart"></canvas>
-
-</div>
-
-
-<!-- ============================================================
-     CALCULATOR
-     ============================================================ -->
-
-<h3>Calculate polarization</h3>
-
-<div class="polarization-calculator">
-
-  <div class="calc-field">
-    <label for="calcIsotope">
-      Isotope
-    </label>
-    <select id="calcIsotope"></select>
-  </div>
-
-
-  <div class="calc-field">
-    <label for="calcTemperature">
-      Temperature (K)
-    </label>
-    <input
-      id="calcTemperature"
-      type="number"
-      min="0.001"
-      step="0.01"
-      value="300"
-    >
-  </div>
-
-
-  <div class="calc-field">
-    <label for="calcField">
-      Magnetic field (T)
-    </label>
-
-    <input
-      id="calcField"
-      type="number"
-      min="0"
-      step="0.01"
-      value="14.1"
-    >
-  </div>
-
-
-  <div class="calc-field">
-    <label>
-      Polarization
-    </label>
-
-    <div
-      id="calcResult"
-      class="calc-result"
-    >
-      —
     </div>
-  </div>
-</div>
 
 
-<!-- ============================================================
-     NUCLEI TABLE
-     ============================================================ -->
+    <!-- =======================================================
+         Calculator
+         ======================================================= -->
 
-<h3>Nuclei and gyromagnetic ratios</h3>
+    <div class="polarization-calculator">
 
-<p>
-Select one or more species to display on the graph.
-\(^{1}\mathrm{H}\) is selected by default.
-</p>
+      <label for="calculatorNucleus">
+        Isotope:
+      </label>
 
-<div class="nuclei-table-wrapper">
+      <select id="calculatorNucleus"></select>
 
-<table class="nuclei-table">
 
-<thead>
+      <label for="temperature">
+        T / K:
+      </label>
 
-<tr>
-  <th>Plot</th>
-  <th>Isotope</th>
-  <th>\(\gamma\) (rad s\(^{-1}\) T\(^{-1}\))</th>
-  <th>\(\gamma/2\pi\) (MHz T\(^{-1}\))</th>
-</tr>
+      <input
+        id="temperature"
+        type="number"
+        value="300"
+        min="0.001"
+        step="any"
+      >
 
-</thead>
 
-<tbody id="nucleiTableBody"></tbody>
+      <label for="magneticField">
+        B / T:
+      </label>
 
-</table>
+      <input
+        id="magneticField"
+        type="number"
+        value="14.1"
+        min="0"
+        step="any"
+      >
 
-</div>
 
+      <span
+        id="calculatorResult"
+        class="calculator-result"
+      >
+        —
+      </span>
 
-</div>
+    </div>
 
-</div>
 
-</main>
+    <!-- =======================================================
+         Nuclei selection
+         ======================================================= -->
 
+    <h3>
+      Nuclei
+    </h3>
 
-<footer>
-  © Alex van der Ham · 2026
-</footer>
+    <p>
+      Select one or more isotopes to display their thermal
+      equilibrium polarization on the graph.
+    </p>
 
 
-<script src="/js/main.js"></script>
+    <div class="nuclei-table-wrapper">
 
+      <table class="nuclei-table">
 
-<script>
+        <thead>
 
-/* =============================================================
-   THERMAL POLARIZATION
-   ============================================================= */
+          <tr>
 
-/*
- * Physical constants
- */
-
-const HBAR = 1.054571817e-34;       // J s
-const KB   = 1.380649e-23;          // J K^-1
+            <th>
+              Plot
+            </th>
 
-
-/*
- * Gyromagnetic ratios
- *
- * gamma is given in rad s^-1 T^-1.
- *
- * Values are absolute values for polarization calculations.
- * The sign of gamma determines the direction of polarization,
- * but not the magnitude plotted here.
- */
-
-const species = [
-
-  {
-    id: "1H",
-    name: "¹H",
-    gamma: 267.52218744e6,
-    selected: true
-  },
-
-  {
-    id: "2H",
-    name: "²H",
-    gamma: 41.065e6,
-    selected: false
-  },
-
-  {
-    id: "3He",
-    name: "³He",
-    gamma: 203.789e6,
-    selected: false
-  },
-
-  {
-    id: "7Li",
-    name: "⁷Li",
-    gamma: 103.962e6,
-    selected: false
-  },
-
-  {
-    id: "13C",
-    name: "¹³C",
-    gamma: 67.28284e6,
-    selected: false
-  },
-
-  {
-    id: "15N",
-    name: "¹⁵N",
-    gamma: 27.116e6,
-    selected: false
-  },
-
-  {
-    id: "17O",
-    name: "¹⁷O",
-    gamma: 36.264e6,
-    selected: false
-  },
-
-  {
-    id: "19F",
-    name: "¹⁹F",
-    gamma: 251.662e6,
-    selected: false
-  },
-
-  {
-    id: "23Na",
-    name: "²³Na",
-    gamma: 70.761e6,
-    selected: false
-  },
-
-  {
-    id: "27Al",
-    name: "²⁷Al",
-    gamma: 69.763e6,
-    selected: false
-  },
-
-  {
-    id: "29Si",
-    name: "²⁹Si",
-    gamma: 53.190e6,
-    selected: false
-  },
-
-  {
-    id: "31P",
-    name: "³¹P",
-    gamma: 108.291e6,
-    selected: false
-  },
-
-  {
-    id: "39K",
-    name: "³⁹K",
-    gamma: 12.546e6,
-    selected: false
-  },
-
-  {
-    id: "43Ca",
-    name: "⁴³Ca",
-    gamma: 18.404e6,
-    selected: false
-  },
-
-  {
-    id: "59Co",
-    name: "⁵⁹Co",
-    gamma: 62.91e6,
-    selected: false
-  },
-
-  {
-    id: "63Cu",
-    name: "⁶³Cu",
-    gamma: 70.733e6,
-    selected: false
-  },
-
-  {
-    id: "65Cu",
-    name: "⁶⁵Cu",
-    gamma: 75.431e6,
-    selected: false
-  },
-
-  {
-    id: "67Zn",
-    name: "⁶⁷Zn",
-    gamma: 16.717e6,
-    selected: false
-  },
-
-  {
-    id: "77Se",
-    name: "⁷⁷Se",
-    gamma: 51.081e6,
-    selected: false
-  },
-
-  {
-    id: "89Y",
-    name: "⁸⁹Y",
-    gamma: 13.157e6,
-    selected: false
-  },
-
-  {
-    id: "109Ag",
-    name: "¹⁰⁹Ag",
-    gamma: 17.797e6,
-    selected: false
-  },
-
-  {
-    id: "129Xe",
-    name: "¹²⁹Xe",
-    gamma: 74.451e6,
-    selected: false
-  },
-
-  {
-    id: "131Xe",
-    name: "¹³¹Xe",
-    gamma: 23.900e6,
-    selected: false
-  },
-
-  {
-    id: "195Pt",
-    name: "¹⁹⁵Pt",
-    gamma: 58.390e6,
-    selected: false
-  },
-
-  {
-    id: "electron",
-    name: "e⁻",
-    gamma: 1.76085963023e11,
-    selected: false,
-    electron: true
-  }
-
-];
-
-
-/*
- * Calculate polarization.
- *
- * x = B/T
- *
- * P = tanh(hbar * gamma * x / (2 kB))
- */
-
-function polarizationFromBT(gamma, B_over_T) {
-
-  const x =
-    HBAR * Math.abs(gamma) * B_over_T /
-    (2 * KB);
-
-  return Math.tanh(x);
-
-}
-
-
-/*
- * Calculate polarization from B and T.
- */
-
-function polarizationFromBTValues(gamma, B, T) {
-
-  if (T <= 0 || B < 0) {
-    return NaN;
-  }
-
-  return polarizationFromBT(
-    gamma,
-    B / T
-  );
-
-}
-
-
-/* =============================================================
-   GRAPH DATA
-   ============================================================= */
-
-const X_MIN = 0.01;
-const X_MAX = 400;
-
-/*
- * Logarithmically spaced x values.
- */
-
-function logspace(min, max, points) {
-
-  const result = [];
-  const logMin = Math.log10(min);
-  const logMax = Math.log10(max);
-
-  for (let i = 0; i < points; i++) {
-
-    const fraction = i / (points - 1);
-
-    const exponent =
-      logMin +
-      fraction * (logMax - logMin);
-
-    result.push(
-      Math.pow(10, exponent)
-    );
-  }
-
-  return result;
-}
-
-const xValues = logspace(
-  X_MIN,
-  X_MAX,
-  500
-);
-
-
-/* =============================================================
-   TABLE
-   ============================================================= */
-
-const tableBody =
-  document.getElementById("nucleiTableBody");
-
-const calcIsotope =
-  document.getElementById("calcIsotope");
-
-
-function formatGamma(gamma) {
-
-  return gamma.toLocaleString(
-    "en-US",
-    {
-      maximumFractionDigits: 3
-    }
-  );
-
-}
-
-
-function formatMHz(gamma) {
-
-  return (
-    Math.abs(gamma) /
-    (2 * Math.PI * 1e6)
-  ).toLocaleString(
-    "en-US",
-    {
-      maximumFractionDigits: 6
-    }
-  );
-
-}
-
-
-/*
- * Populate table and calculator dropdown.
- */
-
-species.forEach((item, index) => {
-
-  const row =
-    document.createElement("tr");
-
-  if (item.electron) {
-    row.classList.add("electron-row");
-  }
-
-  const plotCell =
-    document.createElement("td");
-
-  const checkbox =
-    document.createElement("input");
-
-  checkbox.type = "checkbox";
-  checkbox.checked = item.selected;
-  checkbox.dataset.index = index;
-  checkbox.addEventListener(
-    "change",
-    () => {
-
-      species[index].selected =
-        checkbox.checked;
-      updateChart();
-    }
-  );
-
-  plotCell.appendChild(checkbox);
-
-  const isotopeCell =
-    document.createElement("td");
-
-  isotopeCell.textContent =
-    item.name;
-
-  const gammaCell =
-    document.createElement("td");
-
-  gammaCell.textContent =
-    formatGamma(item.gamma);
-
-  const MHzCell =
-    document.createElement("td");
-
-  MHzCell.textContent =
-    formatMHz(item.gamma);
-
-
-  row.appendChild(plotCell);
-  row.appendChild(isotopeCell);
-  row.appendChild(gammaCell);
-  row.appendChild(MHzCell);
-
-  tableBody.appendChild(row);
-
-
-  /*
-   * Calculator dropdown
-   */
-
-  const option =
-    document.createElement("option");
-
-  option.value = index;
-  option.textContent =
-    item.name;
-
-  calcIsotope.appendChild(option);
-
-});
-
-
-/* =============================================================
-   CHART
-   ============================================================= */
-
-const ctx =
-  document
-    .getElementById("polarizationChart")
-    .getContext("2d");
-
-
-/*
- * A restrained palette suitable for the scientific
- * aesthetic of the website.
- */
-
-const lineColors = [
-  "#003f5c",
-  "#58508d",
-  "#8a508f",
-  "#bc5090",
-  "#de5a79",
-  "#ff6361",
-  "#ff8531",
-  "#ffa600"
-];
-
-function getDatasets() {
-
-  return species
-    .map((item, index) => {
-
-      if (!item.selected) {
-        return null;
+            <th>
+              Isotope
+            </th>
+
+            <th>
+              Spin \(I\)
+            </th>
+
+            <th>
+              \(\gamma\) / rad s\(^{-1}\) T\(^{-1}\)
+            </th>
+
+            <th>
+              \(\gamma\) / MHz T\(^{-1}\)
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="nucleiTableBody">
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- =======================================================
+         Scientific note
+         ======================================================= -->
+
+    <div class="polarization-note">
+
+      <strong>Note:</strong>
+      The polarization shown here is the equilibrium thermal
+      polarization of an isolated spin system in a magnetic field.
+      It does not represent experimentally enhanced polarization
+      produced by dynamic nuclear polarization (DNP), optical
+      pumping, or other non-equilibrium polarization methods.
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       Footer
+       ========================================================= -->
+
+  <footer class="site-footer">
+
+    <p>
+      © Alex van der Ham · 2026
+    </p>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JavaScript
+       ========================================================= -->
+
+  <script>
+
+    "use strict";
+
+
+    /* =========================================================
+       Physical constants
+       ========================================================= */
+
+    const HBAR = 1.054571817e-34;
+    const KB   = 1.380649e-23;
+
+
+    /* =========================================================
+       Graph limits
+       ========================================================= */
+
+    const X_MIN = 0.01;
+    const X_MAX = 400;
+
+    const N_POINTS = 500;
+
+
+    /* =========================================================
+       Isotope database
+       
+       gamma:
+         rad s^-1 T^-1
+
+       spin:
+         nuclear spin I
+
+       electron:
+         S = 1/2
+       ========================================================= */
+
+    const SPECIES = [
+
+      {
+        name: "¹H",
+        gamma: 267.52218744e6,
+        spin: 0.5
+      },
+
+      {
+        name: "²H",
+        gamma: 41.065e6,
+        spin: 1
+      },
+
+      {
+        name: "³He",
+        gamma: 203.789e6,
+        spin: 0.5
+      },
+
+      {
+        name: "⁷Li",
+        gamma: 103.962e6,
+        spin: 1.5
+      },
+
+      {
+        name: "¹³C",
+        gamma: 67.28284e6,
+        spin: 0.5
+      },
+
+      {
+        name: "¹⁵N",
+        gamma: 27.116e6,
+        spin: 0.5
+      },
+
+      {
+        name: "¹⁷O",
+        gamma: 36.264e6,
+        spin: 2.5
+      },
+
+      {
+        name: "¹⁹F",
+        gamma: 251.662e6,
+        spin: 0.5
+      },
+
+      {
+        name: "²³Na",
+        gamma: 70.761e6,
+        spin: 1.5
+      },
+
+      {
+        name: "²⁷Al",
+        gamma: 69.763e6,
+        spin: 2.5
+      },
+
+      {
+        name: "²⁹Si",
+        gamma: 53.190e6,
+        spin: 0.5
+      },
+
+      {
+        name: "³¹P",
+        gamma: 108.291e6,
+        spin: 0.5
+      },
+
+      {
+        name: "³⁹K",
+        gamma: 12.546e6,
+        spin: 1.5
+      },
+
+      {
+        name: "⁴³Ca",
+        gamma: 18.404e6,
+        spin: 3.5
+      },
+
+      {
+        name: "⁵⁹Co",
+        gamma: 62.91e6,
+        spin: 3.5
+      },
+
+      {
+        name: "⁶³Cu",
+        gamma: 70.733e6,
+        spin: 1.5
+      },
+
+      {
+        name: "⁶⁵Cu",
+        gamma: 75.431e6,
+        spin: 1.5
+      },
+
+      {
+        name: "⁶⁷Zn",
+        gamma: 16.717e6,
+        spin: 2.5
+      },
+
+      {
+        name: "⁷⁷Se",
+        gamma: 51.081e6,
+        spin: 0.5
+      },
+
+      {
+        name: "⁸⁹Y",
+        gamma: 13.157e6,
+        spin: 0.5
+      },
+
+      {
+        name: "¹⁰⁹Ag",
+        gamma: 17.797e6,
+        spin: 0.5
+      },
+
+      {
+        name: "¹²⁹Xe",
+        gamma: 74.451e6,
+        spin: 0.5
+      },
+
+      {
+        name: "¹³¹Xe",
+        gamma: 23.900e6,
+        spin: 1.5
+      },
+
+      {
+        name: "¹⁹⁵Pt",
+        gamma: 58.390e6,
+        spin: 0.5
+      },
+
+      {
+        name: "electron",
+        gamma: 1.76085963023e11,
+        spin: 0.5
       }
+
+    ];
+
+
+    /* =========================================================
+       Generate logarithmically spaced B/T values
+       ========================================================= */
+
+    function generateXValues() {
+
+      const values = [];
+
+      const logMin = Math.log10(X_MIN);
+      const logMax = Math.log10(X_MAX);
+
+      for (let i = 0; i < N_POINTS; i++) {
+
+        const fraction =
+          i / (N_POINTS - 1);
+
+        const value =
+          Math.pow(
+            10,
+            logMin + fraction * (logMax - logMin)
+          );
+
+        values.push(value);
+
+      }
+
+      return values;
+    }
+
+
+    const X_VALUES = generateXValues();
+
+
+    /* =========================================================
+       Thermal polarization
+       
+       For spin 1/2:
+       
+         P = tanh(x)
+
+       where
+
+         x = ħ |γ| B / (2 k_B T)
+
+       For arbitrary spin I:
+       
+         E_m = -ħ γ B m
+
+       and
+
+         <m> =
+           Σ m exp(-E_m/kBT)
+           ------------------
+           Σ exp(-E_m/kBT)
+
+       The returned polarization is normalized to the
+       maximum possible projection I:
+
+         P = <m> / I
+
+       For the electron, the same spin-1/2 expression applies.
+       ========================================================= */
+
+    function calculatePolarization(gamma, spin, B, T) {
+
+      if (
+        !Number.isFinite(gamma) ||
+        !Number.isFinite(spin) ||
+        !Number.isFinite(B) ||
+        !Number.isFinite(T) ||
+        T <= 0 ||
+        B < 0
+      ) {
+        return NaN;
+      }
+
+
+      /* -------------------------------------------------------
+         Spin 1/2
+         ------------------------------------------------------- */
+
+      if (spin === 0.5) {
+
+        const x =
+          HBAR *
+          Math.abs(gamma) *
+          B /
+          (2 * KB * T);
+
+        return Math.tanh(x);
+      }
+
+
+      /* -------------------------------------------------------
+         General spin I
+         ------------------------------------------------------- */
+
+      const x =
+        HBAR *
+        Math.abs(gamma) *
+        B /
+        (KB * T);
+
+
+      /*
+       * To avoid numerical overflow, use a shifted
+       * Boltzmann exponent.
+       */
+
+      const mValues = [];
+
+      for (
+        let m = -spin;
+        m <= spin + 1e-12;
+        m += 1
+      ) {
+        mValues.push(m);
+      }
+
+
+      const exponentValues =
+        mValues.map(
+          m => x * m
+        );
+
+
+      const maxExponent =
+        Math.max(...exponentValues);
+
+
+      let numerator = 0;
+      let denominator = 0;
+
+
+      for (let i = 0; i < mValues.length; i++) {
+
+        const weight =
+          Math.exp(
+            exponentValues[i] -
+            maxExponent
+          );
+
+        numerator +=
+          mValues[i] * weight;
+
+        denominator += weight;
+      }
+
+
+      const meanM =
+        numerator / denominator;
+
+
+      return meanM / spin;
+    }
+
+
+    /* =========================================================
+       Format polarization
+       ========================================================= */
+
+    function formatPolarization(P) {
+
+      if (!Number.isFinite(P)) {
+        return "—";
+      }
+
+
+      const percentage = P * 100;
+
+
+      if (
+        percentage !== 0 &&
+        (
+          Math.abs(percentage) < 0.01 ||
+          Math.abs(percentage) >= 100000
+        )
+      ) {
+
+        return percentage.toExponential(4) + " %";
+
+      }
+
+
+      return percentage.toPrecision(6) + " %";
+    }
+
+
+    /* =========================================================
+       Create isotope table
+       ========================================================= */
+
+    const tableBody =
+      document.getElementById(
+        "nucleiTableBody"
+      );
+
+
+    SPECIES.forEach(
+      (species, index) => {
+
+        const row =
+          document.createElement("tr");
+
+
+        const checkboxCell =
+          document.createElement("td");
+
+
+        const checkbox =
+          document.createElement("input");
+
+        checkbox.type = "checkbox";
+
+        checkbox.dataset.index = index;
+
+        /*
+         * 1H selected by default.
+         */
+
+        checkbox.checked =
+          index === 0;
+
+
+        checkboxCell.appendChild(
+          checkbox
+        );
+
+
+        const isotopeCell =
+          document.createElement("td");
+
+        isotopeCell.textContent =
+          species.name;
+
+
+        const spinCell =
+          document.createElement("td");
+
+        spinCell.textContent =
+          species.spin === 0.5
+            ? "½"
+            : species.spin.toString();
+
+
+        const gammaCell =
+          document.createElement("td");
+
+        gammaCell.textContent =
+          species.gamma.toPrecision(10);
+
+
+        const gammaMHzCell =
+          document.createElement("td");
+
+        gammaMHzCell.textContent =
+          (
+            species.gamma /
+            (2 * Math.PI * 1e6)
+          ).toPrecision(8);
+
+
+        row.appendChild(
+          checkboxCell
+        );
+
+        row.appendChild(
+          isotopeCell
+        );
+
+        row.appendChild(
+          spinCell
+        );
+
+        row.appendChild(
+          gammaCell
+        );
+
+        row.appendChild(
+          gammaMHzCell
+        );
+
+
+        tableBody.appendChild(
+          row
+        );
+
+
+        checkbox.addEventListener(
+          "change",
+          updateChart
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       Calculator isotope dropdown
+       ========================================================= */
+
+    const calculatorNucleus =
+      document.getElementById(
+        "calculatorNucleus"
+      );
+
+
+    SPECIES.forEach(
+      (species, index) => {
+
+        const option =
+          document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+          species.name;
+
+        calculatorNucleus.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+    /*
+     * Default calculator isotope = 1H.
+     */
+
+    calculatorNucleus.value = "0";
+
+
+    /* =========================================================
+       Calculator elements
+       ========================================================= */
+
+    const temperatureInput =
+      document.getElementById(
+        "temperature"
+      );
+
+    const magneticFieldInput =
+      document.getElementById(
+        "magneticField"
+      );
+
+    const calculatorResult =
+      document.getElementById(
+        "calculatorResult"
+      );
+
+
+    /* =========================================================
+       Update calculator
+       ========================================================= */
+
+    function updateCalculator() {
+
+      const index =
+        Number(
+          calculatorNucleus.value
+        );
+
+
+      const species =
+        SPECIES[index];
+
+
+      const T =
+        Number(
+          temperatureInput.value
+        );
+
+
+      const B =
+        Number(
+          magneticFieldInput.value
+        );
+
+
+      const P =
+        calculatePolarization(
+          species.gamma,
+          species.spin,
+          B,
+          T
+        );
+
+
+      calculatorResult.textContent =
+        "P = " + formatPolarization(P);
+
+    }
+
+
+    calculatorNucleus.addEventListener(
+      "change",
+      updateCalculator
+    );
+
+    temperatureInput.addEventListener(
+      "input",
+      updateCalculator
+    );
+
+    magneticFieldInput.addEventListener(
+      "input",
+      updateCalculator
+    );
+
+
+    /* =========================================================
+       Create graph datasets
+       ========================================================= */
+
+    function createDataset(
+      species,
+      index
+    ) {
+
+      const data =
+        X_VALUES.map(
+          x => {
+
+            const P =
+              calculatePolarization(
+                species.gamma,
+                species.spin,
+                x,
+                1
+              );
+
+            return {
+              x: x,
+              y: Math.max(
+                P,
+                1e-300
+              )
+            };
+
+          }
+        );
+
+
+      const colors = [
+
+        "#003f5c",
+        "#58508d",
+        "#8a508f",
+        "#bc5090",
+        "#de5a79",
+        "#ff6361",
+        "#ff8531",
+        "#ffa600"
+
+      ];
+
 
       return {
 
         label:
-          item.name,
+          species.name,
 
         data:
-          xValues.map(
-            x => ({
-              x: x,
-              y: polarizationFromBT(
-                item.gamma,
-                x
-              )
-            })
-          ),
+          data,
 
         borderColor:
-          lineColors[
-            index % lineColors.length
+          colors[
+            index % colors.length
           ],
 
         backgroundColor:
-          lineColors[
-            index % lineColors.length
+          colors[
+            index % colors.length
           ],
+
         borderWidth: 2,
+
         pointRadius: 0,
+
         pointHoverRadius: 4,
-        tension: 0.05,
+
+        tension: 0,
+
         fill: false
+
       };
-    })
-    .filter(Boolean);
 
-}
+    }
 
-const chart =
-  new Chart(
-    ctx,
-    {
 
-      type: "line",
+    /* =========================================================
+       Chart
+       ========================================================= */
 
-      data: {
-        datasets: getDatasets()
-      },
+    const ctx =
+      document
+        .getElementById(
+          "polarizationChart"
+        )
+        .getContext("2d");
 
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: {
-          duration: 250
-        },
 
-        interaction: {
-          mode: "nearest",
-          intersect: false
-        },
+    let polarizationChart;
 
-        plugins: {
-          legend: {
-            display: true,
-            position: "top"
-          },
 
-          tooltip: {
+    function createChart() {
 
-            callbacks: {
-              title: function(items) {
-                if (!items.length) {
-                  return "";
-                }
+      const selectedSpecies =
+        SPECIES.filter(
+          (species, index) => {
 
-                return (
-                  "B/T = " +
-                  Number(
-                    items[0].parsed.x
-                  ).toPrecision(5) +
-                  " T K⁻¹"
-                );
+            const checkbox =
+              document.querySelector(
+                `input[data-index="${index}"]`
+              );
+
+            return checkbox &&
+                   checkbox.checked;
+
+          }
+        );
+
+
+      const datasets =
+        selectedSpecies.map(
+          species => {
+
+            const originalIndex =
+              SPECIES.indexOf(
+                species
+              );
+
+            return createDataset(
+              species,
+              originalIndex
+            );
+
+          }
+        );
+
+
+      polarizationChart =
+        new Chart(
+          ctx,
+          {
+
+            type: "line",
+
+            data: {
+              datasets: datasets
+            },
+
+            options: {
+
+              responsive: true,
+
+              maintainAspectRatio: false,
+
+              animation: false,
+
+              interaction: {
+                mode: "nearest",
+                intersect: false
               },
 
-              label: function(context) {
+              plugins: {
 
-                const P =
-                  context.parsed.y;
+                legend: {
+                  display: true,
+                  position: "top"
+                },
 
-                return (
-                  context.dataset.label +
-                  ": " +
-                  P.toExponential(4)
-                );
-              }
-            }
-          }
-        },
+                tooltip: {
 
-        scales: {
+                  callbacks: {
 
-          x: {
-            type: "logarithmic",
-            min: X_MIN,
-            max: X_MAX,
-            title: {
-              display: true,
-              text:
-                "Magnetic field / temperature, B/T (T K⁻¹)"
-            },
+                    title: function(context) {
 
-            ticks: {
-              callback: function(value) {
-                const exponent =
-                  Math.log10(value);
-                if (
-                  Number.isInteger(exponent)
-                ) {
-                  return value;
+                      if (
+                        !context.length
+                      ) {
+                        return "";
+                      }
+
+                      const x =
+                        context[0]
+                          .parsed.x;
+
+                      return (
+                        "B/T = " +
+                        x.toPrecision(5) +
+                        " T K⁻¹"
+                      );
+
+                    },
+
+                    label: function(context) {
+
+                      const y =
+                        context.parsed.y;
+
+                      return (
+                        context.dataset.label +
+                        ": P = " +
+                        y.toExponential(5)
+                      );
+
+                    }
+
+                  }
+
                 }
-                return "";
-              }
-            }
-          },
 
-          y: {
-            type: "linear",
-            min: 1e-7,
-            max: 1,
-            title: {
-              display: true,
-              text: "Polarization, P"
-            },
+              },
 
-            ticks: {
-              callback: function(value) {
-                if (
-                  value === 1 ||
-                  value === 0.1 ||
-                  value === 0.01 ||
-                  value === 0.001
-                ) {
-                  return value;
+              scales: {
+
+                x: {
+
+                  type:
+                    document
+                      .getElementById(
+                        "xScale"
+                      )
+                      .value,
+
+                  min:
+                    X_MIN,
+
+                  max:
+                    X_MAX,
+
+                  title: {
+
+                    display: true,
+
+                    text:
+                      "Magnetic field / temperature, B/T (T K⁻¹)"
+
+                  },
+
+                  grid: {
+                    display: true
+                  }
+
+                },
+
+
+                y: {
+
+                  type:
+                    document
+                      .getElementById(
+                        "yScale"
+                      )
+                      .value,
+
+                  min: 1e-7,
+
+                  max: 1,
+
+                  title: {
+
+                    display: true,
+
+                    text:
+                      "Polarization, P"
+
+                  },
+
+                  grid: {
+                    display: true
+                  }
+
                 }
-                return "";
+
               }
+
             }
+
           }
-        }
-      }
+        );
+
     }
-  );
-
-/*
- * Redraw graph after isotope selection.
- */
-
-function updateChart() {
-
-  chart.data.datasets =
-    getDatasets();
-
-  chart.update();
-
-}
 
 
-/* =============================================================
-   POLARIZATION CALCULATOR
-   ============================================================= */
+    /* =========================================================
+       Update graph when isotope selection changes
+       ========================================================= */
 
-const calcTemperature =
-  document.getElementById(
-    "calcTemperature"
-  );
+    function updateChart() {
 
-const calcField =
-  document.getElementById(
-    "calcField"
-  );
-
-const calcResult =
-  document.getElementById(
-    "calcResult"
-  );
+      if (!polarizationChart) {
+        return;
+      }
 
 
-function updateCalculator() {
+      const selectedSpecies =
+        SPECIES.filter(
+          (species, index) => {
 
-  const index =
-    Number(calcIsotope.value);
+            const checkbox =
+              document.querySelector(
+                `input[data-index="${index}"]`
+              );
 
-  const T =
-    Number(calcTemperature.value);
+            return checkbox &&
+                   checkbox.checked;
 
-  const B =
-    Number(calcField.value);
-
-
-  if (
-    !Number.isFinite(T) ||
-    !Number.isFinite(B) ||
-    T <= 0 ||
-    B < 0
-  ) {
-
-    calcResult.textContent = "—";
-
-    return;
-
-  }
+          }
+        );
 
 
-  const item =
-    species[index];
+      const datasets =
+        selectedSpecies.map(
+          species => {
+
+            const originalIndex =
+              SPECIES.indexOf(
+                species
+              );
+
+            return createDataset(
+              species,
+              originalIndex
+            );
+
+          }
+        );
 
 
-  const P =
-    polarizationFromBTValues(
-      item.gamma,
-      B,
-      T
-    );
+      polarizationChart.data.datasets =
+        datasets;
 
 
-  const percent =
-    P * 100;
+      polarizationChart.update();
+
+    }
 
 
-  /*
-   * Display both the percentage and the
-   * scientific-notation value.
-   */
+    /* =========================================================
+       X-axis scale toggle
+       ========================================================= */
 
-  calcResult.textContent =
-    percent.toExponential(6) +
-    " %";
+    document
+      .getElementById("xScale")
+      .addEventListener(
+        "change",
+        function() {
 
-
-}
-
-
-calcIsotope.addEventListener(
-  "change",
-  updateCalculator
-);
-
-calcTemperature.addEventListener(
-  "input",
-  updateCalculator
-);
-
-calcField.addEventListener(
-  "input",
-  updateCalculator
-);
+          polarizationChart.options.scales.x.type =
+            this.value;
 
 
-/*
- * Initial calculation.
- */
+          /*
+           * The data are already logarithmically
+           * distributed, but Chart.js can display
+           * them on either type of axis.
+           */
 
-updateCalculator();
+          polarizationChart.update();
 
-</script>
+        }
+      );
+
+
+    /* =========================================================
+       Y-axis scale toggle
+       ========================================================= */
+
+    document
+      .getElementById("yScale")
+      .addEventListener(
+        "change",
+        function() {
+
+          polarizationChart.options.scales.y.type =
+            this.value;
+
+
+          polarizationChart.update();
+
+        }
+      );
+
+
+    /* =========================================================
+       Initialize
+       ========================================================= */
+
+    createChart();
+
+    updateCalculator();
+
+
+  </script>
+
+
+  <!-- Existing site JavaScript -->
+  <script src="/js/main.js"></script>
+
 
 </body>
+
 </html>
